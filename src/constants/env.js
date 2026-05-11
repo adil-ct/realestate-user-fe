@@ -1,0 +1,50 @@
+/* eslint-disable no-undef */
+export const PERSONA_TEMPLATE_ID = process.env.REACT_APP_PERSONA_TEMPLATE_ID;
+export const PERSONA_ENV = process.env.REACT_APP_PERSONA_PERSONA_ENV;
+export const PERSONA_ENV_ID = process.env.REACT_APP_PERSONA_PERSONA_ENV_ID;
+export const NODE_ENV = process.env.REACT_APP_CLIENT_ENV;
+export const DISABLE_INVEST = process.env.REACT_APP_DISABLE_INVEST;
+export const AUTH_BASE_URL = process.env.REACT_APP_AUTH_BASE_URL;
+export const USER_BASE_URL = process.env.REACT_APP_USER_BASE_URL;
+export const PROPOSAL_BASE_URL = process.env.REACT_APP_PROPOSAL_BASE_URL;
+export const PAYMENT_BASE_URL = process.env.REACT_APP_PAYMENT_BASE_URL;
+export const ADMIN_BASE_URL = process.env.REACT_APP_ADMIN_BASE_URL;
+export const MOGUL_SUPPORT_EMAIL = process.env.REACT_APP_MOGUL_SUPPORT_EMAIL;
+export const MARKETPLACE_URL = process.env.REACT_APP_MARKETPLACE_URL;
+export const CIRCLE_TERMS = process.env.REACT_APP_CIRCLE_TERMS;
+export const CIRCLE_PRIVACY_POLICY =
+  process.env.REACT_APP_CIRCLE_PRIVACY_POLICY;
+export const MARKETING_BASE_URL = process.env.REACT_APP_MARKETING_BASE_URL;
+export const GOOGLE_AUTH_APP_URL = process.env.REACT_APP_GOOGLE_AUTH_APP_URL;
+export const ACH_MODE = process.env.REACT_APP_ACH_MODE;
+export const CREDIT_CARD_MODE = process.env.REACT_APP_CREDIT_CARD_MODE;
+export const SELL_MY_PROPERTY_ID = process.env.REACT_APP_SELL_MY_PROPERTY_ID;
+export const INSTAGRAM_LINK = process.env.REACT_APP_INSTAGRAM_LINK;
+export const TWITTER_LINK = process.env.REACT_APP_TWITTER_LINK;
+export const LINKEDIN_LINK = process.env.REACT_APP_LINKEDIN_LINK;
+export const YOUTUBE_LINK = process.env.REACT_APP_YOUTUBE_LINK;
+export const PRIVACY_LINK = process.env.REACT_APP_PRIVACY_LINK;
+export const DISCLOSURES_LINK = process.env.REACT_APP_DISCLOSURES_LINK;
+export const FAQ_LINK = process.env.REACT_APP_FAQ_LINK;
+export const TERMS_AND_CONDITION =
+  process.env.REACT_APP_TERMS_AND_CONDITION_LINK;
+export const DEPOSITE_CROSSED_OUT_FEES =
+  process.env.REACT_APP_DEPOSITE_CROSSED_OUT_FEES;
+export const POLYGONSCAN_URL = process.env.REACT_APP_POLYGONSCAN_URL;
+export const TXN_LIMIT_LINK = process.env.REACT_APP_TXN_LIMIT_LINK;
+export const PROD_BUILD_VERSION = process.env.REACT_APP_VERSION;
+export const TRACKING_REFRENCE = process.env.REACT_APP_TRACKING_REF;
+export const PRODUCT_TOUR_ENABLE = process.env.REACT_APP_PRODUCT_TOUR_ENABLE;
+export const SOCKET_URL = process.env.REACT_APP_SOCKET_URL
+export const STRIPE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+export const SHARE_TEXT = process.env.REACT_APP_REFERRAL_SHARE_TEXT
+export const SHARE_TITLE = process.env.REACT_APP_REFERRAL_SHARE_TITLE
+export const HELP_LINK = process.env.REACT_APP_HELP_LINK ?? 'dev@occurence.global'
+export const MIN_INVEST_AMOUNT = process.env.REACT_APP_MIN_INVEST_AMOUNT
+export const VERIFIED_URL = process.env.REACT_APP_VERIFIED_URL
+export const VERIFIED_TOKEN = process.env.REACT_APP_VERIFIED_API_KEY
+export const REFERRAL_BASE_URL = process.env.REACT_APP_REFERRAL_BASE_URL
+export const AFFILIATE_SHARE_TEXT = process.env.REACT_APP_AFFILIATE_SHARE_TEXT
+export const MAX_REFERRAL = process.env.REACT_APP_MAX_REFERRAL
+export const MOGUL_FEES = process.env.REACT_APP_MOGUL_FEES
+export const PAYMENT_METHOD_NAME = process.env.REACT_APP_PAYMENT_METHOD_NAME

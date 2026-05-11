@@ -1,0 +1,302 @@
+/* Static font imports start*/
+@font-face {
+  font-family: "PP Fragment";
+  font-weight: normal;
+  src: url(./assets/fonts/PPFragment-TextRegular.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Glare";
+  src: url(./assets/fonts/PPFragment-GlareRegular.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Glare";
+  font-weight: bold;
+  src: url(./assets/fonts/PPFragment-GlareExtraBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Glare";
+  font-weight: lighter;
+  src: url(./assets/fonts/PPFragment-GlareLight.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Sans";
+  src: url(./assets/fonts/PPFragment-SansRegular.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Sans";
+  font-weight: bold;
+  src: url(./assets/fonts/PPFragment-SansExtraBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Sans";
+  font-weight: lighter;
+  src: url(./assets/fonts/PPFragment-SansLight.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Serif";
+  src: url(./assets/fonts/PPFragment-SerifRegular.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Serif";
+  font-weight: bold;
+  font-style: normal;
+  src: url(./assets/fonts/PPFragment-SerifExtraBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PP Fragment-Serif";
+  font-weight: 0 300;
+  font-style: lighter;
+  src: url(./assets/fonts/PPFragment-SerifLight.otf) format("opentype");
+}
+
+/* Static font imports end*/
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Make autofill in input of background white */
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: black;
+    color: black;
+} */
+
+/* .top-container-lg input:-webkit-autofill,
+.top-container-lg input:-webkit-autofill:hover,
+.top-container-lg input:-webkit-autofill:focus,
+.top-container-lg input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: black;
+    color: black;
+} */
+
+.padding_all {
+  padding: 20px 50px;
+}
+
+.max-width1400 {
+  max-width: 1800px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ReactCollapse--collapse {
+  transition: height 200ms;
+}
+
+img {
+  max-width: 100%;
+}
+
+.mySwiper {
+  width: 100%;
+}
+.mySwiper-investors {
+  width: 100%;
+  height: 720px;
+  display: flex;
+}
+
+.swiper-slide {
+  justify-content: center;
+  display: flex;
+}
+.swiper-slide-investors {
+  width: 400px;
+  border-radius: 16px;
+  height: fit-content;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff !important;
+}
+
+/* Slick slider css start */
+
+.slick-next:before {
+  /* important used to overide the slick slider default css */
+  font-size: 28px !important;
+  /* color: #58f2f0 !important; */
+}
+
+.slick-prev:before {
+  /* important used to overide the slick slider default css */
+  font-size: 28px !important;
+  /* color: #58f2f0 !important; */
+}
+
+/* Slick slider css end */
+
+.inputRounded .MuiOutlinedInput-root {
+  border-radius: 30px;
+  height: 48px;
+  padding-right: 6px !important;
+  /* border: 2px solid #58f2ef8f !important; */
+}
+
+.inputRounded {
+  height: 48px;
+  margin-bottom: 2vh;
+  border-radius: 30px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* .top-container-lg .inputRounded {
+    border: 1px solid #58f2ef8f !important;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: 1px solid #6976b4;
+} */
+
+.MuiTabs-indicator {
+  background-color: #046149 !important;
+}
+
+.layout_body {
+  min-height: 100vh;
+  padding-top: 70px;
+  overflow: hidden;
+}
+
+.selected-link {
+  /* color: #58f2f0 !important;
+    border-bottom: 2px solid #58f2f0; */
+  padding-bottom: 11px !important;
+}
+
+.hiw-slider .slick-initialized .slick-slide {
+  width: auto !important;
+}
+
+.lazy-load-image-background.blur.lazy-load-image-loaded {
+  height: 100%;
+}
+
+.MuiMenuItem-root {
+  min-height: 20px !important;
+}
+
+.small_screen {
+  display: none;
+}
+
+.header_variant {
+  /* background: #2D355A; */
+  position: sticky;
+}
+
+.market_header {
+  /* background: transparent; */
+  position: sticky;
+}
+
+.header_padding {
+  padding-top: 80px;
+}
+
+.hiw-slider .slick-list {
+  padding: 0 0 0 3% !important;
+}
+
+.show-mobile {
+  display: block !important;
+}
+
+/* Responsivness css start */
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1400px) {
+  .inputRounded {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .inputRounded {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .padding_all {
+    padding: 0px 20px;
+  }
+  .no-padding-left {
+    padding-left: 0 !important;
+  }
+  .small_screen {
+    display: block !important;
+  }
+  .large_screen {
+    display: none;
+  }
+  .inputRounded .MuiOutlinedInput-root {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .text-wrap-div-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: no-wrap;
+  }
+  .text-wrap-div {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: no-wrap;
+  }
+  .large_screen {
+    display: none;
+  }
+  .small_screen {
+    display: block !important;
+  }
+  .testimonial_container {
+    padding: 0px 10px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .testimonial_container {
+    padding: 0px 10px;
+  }
+  .left_back_mock {
+    left: 10px;
+  }
+  .right_back_mock {
+    right: 10px;
+  }
+  .header_button {
+    display: none;
+  }
+}

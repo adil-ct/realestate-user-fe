@@ -1,0 +1,5 @@
+@media only screen and (max-width: 375px) {
+  .two__factor__otp input {
+    margin-right: 12px !important;
+  }
+}
