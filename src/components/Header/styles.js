@@ -2,436 +2,339 @@ import { createStyles, makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+/* ─── Outer wrapper: constrain to max-width ─── */
 export const HeaderContainer = styled.div`
   display: flex;
+  align-items: center;
   width: 100%;
   max-width: 1440px;
-
   height: 100%;
-  @media (max-width: 1250px) {
-    padding-inline: 40px;
-  }
-  @media (max-width: 850px) {
-    flex-direction: column;
-  }
-  @media (max-width: 540px) {
-    padding-inline: 20px;
-  }
+  padding-inline: 56px;
+
+  @media (max-width: 1250px) { padding-inline: 36px; }
+  @media (max-width: 640px)  { padding-inline: 20px; }
 `;
 
+/* ─── Logo ─── */
 export const LogoLink = styled(Link)`
-  max-height: 100px;
-  height:100px;
-  display: grid;
-  place-content: center;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none !important;
+  flex-shrink: 0;
 `;
 
+export const LogoBadge = styled.div`
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #C9A84C 0%, #A8872F 100%);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 900;
+  color: #1A2B4A;
+  font-family: "PP Fragment-Serif", serif;
+  flex-shrink: 0;
+`;
+
+export const LogoText = styled.span`
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-family: "PP Fragment-Serif", serif;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+`;
+
+/* ─── Desktop login/register CTAs ─── */
 export const ActionsButtonsContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 6px;
   margin-left: auto;
 
-  @media (max-width: 800px) {
-    display: none;
+  @media (max-width: 800px) { display: none; }
+`;
+
+/* ─── Ghost Login link ─── */
+export const LoginButton = styled(Link)`
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+  font-size: 13px;
+  font-family: "PP Fragment-Sans", sans-serif;
+  padding: 6px 14px;
+  border-radius: 7px;
+  transition: color 140ms ease, background 140ms ease;
+  text-decoration: none !important;
+  white-space: nowrap;
+
+  &:hover {
+    color: #FFFFFF;
+    background: rgba(255,255,255,0.08);
   }
 `;
 
-export const LoginButton = styled(Link)`
-  color: white;
-  font-weight: 800;
-  font-size: 14px;
-  font-family: "PP Fragment-Sans";
-`;
-
+/* ─── makeStyles ─── */
 const headerStyle = makeStyles((theme) =>
-  createStyles(
-    {
-      appBar: {
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        backgroundSize: "100% 100%",
-        borderRadius: 0,
-        
-        // Override MUI
-        maxHeight: "106px",
-        minWidth: "auto",
-        maxWidth: "none !important",
-        margin: 0,
-        padding: 0,
-      },
-      hidden: {
-        display: "none",
-      },
-      headerContainer: {
-        display: "flex",
-        alignItems: "center",
-        // Overriding the default padding of mui container
-        margin: "auto",
-        padding: 0,
-        height: "100%",
-        width: "100%",
-        minWidth: "auto",
-        // Overriding the default maxWidth of mui container
-        maxWidth: "1440px !important",
-        paddingInline: "80px !important",
-        [theme.breakpoints.down("sm")]: {
-          // Overriding the default padding of mui container
-          paddingLeft: "30px !important",
-          margin: 0,
-        },
-      },
-      toolbar: {
-        backgroundColor: "transparent",
-        padding: 0,
-        margin: 0,
-        height: 'auto',
-        minHeight: "auto !important",
-        justifyContent: "flex-start !important",
-        gap: "58px",
-      },
-      flexCenter: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: 0,
-        
-      },
-      txtCapitalize: {
-        textTransform: "capitalize",
-      },
-      dropDownMenuHeader: {
-        borderBottomWidth: "1px",
-        borderBottomStyle: "solid",
-        marginBottom: "8px",
-        paddingBottom: "3px",
-      },
-      logo: {
-        cursor: "pointer",
-        // backgroundColor: "transparent",
-        border: "none",
-        borderRadius: 0,
-        width: "100%",
-        height:"80px"
-      },
-      flex1: {
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-      },
-      height100: {
-        height: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-      },
-      width100: {
-        width: "100%",
-      },
-      headerTitle: {
-        marginLeft: "10px",
-        fontWeight: 700,
-        // color: "#ffffff",
-        fontSize: "14px",
-        textDecoration: "none",
-        cursor: "pointer",
-        marginTop: "5px",
-        letterSpacing: "0.05rem",
-      },
-      navLinkIcon: {
-        height: "18px",
-        width: "18px",
-      },
-      navLinkIconHover: {
-        height: "18px",
-        width: "18px",
-        display: "none",
-      },
-      navLinkText: {
-        display: "inline-flex",
-        justifyContent: "center",
-        marginLeft: "10px",
-        marginBottom: 0,
-        marginTop: 0,
-        alignItems: "center",
-        fontFamily: "PP Fragment-Sans",
-        marginRight: "25px",
-        cursor: "pointer",
-        fontSize: "14px",
-        fontWeight: "500",
-        color: theme.palette.headerLinks.primary,
-        opacity: 0.8,
-        "&:hover": {
-          opacity: 1,
-        },
-        [theme.breakpoints.down("sm")]: {
-          marginRight: "15px",
-        },
-        [theme.breakpoints.down(360)]: {
-          marginRight: "5px",
-          fontSize: "12px",
-        },
-      },
-      pIcon1: {
-        // color: "white",
-        marginRight: "30px",
-        [theme.breakpoints.down("md")]: {
-          marginRight: "30px",
-        },
-        [theme.breakpoints.down("sm")]: {
-          marginRight: "0px",
-        },
-      },
-      navLinkTextActive: {
-        color: theme.palette.headerLinks.active,
-        opacity: 0.5,
-        display: "inline-flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginLeft: "10px",
-        fontFamily: "PP Fragment-Sans",
-        marginRight: "25px",
-        marginBottom: 0,
-        marginTop: 0,
-        cursor: "pointer",
-        fontSize: "14px",
-        fontWeight: "500",
-        "&:hover": {
-          opacity: 0.9,
-        },
-        [theme.breakpoints.down("sm")]: {
-          marginRight: "15px",
-        },
-        [theme.breakpoints.down(360)]: {
-          marginRight: "5px",
-          fontSize: "12px",
-        },
-      },
-      navLinkSelected: {
-        // color: "#58F2F0",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginLeft: "10px",
-        marginRight: "35px",
-        cursor: "pointer",
-      },
-      actionsBox: {
-        position: "relative",
-        display: "flex",
-        flex: 1,
-        justifyContent: "flex-end",
-      },
-      newNotification: {
-        height: "9px",
-        width: "9px",
-        borderRadius: "9px",
-        position: "absolute",
-        right: "0",
-        top: "0",
-      },
-      notificationIconBox: {
-        marginRight: "30px",
-        display: "flex",
-        position: "relative",
-        alignItems: "center",
-        cursor: "pointer",
-        "&:hover .bellIcon": {
-          display: "none",
-        },
-        "&:hover .bellIconHover": {
-          display: "block",
-        },
-      },
-      iconButton: {
-        p: 0,
-        // border: "1.6px solid #58F2F0",
-        height: "34px",
-        width: "34px",
-      },
-      smallScreenMenuIcon: {
-        color: theme.palette.headerLinks.primary,
-      },
-      profileAvatar: {
-        // background: "transparent",
-        // color: "#58F2F0",
-        fontSize: "13px",
-        fontWeight: "500",
-      },
-      ".navIcon": {
-        height: "18px",
-        width: "18px",
-      },
-      ".navIconHover": {
-        height: "18px",
-        width: "18px",
-        display: "none",
-      },
-      dFlex1: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      },
-      dFlex2: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        cursor: "pointer",
-      },
-      dFlex: {
-        display: "flex",
-        cursor: "pointer",
-        alignItems: "center",
-        "&:hover .navIcon": {
-          display: "none",
-        },
-        "&:hover .navIconHover": {
-          display: "block",
-        },
-        // "&:hover .navLinkText": {
-        //   color: "#58F2F0",
-        // },
-        margin: 0,
-      },
-      svgIcon: {
-        // "&:hover": {
-        //   fill: "red",
-        // },
-      },
-      displaySM: {
-        display: "none",
-        [theme.breakpoints.down("sm")]: {
-          display: "flex",
-        },
-      },
-      displayLG: {
-        display: "flex",
-        alignItems: "center",
-        flex: "1",
-        [theme.breakpoints.down("sm")]: {
-          display: "none",
-        },
-      },
-      displayAll: {
-        display: "flex",
-        alignItems: "center",
-        [theme.breakpoints.down(800)]: {
-          display: "none",
-        },
-      },
-      displaySMAll: {
-        display: "none",
-        [theme.breakpoints.down(800)]: {
-          display: "flex",
-          alignItems: "center",
-        },
-      },
-      headerRightContainer: {
-        position: "relative",
-      },
-      profileNavItem: {
-        fontSize: "14px",
-        // color: "#51566B",
-        fontWeight: "400",
-        lineHeight: "24px",
-        textAlign: "center",
-      },
-      loggedOutNavItem: {
-        color: theme.palette.bodyText.primary,
-        border: "none",
-        margin: 0,
-        padding: 0,
-        fontSize: "1rem",
-        letterSpacing: "0.00938em",
-      },
-      loggedOutMenuItem: {
-        display: "flex",
-        alignItems: "center",
-      },
-      sellButton: {
-        fontSize: "14px",
-        // color: "#51566B",
-        fontWeight: "400",
-        lineHeight: "24px",
-        textAlign: "center",
-        // background: "transparent",
-        cursor: "pointer",
-        border: 0,
-        margin: 0,
-        padding: 0,
-        marginLeft: "-2px",
-      },
-      profileNavIcon: {
-        marginRight: "13px",
-      },
-      profileNavIcon1: {
-        marginRight: "13px",
-        height: "25px",
-        width: "25px",
-      },
-      profileNavIcon1Hover: {
-        marginRight: "13px",
-        height: "25px",
-        width: "25px",
-        display: "none",
-      },
-      profileNavSName: {
-        // background: "#2D355A",
-        margin: "12px 16px 15px 12px",
-        // border: "1.6px solid #58F2F0",
-        width: "18px",
-        height: "18px",
-        cursor: "auto",
-      },
-      profileNav: {
-        padding: "2px 22px 2px 12px",
-        margin: "2px 0",
-      },
-      profileNav1: {
-        padding: "2px 22px 2px 12px",
-        margin: "10px 0",
-      },
-      headerButton: {
-        letterSpacing: "0.03em",
-        width: "80px",
-        height: "40px",
-        cursor: "pointer",
-        borderRadius: "30px",
-        marginRight: "10px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "0",
-        [theme.breakpoints.down("lg")]: {
-          maxWidth: "70px",
-          height: "40px",
-        },
-        [theme.breakpoints.down("md")]: {
-          maxWidth: "60px",
-          height: "35px",
-          marginLeft: "10px",
-        },
-        [theme.breakpoints.down("sm")]: {
-          maxWidth: "50px",
-          height: "28px",
-          marginLeft: "4px",
-        },
-        [theme.breakpoints.down("xs")]: {
-          maxWidth: "48px",
-          height: "26px",
-          marginLeft: "3px",
-        },
-      },
-      // headerButtonSmall: {
-      //   letterSpacing: "0.03em",
-      //   cursor: "pointer",
-      //   borderRadius: "30px",
-      //   padding: "0px",
-      //   marginLeft: "10px",
-      // },
+  createStyles({
+    /* AppBar override */
+    appBar: {
+      display: "flex",
+      alignItems: "center",
+      width: "100%",
+      borderRadius: "0 !important",
+      backgroundColor: "#111E35 !important",
+      borderBottom: "1px solid rgba(255,255,255,0.07) !important",
+      boxShadow: "none !important",
+      height: "72px",
+      maxHeight: "72px",
+      minHeight: "72px",
+      minWidth: "auto",
+      maxWidth: "none !important",
+      margin: 0,
+      padding: 0,
+      position: "sticky !important",
+      top: 0,
+      zIndex: "1200 !important",
     },
-    { name: "header-component" }
-  )
+
+    hidden:     { display: "none" },
+
+    toolbar: {
+      backgroundColor: "transparent",
+      padding: 0,
+      margin: 0,
+      height: "auto",
+      minHeight: "auto !important",
+      justifyContent: "flex-start !important",
+      gap: "40px",
+      width: "100%",
+    },
+
+    flexCenter: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexShrink: 0,
+    },
+
+    txtCapitalize: { textTransform: "capitalize" },
+
+    /* Dropdown header row */
+    dropDownMenuHeader: {
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      padding: "10px 14px 10px 10px",
+      borderBottom: "1px solid #E2E8F0",
+      marginBottom: "4px",
+    },
+
+    flex1: {
+      flex: 1,
+      display: "flex",
+      alignItems: "center",
+    },
+
+    height100: {
+      height: "100%",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+
+    width100: { width: "100%" },
+
+    /* Nav links */
+    navLinkText: {
+      display: "inline-flex",
+      alignItems: "center",
+      fontFamily: '"PP Fragment-Sans", sans-serif',
+      padding: "5px 12px",
+      borderRadius: "7px",
+      cursor: "pointer",
+      fontSize: "13px",
+      fontWeight: "500",
+      color: "rgba(255,255,255,0.68)",
+      transition: "color 140ms ease, background 140ms ease",
+      marginRight: "2px",
+      "&:hover": {
+        color: "#FFFFFF",
+        backgroundColor: "rgba(255,255,255,0.07)",
+      },
+    },
+
+    navLinkTextActive: {
+      display: "inline-flex",
+      alignItems: "center",
+      fontFamily: '"PP Fragment-Sans", sans-serif',
+      padding: "5px 12px",
+      borderRadius: "7px",
+      cursor: "pointer",
+      fontSize: "13px",
+      fontWeight: "600",
+      color: "#C9A84C",
+      backgroundColor: "rgba(201,168,76,0.10)",
+      marginRight: "2px",
+      "&:hover": {
+        color: "#E8CC82",
+        backgroundColor: "rgba(201,168,76,0.14)",
+      },
+    },
+
+    actionsBox: {
+      position: "relative",
+      display: "flex",
+      flex: 1,
+      justifyContent: "flex-end",
+      alignItems: "center",
+      gap: "6px",
+    },
+
+    iconButton: {
+      padding: "4px !important",
+      height: "34px",
+      width: "34px",
+    },
+
+    /* Avatar */
+    profileAvatar: {
+      backgroundColor: "#C9A84C !important",
+      color: "#1A2B4A !important",
+      fontSize: "11px !important",
+      fontWeight: "800 !important",
+      width: "32px !important",
+      height: "32px !important",
+      cursor: "pointer",
+      transition: "box-shadow 140ms ease",
+      "&:hover": {
+        boxShadow: "0 0 0 2.5px rgba(201,168,76,0.4)",
+      },
+    },
+
+    smallScreenMenuIcon: { color: "rgba(255,255,255,0.85)" },
+
+    dFlex1: { display: "flex", justifyContent: "center", alignItems: "center" },
+    dFlex2: { display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer" },
+    dFlex:  { display: "flex", cursor: "pointer", alignItems: "center", margin: 0 },
+
+    displayLG: {
+      display: "flex",
+      alignItems: "center",
+      flex: "1",
+      [theme.breakpoints.down("sm")]: { display: "none" },
+    },
+
+    displayAll: {
+      display: "flex",
+      alignItems: "center",
+      [theme.breakpoints.down(800)]: { display: "none" },
+    },
+
+    displaySMAll: {
+      display: "none",
+      [theme.breakpoints.down(800)]: {
+        display: "flex",
+        alignItems: "center",
+        gap: "6px",
+      },
+    },
+
+    headerRightContainer: { position: "relative" },
+
+    profileNavItem: {
+      fontSize: "13px",
+      color: "#1A1A2E",
+      fontWeight: "500",
+      lineHeight: "20px",
+    },
+
+    loggedOutNavItem: {
+      color: "#1A1A2E",
+      border: "none",
+      margin: 0,
+      padding: 0,
+      fontSize: "13px",
+      fontWeight: "500",
+    },
+
+    loggedOutMenuItem: {
+      display: "flex",
+      alignItems: "center",
+      borderRadius: "7px",
+    },
+
+    sellButton: {
+      fontSize: "13px",
+      color: "#1A1A2E",
+      fontWeight: "500",
+      lineHeight: "20px",
+      background: "transparent",
+      cursor: "pointer",
+      border: 0,
+      margin: 0,
+      padding: 0,
+    },
+
+    profileNavIcon: {
+      marginRight: "10px",
+      width: "16px",
+      height: "16px",
+      opacity: 0.55,
+    },
+
+    profileNavSName: {
+      width: "32px",
+      height: "32px",
+      cursor: "auto",
+      marginRight: "4px",
+    },
+
+    profileNav: {
+      padding: "7px 14px",
+      margin: "1px 4px",
+      borderRadius: "7px",
+      transition: "background 140ms ease",
+      "&:hover": { backgroundColor: "rgba(26,43,74,0.05)" },
+    },
+
+    /* Join Now button */
+    headerButton: {
+      backgroundColor: "#C9A84C !important",
+      color: "#111E35 !important",
+      fontWeight: "700 !important",
+      letterSpacing: "0.01em",
+      height: "34px",
+      cursor: "pointer",
+      borderRadius: "8px !important",
+      padding: "0 18px !important",
+      fontSize: "13px !important",
+      fontFamily: '"PP Fragment-Sans", sans-serif',
+      minWidth: "unset !important",
+      transition: "all 180ms ease !important",
+      boxShadow: "none !important",
+      "&:hover": {
+        backgroundColor: "#A8872F !important",
+        transform: "translateY(-1px)",
+        boxShadow: "0 4px 14px rgba(201,168,76,0.35) !important",
+      },
+    },
+
+    headerButtonSmall: {
+      backgroundColor: "#C9A84C !important",
+      color: "#111E35 !important",
+      fontWeight: "700 !important",
+      height: "32px",
+      cursor: "pointer",
+      borderRadius: "7px !important",
+      padding: "0 14px !important",
+      fontSize: "12px !important",
+      minWidth: "unset !important",
+    },
+  }),
+  { name: "header-component" }
 );
 
 export default headerStyle;

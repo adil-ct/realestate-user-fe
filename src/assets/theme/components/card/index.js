@@ -1,14 +1,6 @@
-// Material Kit 2 React Base Styles
-// import colors from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";
-import boxShadows from "assets/theme/base/boxShadows";
 
-// Material Kit 2 React Helper Function
-// import rgba from "assets/theme/functions/rgba";
-
-// const { black, white } = colors;
-const { /*borderWidth,*/ borderRadius } = borders;
-const { md } = boxShadows;
+const { borderRadius } = borders;
 
 export default {
   styleOverrides: {
@@ -18,12 +10,18 @@ export default {
       position: "relative",
       minWidth: 0,
       wordWrap: "break-word",
-      // backgroundColor: white.main,
+      backgroundColor: "#FFFFFF",
       backgroundClip: "border-box",
-      // border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
-      borderRadius: borderRadius.xl,
-      boxShadow: md,
+      border: "1px solid #E2E8F0",
+      borderRadius: borderRadius.xxl,
+      boxShadow: "0 2px 12px rgba(26,43,74,0.07), 0 1px 3px rgba(26,43,74,0.05)",
       overflow: "visible",
+      transition: "box-shadow 200ms ease, transform 200ms ease",
+
+      "&:hover": {
+        boxShadow: "0 8px 32px rgba(26,43,74,0.12), 0 2px 8px rgba(26,43,74,0.08)",
+        transform: "translateY(-2px)",
+      },
     },
   },
 };

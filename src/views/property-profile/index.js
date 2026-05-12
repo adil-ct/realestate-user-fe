@@ -192,7 +192,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: "24px 0" }}>{children}</Box>}
+      {value === index && <Box sx={{ p: "12px 0" }}>{children}</Box>}
     </div>
   );
 }
@@ -1022,44 +1022,59 @@ const PropertyProfile = () => {
                     </Box>
                   </Box>
                   {propertyObj?.market?.marketDetails?.description && (
-                    <span
+                    <Box
                       className={classes.marketDescription}
                       dangerouslySetInnerHTML={{
                         __html: propertyObj?.market?.alteredDesc,
                       }}
-                    ></span>
+                    />
                   )}
                   {!propertyObj?.market?.noChartData && !isLoading && (
-                    <Grid
-                      container
-                      direction="row"
-                      rowSpacing={0}
-                      justifyContent="flex-end"
-                      className={classes.mt30}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexWrap: "wrap",
+                        gap: "12px",
+                        marginTop: "20px",
+                        marginBottom: "12px",
+                      }}
                     >
-                      <MKButton
-                        onClick={() => setRentSelected(true)}
-                        variant={rentSelected ? "gradient" : "outlined"}
-                        className={
-                          rentSelected ? classes.customBtn : classes.mktBtns
-                        }
-                        // color="primary"
+                      <MKTypography
+                        sx={{
+                          fontSize: "13px",
+                          fontWeight: 600,
+                          color: "#6B7280",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.06em",
+                        }}
                       >
-                        Rent (PSF)
-                      </MKButton>
-                      <MKButton
-                        onClick={() => setRentSelected(false)}
-                        variant={rentSelected ? "outlined" : "gradient"}
-                        className={
-                          !rentSelected
-                            ? classes.customOutlineBtn
-                            : classes.mktBtnsRight
-                        }
-                        // color="primary"
-                      >
-                        Property Values
-                      </MKButton>
-                    </Grid>
+                        Historical Performance
+                      </MKTypography>
+                      <Box sx={{ display: "flex" }}>
+                        <MKButton
+                          onClick={() => setRentSelected(true)}
+                          variant={rentSelected ? "gradient" : "outlined"}
+                          className={
+                            rentSelected ? classes.customBtn : classes.mktBtns
+                          }
+                        >
+                          Rent (PSF)
+                        </MKButton>
+                        <MKButton
+                          onClick={() => setRentSelected(false)}
+                          variant={rentSelected ? "outlined" : "gradient"}
+                          className={
+                            !rentSelected
+                              ? classes.customOutlineBtn
+                              : classes.mktBtnsRight
+                          }
+                        >
+                          Property Values
+                        </MKButton>
+                      </Box>
+                    </Box>
                   )}
                   {/* </Grid> */}
                   {propertyObj?.market?.noChartData ? (

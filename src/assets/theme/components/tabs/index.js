@@ -1,13 +1,11 @@
-// Material Kit 2 React base styles
-import colors from "assets/theme/base/colors";
-
 export default {
   styleOverrides: {
     root: {
-        "& .MuiTabs-indicator": {
-            backgroundColor: colors.secondary.dark,
-        },
+      "& .MuiTabs-indicator": {
+        backgroundColor: "#C9A84C",
+        height: "2.5px",
+        borderRadius: "2px",
+      },
     },
   },
 };
-

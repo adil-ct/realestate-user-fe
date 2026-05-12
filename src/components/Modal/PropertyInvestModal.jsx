@@ -479,6 +479,12 @@ const PropertyInvestModal = ({
                   fontSize="20px"
                   width="100%"
                   component="span"
+                  sx={{
+                    fontFamily: '"PP Fragment-Serif", serif',
+                    color: "#1A1A2E",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.2,
+                  }}
                 >
                   {property?.title || "Property Title"}
                 </MKTypography>
@@ -487,20 +493,21 @@ const PropertyInvestModal = ({
                   className={classes.locationEle}
                   component="span"
                 >
-                  {property?.city && property?.city + " , "} {property?.state}
+                  {property?.city && property?.city + ", "} {property?.state}
                 </MKTypography>
               </MKBox>
               {!checkout && (
-                <Grid container className={classes.centerGrid}>
-                  <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    xl={12}
-                    className={classes?.dFlex1}
-                  >
+                <MKBox
+                  sx={{
+                    background: "#F8F7F4",
+                    borderRadius: "12px",
+                    padding: "14px 16px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                  }}
+                >
+                  <MKBox className={classes?.dFlex1}>
                     <Tooltip
                       title="The total amount of the offering inclusive of the purchase price, reserves, and closing costs net of debt"
                       placement="top-start"
@@ -523,16 +530,8 @@ const PropertyInvestModal = ({
                         }
                       />
                     </MKTypography>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    xl={12}
-                    className={classes?.dFlex1}
-                  >
+                  </MKBox>
+                  <MKBox className={classes?.dFlex1}>
                     <Tooltip
                       title="The price of each share"
                       placement="top-start"
@@ -553,8 +552,8 @@ const PropertyInvestModal = ({
                         value={property?.pricePerToken}
                       />
                     </MKTypography>
-                  </Grid>
-                </Grid>
+                  </MKBox>
+                </MKBox>
               )}
               {!checkout && (
                 <Grid item xs={12} md={12} mt={2}>
@@ -567,21 +566,28 @@ const PropertyInvestModal = ({
                   <MKBox className={classes.tBoxContainer}>
                     {Number(numberOfTokens) - Number(tokensSold) - noOfToken >=
                       750 && (
-                      <MKBox
-                        className={classes.tBox}
-                        onClick={() => addWithExistingTokensInput(750)}
-                      >
-                        <MKTypography
-                          component="span"
-                          className={classes.tokenVal}
+                      <MKBox sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                        <MKBox className={classes.specs1} sx={{ visibility: "hidden" }}>
+                          <MKTypography className={classes.tagsEle} component="span">
+                            &nbsp;
+                          </MKTypography>
+                        </MKBox>
+                        <MKBox
+                          className={classes.tBox}
+                          onClick={() => addWithExistingTokensInput(750)}
                         >
-                          + 750
-                        </MKTypography>
+                          <MKTypography
+                            component="span"
+                            className={classes.tokenVal}
+                          >
+                            + 750
+                          </MKTypography>
+                        </MKBox>
                       </MKBox>
                     )}
                     {Number(numberOfTokens) - Number(tokensSold) - noOfToken >=
                       1500 && (
-                      <MKBox>
+                      <MKBox sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
                         <MKBox className={classes.specs1}>
                           <MKTypography
                             className={classes.tagsEle}
@@ -593,6 +599,10 @@ const PropertyInvestModal = ({
                         <MKBox
                           className={classes.tBox}
                           onClick={() => addWithExistingTokensInput(1500)}
+                          sx={{
+                            borderColor: "#C9A84C !important",
+                            background: "rgba(201,168,76,0.06)",
+                          }}
                         >
                           <MKTypography
                             component="span"
@@ -605,16 +615,23 @@ const PropertyInvestModal = ({
                     )}
                     {Number(numberOfTokens) - Number(tokensSold) - noOfToken >=
                       3000 && (
-                      <MKBox
-                        className={classes.tBox}
-                        onClick={() => addWithExistingTokensInput(3000)}
-                      >
-                        <MKTypography
-                          component="span"
-                          className={classes.tokenVal}
+                      <MKBox sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                        <MKBox className={classes.specs1} sx={{ visibility: "hidden" }}>
+                          <MKTypography className={classes.tagsEle} component="span">
+                            &nbsp;
+                          </MKTypography>
+                        </MKBox>
+                        <MKBox
+                          className={classes.tBox}
+                          onClick={() => addWithExistingTokensInput(3000)}
                         >
-                          + 3,000
-                        </MKTypography>
+                          <MKTypography
+                            component="span"
+                            className={classes.tokenVal}
+                          >
+                            + 3,000
+                          </MKTypography>
+                        </MKBox>
                       </MKBox>
                     )}
                   </MKBox>

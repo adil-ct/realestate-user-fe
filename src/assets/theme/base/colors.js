@@ -1,147 +1,176 @@
-const mainBlack = '#34c38f';
-const mainWhite = '#FFFFFF';
-const palette =  {
-    mode: 'light',
-    primary: {
-      main: mainBlack,
-    },
+// Primary brand: Deep Navy | Accent: Warm Gold | Background: Warm Off-White
+const navy        = '#1A2B4A';
+const navyDark    = '#0F1C32';
+const navyLight   = '#2C4270';
+const gold        = '#C9A84C';
+const goldDark    = '#A8872F';
+const goldLight   = '#E8CC82';
+const offWhite    = '#F8F7F4';
+const white       = '#FFFFFF';
+
+const palette = {
+  mode: 'light',
+
+  primary: {
+    main: navy,
+    dark: navyDark,
+    light: navyLight,
+  },
+
+  secondary: {
+    main: gold,
+    dark: goldDark,
+    light: goldLight,
+  },
+
+  text: {
+    primary: '#1A1A2E',
+    secondary: '#6B7280',
+    disabled: '#94A3B8',
+  },
+
+  bodyText: {
+    primary: '#1A1A2E',
+    secondary: navy,
+    disabled: '#6B7280',
+    subText: '#94A3B8',
+    disclaimers: '#CBD5E1',
+  },
+
+  background: {
+    primary: offWhite,
+    default: offWhite,
+    paper: white,
+  },
+
+  subBackground: {
+    primary: '#F1F0EC',
+  },
+
+  foreground: {
+    primary: white,
+  },
+
+  error: {
+    main: '#EF4444',
+    dark: '#B91C1C',
+    light: '#FCA5A5',
+  },
+
+  success: {
+    main: '#22C55E',
+    light: '#86EFAC',
+    dark: '#15803D',
+  },
+
+  warning: {
+    main: '#F59E0B',
+    light: '#FDE68A',
+    dark: '#B45309',
+  },
+
+  info: {
+    main: navy,
+    light: navyLight,
+    dark: navyDark,
+  },
+
+  grey: {
+    0:   '#FFFFFF',
+    25:  '#F8F7F4',
+    50:  '#F1F0EC',
+    100: '#E2E8F0',
+    200: '#CBD5E1',
+    300: '#94A3B8',
+    400: '#64748B',
+    500: '#475569',
+    600: '#334155',
+    700: '#1E293B',
+    800: '#0F172A',
+  },
+
+  tooltipBackground: {
+    light: white,
+    dark: navy,
+  },
+
+  callToAction: {
+    primary: gold,
+    light: goldLight,
+    dark: goldDark,
+    active: goldDark,
+    off: '#CBD5E1',
+    white: white,
+    hover: navyLight,
     secondary: {
-      main: '#046149',
-      dark: '#01281C',
-      light: '#92D4C0',
+      main: navy,
+      dark: navyDark,
+      light: navyLight,
+      active: navyLight,
     },
-    text: {
-        primary: mainWhite,
-        secondary: '#F2F5F7',
-        disabled: '#99A2A8',
+    closeIcon: {
+      dark: navy,
+      light: white,
     },
-    bodyText: {
-        primary: mainBlack,
-        secondary: '#046149',
-        disabled: '#6A7379',
-        subText: '#99A2A8',
-        disclaimers: '#BCC5CC'
+  },
+
+  searchBox: {
+    border: '#E2E8F0',
+    background: white,
+  },
+
+  headerLinks: {
+    primary: '#FFFFFF',
+    active: goldLight,
+  },
+
+  footerLinks: {
+    primary: '#CBD5E1',
+    active: goldLight,
+  },
+
+  dividers: {
+    main: '#E2E8F0',
+  },
+
+  tables: {
+    header: {
+      background: offWhite,
+    },
+    subheader: {
+      background: '#F1F0EC',
+    },
+  },
+
+  inputs: {
+    border: {
+      primary: '#CBD5E1',
+      disabled: '#E2E8F0',
+      error: '#EF4444',
     },
     background: {
-        primary: '#D8E0E5', 
-        default: '#D8E0E5', 
+      primary: white,
+      disabled: offWhite,
     },
-    subBackground: {
-        primary: '#F2F5F7'
+    label: {
+      asterisk: {
+        main: '#EF4444',
+      },
     },
-    foreground: {
-        primary: mainWhite,
-    },
-    error: {
-        main: "#CD4848",
-        dark: "#993636",
-        light: '#FFABAB',
-    },
-    success: {
-        main: "#35C377",
-        light: '#73E5A8',
-        dark: '#23804E',
-    },
-    warning: {
-        main: '#F3BF23',
-        light: '#F3DE9E',
-        dark: '#B28A12',
-    },
-    info: {
-        main: '#34c38f',
-        light: '#5dd4a8',
-        dark: '#23804E',
-    },
-    grey: {
-        0: '#FFFFFF',
-        25: '#F9FAFB',
-        50: '#F2F5F7',
-        100: "#D8E0E5",
-        200: "#BCC5CC",
-        300: "#99A2A8",
-        400: "#6A7379",
-        500: "#51585F",
-        600: "#3F464D",
-        700: "#293036",
-        800: "#1D2329",
-    },
-    tooltipBackground: {
-        light: mainWhite,
-        dark: mainBlack,
-    },
-    callToAction: {
-        primary: '#34c38f',
-        light: '#5dd4a8',
-        dark: '#23804E',
-        active: '#5dd4a8',
-        off: '#BCC5CC',
-        white: '#FFFFFF',
-        hover: '#4685FF',
-        secondary: {
-            main: '#046149',
-            dark: '#01281C',
-            light: '#92D4C0',
-            active: '#92D4C0',
-        },
-        closeIcon: {
-            dark: mainBlack,
-            light: mainWhite,
-        },
-    },
-    searchBox: {
-        border: '#D8E0E5',
-        background: '#FFFFFF',
-    },
-    headerLinks: {
-        primary: '#FFFFFF',
-        active: '#FFFFFF',
-    },
-    footerLinks: {
-        primary: '#FFFFFF',
-        active: '#FFFFFF',
-    },
-    dividers: {
-        main: 'D8E0E5',
-    },
-    tables: {
-        header: {
-            background: '#D8E0E5',
-        },
-        subheader: {
-            background: '#F2F5F7',
-        },
-    },
-    inputs: {
-        border: {
-            primary: '#D8E0E5',
-            disabled: '#BCC5CC',
-            error: '#CD4848',
-        },
-        background: {
-            primary: mainWhite,
-            disabled: '#F2F5F7',
-        },
-        label: {
-            asterisk: {
-                main: 'red'
-            }
-        },
-    },
+  },
 
-    // T: Update these
-    coloredShadows: { // revisit
-        primary: "#e91e62",
-        secondary: "#110e0e",
-        info: "#00bbd4",
-        success: "#4caf4f",
-        warning: "#ff9900",
-        error: "#f44336",
-        light: "#adb5bd",
-        dark: "#404040",
-        white: "#ffffff",
-        black: "#000000",
-    },
-      
+  coloredShadows: {
+    primary: navy,
+    secondary: navyDark,
+    info: navyLight,
+    success: '#22C55E',
+    warning: '#F59E0B',
+    error: '#EF4444',
+    light: '#94A3B8',
+    dark: '#0F172A',
+    white: white,
+    black: '#000000',
+  },
 };
 
 export default palette;

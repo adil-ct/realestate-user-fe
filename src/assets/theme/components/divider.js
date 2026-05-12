@@ -1,32 +1,31 @@
-// Material Kit 2 React base styles
 import colors from "assets/theme/base/colors";
-
-// Material Kit 2 React helper functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
 export default {
   styleOverrides: {
     root: {
-      width: "80%",
+      backgroundColor: "transparent",
+      backgroundImage: "none !important",
       height: pxToRem(1),
-      margin: `${pxToRem(16)} auto`,
-      borderBottom: "none",
-      color: colors.bodyText.primary,
+      margin: `${pxToRem(16)} 0`,
+      borderBottom: `1px solid ${colors.grey[100]}`,
+      opacity: 1,
     },
 
     vertical: {
-      // background: rgba(dark.main, 0.2),
+      backgroundColor: "transparent",
+      backgroundImage: "none !important",
+      borderRight: `1px solid ${colors.grey[100]}`,
       width: pxToRem(1),
       height: "100%",
       margin: `0 ${pxToRem(16)}`,
-      borderRight: "none",
     },
 
     light: {
-      background: colors.grey[50],
+      borderColor: colors.grey[50],
 
       "&.MuiDivider-vertical": {
-        background: colors.grey[50],
+        borderColor: colors.grey[50],
       },
     },
   },

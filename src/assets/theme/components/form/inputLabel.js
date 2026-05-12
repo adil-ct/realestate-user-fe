@@ -1,28 +1,34 @@
-// Material Kit 2 React Base Styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
+import pxToRem from "assets/theme/functions/pxToRem";
 
-// const { text, info } = colors;
-const { size } = typography;
+const { size, fontWeightMedium } = typography;
 
 export default {
   styleOverrides: {
     root: {
       fontSize: size.sm,
-      color: colors.bodyText.primary,
+      fontWeight: fontWeightMedium,
+      color: colors.bodyText.disabled,
       lineHeight: 0.9,
-
-      // "&.Mui-focused": {
-      //   color: info.main,
-      // },
+      letterSpacing: "0.01em",
 
       "&.MuiInputLabel-shrink": {
         lineHeight: 1.5,
-        fontSize: size.md,
+        fontSize: pxToRem(12),
+        color: colors.primary.main,
 
         "~ .MuiInputBase-root .MuiOutlinedInput-notchedOutline legend": {
           fontSize: "0.85em",
         },
+      },
+
+      "&.Mui-focused": {
+        color: colors.primary.main,
+      },
+
+      "&.Mui-error": {
+        color: colors.error.main,
       },
     },
 

@@ -1,14 +1,6 @@
-// Material Kit 2 React Base Styles
-// import colors from "assets/theme/base/colors";
-
-// Material Kit 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-// const { grey } = colors;
-
 export default {
-  // borderColor: grey[500],
-
   borderWidth: {
     0: 0,
     1: pxToRem(1),
@@ -19,14 +11,14 @@ export default {
   },
 
   borderRadius: {
-    xs: pxToRem(1.6),
-    sm: pxToRem(2),
-    md: pxToRem(6),
-    lg: pxToRem(8),
-    xl: pxToRem(12),
-    xxl: pxToRem(16),
-    xxxl: pxToRem(30),
-    xxxxl: pxToRem(40),
+    xs:     pxToRem(4),
+    sm:     pxToRem(6),
+    md:     pxToRem(8),
+    lg:     pxToRem(10),
+    xl:     pxToRem(12),
+    xxl:    pxToRem(16),
+    xxxl:   pxToRem(24),
+    xxxxl:  pxToRem(40),
     section: pxToRem(160),
   },
 };

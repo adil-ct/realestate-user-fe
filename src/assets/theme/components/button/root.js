@@ -1,32 +1,41 @@
-// Material Kit 2 React Base Styles
 import typography from "assets/theme/base/typography";
 import borders from "assets/theme/base/borders";
-
-// Material Kit 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-const { size, fontWeightBold } = typography;
+const { size, fontWeightSemiBold } = typography;
 const { borderRadius } = borders;
 
 export default {
   display: "inline-flex",
   justifyContent: "center",
   alignItems: "center",
-  fontSize: size.xs,
-  borderRadius: borderRadius.xxxl,
-  padding: `${pxToRem(6.302)} ${pxToRem(16.604)}`,
-  lineHeight: 1.4,
+  fontSize: size.sm,
+  borderRadius: borderRadius.xl,
+  padding: `${pxToRem(10)} ${pxToRem(24)}`,
+  lineHeight: 1.5,
   textAlign: "center",
-  fontWeight: fontWeightBold,
-  // textTransform: "uppercase",
+  fontWeight: fontWeightSemiBold,
+  letterSpacing: "0.01em",
   userSelect: "none",
-  backgroundSize: "150% !important",
-  backgroundPositionX: "25% !important",
-  transition: "all 150ms ease-in",
+  transition: "all 200ms cubic-bezier(0.4, 0, 0.2, 1)",
+  boxShadow: "none",
+
+  "&:hover": {
+    transform: "translateY(-1px)",
+    boxShadow: "0 4px 16px rgba(26,43,74,0.18)",
+  },
+
+  "&:active": {
+    transform: "translateY(0)",
+    boxShadow: "none",
+    opacity: 0.92,
+  },
 
   "&:disabled": {
-    pointerEvent: "none",
-    opacity: 0.65,
+    pointerEvents: "none",
+    opacity: 0.45,
+    transform: "none",
+    boxShadow: "none",
   },
 
   "& .material-icons": {

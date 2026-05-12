@@ -20,7 +20,9 @@ import headerStyle, {
   ActionsButtonsContainer,
   HeaderContainer,
   LoginButton,
+  LogoBadge,
   LogoLink,
+  LogoText,
 } from "./styles";
 
 // Static imports
@@ -380,10 +382,9 @@ const Header = () => {
               to={routePaths.LANDING_PAGE_PATH}
               target="_self"
               rel="noreferrer"
-              // className={`${classes.width100}`}
-              
             >
-              <span style={{fontSize: '24px', fontWeight: 'bold', color: '#34c38f'}}>Occurrence</span>
+              <LogoBadge>O</LogoBadge>
+              <LogoText>Occurrence</LogoText>
             </LogoLink>
           </Box>
           <Box className={classes.flex1}>

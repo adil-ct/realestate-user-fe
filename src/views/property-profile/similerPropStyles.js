@@ -7,34 +7,20 @@ const SimilarPropStyles = makeStyles((theme) =>
         color: theme.palette.bodyText.primary,
       },
       paddingContainer: {
-        margin: "80px 30px",
-        // border: "1px solid #EAECF4",
-        borderRadius: "20px",
+        margin: "0",
+        padding: "24px 40px 32px",
         [theme.breakpoints.down("md")]: {
-          margin: "50px 10px",
+          padding: "20px 16px 24px",
         },
         [theme.breakpoints.down("sm")]: {
-          margin: "50px 5px",
+          padding: "16px 12px 20px",
         },
       },
       mainContainer: {
-        // background: theme.palette.subBackground.primary,
         color: theme.palette.bodyText.primary,
-        minHeight: "calc(100vh - 125px)",
-        padding: "10px 30px",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "100% 100%",
-        borderRadius: "22px",
+        padding: "0",
         width: "100%",
         boxSizing: "border-box",
-        [theme.breakpoints.down("md")]: {
-          padding: "20px 20px",
-          height: "auto",
-        },
-        [theme.breakpoints.down("sm")]: {
-          padding: "20px 10px",
-          height: "auto",
-        },
       },
       flexCenter: {
         minHeight: "calc(100vh - 85px)",
@@ -126,10 +112,10 @@ const SimilarPropStyles = makeStyles((theme) =>
         alignItems: "center",
       },
       homeIcon: {
-        width: "28px",
-        height: "23px",
-        marginBottom: "5px",
-        marginLeft: "6px",
+        width: "22px",
+        height: "22px",
+        color: "#C9A84C",
+        flexShrink: 0,
       },
       upIcon: {
         width: "18px",
@@ -137,9 +123,12 @@ const SimilarPropStyles = makeStyles((theme) =>
         marginLeft: "10px",
       },
       heading1: {
-        fontSize: "24px",
-        letterSpacing: "0.04em",
-        marginLeft: "10px",
+        fontSize: "20px",
+        fontWeight: "700",
+        letterSpacing: "-0.02em",
+        color: "#1A1A2E",
+        fontFamily: '"PP Fragment-Serif", serif',
+        marginLeft: "8px",
       },
       heading2: {
         fontSize: "18px",
@@ -148,10 +137,10 @@ const SimilarPropStyles = makeStyles((theme) =>
         marginLeft: "10px",
       },
       topTrending: {
-        marginTop: "40px",
+        marginTop: "20px",
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "24px",
+        gap: "20px",
         [theme.breakpoints.down("md")]: {
           gridTemplateColumns: "repeat(2, 1fr)",
         },
@@ -259,7 +248,7 @@ const SimilarPropStyles = makeStyles((theme) =>
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "500px",
+        minHeight: "200px",
         flexDirection: "column",
       },
       quote: {

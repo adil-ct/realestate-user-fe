@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx react-scripts *)",
+      "Bash(Get-ChildItem -Path \"D:\\\\Candour\\\\Realstate\\\\realestate-whitelabel-fe-user-main 1\\\\realestate-whitelabel-fe-user-main\\\\src\\\\views\" -Recurse)",
+      "Bash(Select-Object FullName)",
+      "Bash(findstr /i \"error warning built deploy\")"
+    ]
+  }
+}

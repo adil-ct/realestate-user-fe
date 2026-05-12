@@ -7,34 +7,21 @@ const styles = makeStyles((theme) =>
         color: theme.palette.bodyText.primary,
       },
       paddingContainer: {
-        margin: "80px 30px",
-        // border: "1px solid #EAECF4",
-        borderRadius: "20px",
+        margin: "0",
+        padding: "32px 40px",
         [theme.breakpoints.down("md")]: {
-          margin: "50px 10px",
+          padding: "24px 20px",
         },
         [theme.breakpoints.down("sm")]: {
-          margin: "50px 5px",
+          padding: "20px 12px",
         },
       },
       mainContainer: {
-        // background: theme.palette.subBackground.primary,
         color: theme.palette.bodyText.primary,
         minHeight: "calc(100vh - 125px)",
-        padding: "10px 30px",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "100% 100%",
-        borderRadius: "22px",
+        padding: "0",
         width: "100%",
         boxSizing: "border-box",
-        [theme.breakpoints.down("md")]: {
-          padding: "20px 20px",
-          height: "auto",
-        },
-        [theme.breakpoints.down("sm")]: {
-          padding: "20px 10px",
-          height: "auto",
-        },
       },
       flexCenter: {
         minHeight: "calc(100vh - 85px)",
@@ -126,10 +113,10 @@ const styles = makeStyles((theme) =>
         alignItems: "center",
       },
       homeIcon: {
-        width: "28px",
-        height: "23px",
-        marginBottom: "5px",
-        marginLeft: "6px",
+        width: "22px",
+        height: "22px",
+        marginBottom: "2px",
+        color: "#C9A84C",
       },
       upIcon: {
         width: "18px",
@@ -137,26 +124,29 @@ const styles = makeStyles((theme) =>
         marginLeft: "10px",
       },
       heading1: {
-        fontSize: "24px",
-        letterSpacing: "0.04em",
-        marginLeft: "10px",
+        fontSize: "22px",
+        fontWeight: "700",
+        letterSpacing: "-0.02em",
+        color: "#1A1A2E",
+        marginLeft: "8px",
+        fontFamily: '"PP Fragment-Serif", serif',
       },
       heading2: {
-        fontSize: "18px",
-        letterSpacing: "0.02em",
-        textTransform: "uppercase",
+        fontSize: "16px",
+        letterSpacing: "-0.01em",
         marginLeft: "10px",
       },
       topTrending: {
-        marginTop: "40px",
+        marginTop: "24px",
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "24px",
+        gap: "20px",
         [theme.breakpoints.down("md")]: {
           gridTemplateColumns: "repeat(2, 1fr)",
         },
         [theme.breakpoints.down("sm")]: {
           gridTemplateColumns: "1fr",
+          gap: "16px",
         },
       },
       topTrendingContainer: {

@@ -1,22 +1,15 @@
-// Material Kit 2 React Base Styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
-
-// Material Kit 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-// const { white, text, info, secondary } = colors;
 const { size } = typography;
+const { callToAction } = colors;
 
 const contained = {
   base: {
-    minHeight: pxToRem(41),
-    minWidth: pxToRem(121),
-    padding: `${pxToRem(10)} ${pxToRem(24)}`,
-
-    "&:active, &:active:focus, &:active:hover": {
-      opacity: 0.85,
-    },
+    minHeight: pxToRem(44),
+    minWidth: pxToRem(120),
+    padding: `${pxToRem(11)} ${pxToRem(28)}`,
 
     "& .material-icon, .material-icons-round, svg": {
       fontSize: `${pxToRem(16)} !important`,
@@ -24,17 +17,17 @@ const contained = {
   },
 
   small: {
-    minHeight: pxToRem(32),
-    padding: `${pxToRem(6)} ${pxToRem(16)}`,
+    minHeight: pxToRem(34),
+    padding: `${pxToRem(7)} ${pxToRem(18)}`,
     fontSize: size.xs,
 
     "& .material-icon, .material-icons-round, svg": {
       fontSize: `${pxToRem(12)} !important`,
     },
   },
-  extraSmall: {
-    minHeight: pxToRem(32),
 
+  extraSmall: {
+    minHeight: pxToRem(30),
     fontSize: size.xs,
 
     "& .material-icon, .material-icons-round, svg": {
@@ -43,40 +36,46 @@ const contained = {
   },
 
   large: {
-    minHeight: pxToRem(41),
-    minWidth: pxToRem(325),
-    padding: `${pxToRem(16)} ${pxToRem(100)}`,
-    fontSize: size.sm,
+    minHeight: pxToRem(52),
+    minWidth: pxToRem(200),
+    padding: `${pxToRem(14)} ${pxToRem(40)}`,
+    fontSize: size.md,
 
     "& .material-icon, .material-icons-round, svg": {
-      fontSize: `${pxToRem(22)} !important`,
+      fontSize: `${pxToRem(20)} !important`,
     },
   },
 
+  // Gold CTA — primary action
   primary: {
-    backgroundColor: colors.callToAction.primary,
+    backgroundColor: callToAction.primary,
+    color: "#1A2B4A",
 
     "&:hover": {
-      backgroundColor: colors.callToAction.active,
+      backgroundColor: callToAction.dark,
+      color: "#FFFFFF",
+      boxShadow: "0 6px 20px rgba(201,168,76,0.35)",
     },
 
     "&:focus:not(:hover)": {
-      backgroundColor: colors.callToAction.active,
+      backgroundColor: callToAction.dark,
     },
   },
 
+  // Navy secondary
   secondary: {
-    backgroundColor: colors.callToAction.secondary.main,
+    backgroundColor: callToAction.secondary.main,
+    color: "#FFFFFF",
 
     "&:hover": {
-      backgroundColor: colors.callToAction.secondary.main,
+      backgroundColor: callToAction.secondary.dark,
+      boxShadow: "0 6px 20px rgba(26,43,74,0.3)",
     },
 
     "&:focus:not(:hover)": {
-      backgroundColor: colors.callToAction.secondary.active,
+      backgroundColor: callToAction.secondary.dark,
     },
   },
 };
-
 
 export default contained;

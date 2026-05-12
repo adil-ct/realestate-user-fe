@@ -425,7 +425,7 @@ const AccountSetting = () => {
             <MKBox className={classes.accountSettingsFlex1}>
               <label className={classes.AccountSettingLabel2}>All</label>
               <Switch
-                // disabled={isLoading.editProfile}
+                className={classes.brandSwitch}
                 checked={notificationSetting?.all || false}
                 onChange={(e) =>
                   updateNotificationSetting(e, notificationSettingType.ALL)
@@ -437,7 +437,7 @@ const AccountSetting = () => {
                 Asset Updates
               </label>
               <Switch
-                // disabled={isLoading.editProfile}
+                className={classes.brandSwitch}
                 checked={notificationSetting?.assetUpdate || false}
                 onChange={(e) =>
                   updateNotificationSetting(
@@ -450,7 +450,7 @@ const AccountSetting = () => {
             <MKBox className={classes.accountSettingsFlex1}>
               <label className={classes.AccountSettingLabel2}>Activities</label>
               <Switch
-                // disabled={isLoading.editProfile}
+                className={classes.brandSwitch}
                 checked={notificationSetting?.activities || false}
                 onChange={(e) =>
                   updateNotificationSetting(
@@ -467,7 +467,7 @@ const AccountSetting = () => {
                 System Messages
               </label>
               <Switch
-                // disabled={isLoading.editProfile}
+                className={classes.brandSwitch}
                 checked={notificationSetting?.systemMessages || false}
                 onChange={(e) =>
                   updateNotificationSetting(

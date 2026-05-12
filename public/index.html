@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
+    <link rel="alternate icon" href="%PUBLIC_URL%/favicon.png" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,500,500italic,700,700italic,900italic,900&display=swap"
       as="style"
@@ -45,9 +46,15 @@
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script> -->
     
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.svg" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Occurrence</title>
+    <style>
+      html { font-size: 14px; }
+      @media (max-width: 1280px) { html { font-size: 13px; } }
+      @media (max-width: 768px)  { html { font-size: 12.5px; } }
+      body { font-size: 0.875rem; -webkit-text-size-adjust: 100%; }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

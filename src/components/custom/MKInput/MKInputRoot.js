@@ -52,6 +52,7 @@ export default styled(TextField)(({ theme, ownerState }) => {
   return {
     backgroundColor: disabled ? palette.inputs.background.disabled : palette.inputs.background.primary,
     marginTop: "0px !important",
+    marginBottom: "0px !important",
     pointerEvents: disabled ? "none" : "auto",
     ...(error && errorStyles()),
     ...(success && successStyles()),

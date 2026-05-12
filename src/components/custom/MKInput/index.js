@@ -39,10 +39,12 @@ const MKInput = forwardRef(
           htmlFor={id}
           error={error ? 1 : 0}
           sx={{
-            fontSize: "14px",
-            fontWeight: 400,
+            fontSize: "12px",
+            fontWeight: 500,
             display: "block",
-            textAlign: "left"
+            textAlign: "left",
+            color: "#374151",
+            mb: "3px",
           }}
         >
           {label}
@@ -96,9 +98,11 @@ const MKInput = forwardRef(
       </Box>
       ) : (
         <Typography className={labelColor || ""} htmlFor={id}  error={error ? 1 : 0} sx={{
-          fontSize: "14px",
-          fontWeight: 400,
-          textAlign: "left"
+          fontSize: "12px",
+          fontWeight: 500,
+          textAlign: "left",
+          color: "#374151",
+          mb: "3px",
         }}>
           {label}
         </Typography>
@@ -116,7 +120,7 @@ const MKInput = forwardRef(
         {...rest}
         id={id}
         ref={ref}
-        margin="dense"
+        margin="none"
         ownerState={{ disabled, defaultInput }}
         error={error}
         disabled={disabled}

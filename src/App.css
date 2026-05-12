@@ -67,10 +67,13 @@ html {
 body {
   margin: 0;
   width: 100%;
+  background-color: #F8F7F4;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Make autofill in input of background white */
@@ -93,7 +96,7 @@ input:-webkit-autofill:active {
 } */
 
 .padding_all {
-  padding: 20px 50px;
+  padding: 20px 64px;
 }
 
 .max-width1400 {
@@ -178,8 +181,9 @@ img {
 
 .layout_body {
   min-height: 100vh;
-  padding-top: 70px;
+  padding-top: 0;
   overflow: hidden;
+  background-color: #F8F7F4;
 }
 
 .selected-link {
