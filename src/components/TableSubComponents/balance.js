@@ -22,15 +22,11 @@ const amountData = (props) => {
       <MKTypography className={classes.diffVal} component="span">
         <CurrencyFormat
             prefix={"$"}
-            value={ele?.balance}
+            value={ele?.diff}
             zeroAllowed
             onlyComma
             noSpan={true}
           />
-        {/* <img
-          src={ele?.stats == "up" ? ArrowUpGreenSm : ArrowDownRed}
-          alt="Stats"
-        /> */}
       </MKTypography>
     </MKBox>
   );
