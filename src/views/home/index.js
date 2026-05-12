@@ -5,8 +5,8 @@ const TopSection = React.lazy(() => import("./top-section"));
 const Ticker = React.lazy(() => import("./ticker"));
 // const TweetSection = React.lazy(() => import("./tweet-section"));
 const InvitationSection = React.lazy(() => import("./invitation-section"));
-const OpenBookInvestingSection = React.lazy(() =>
-  import("./open-book-investing-section")
+const OpenBookInvestingSection = React.lazy(
+  () => import("./open-book-investing-section"),
 );
 const AdsBannedSection = React.lazy(() => import("./banned-section"));
 const InvestorsSection = React.lazy(() => import("./investorsSection"));
@@ -39,7 +39,7 @@ const HomePage = () => {
         <CTASection
           bgImage={ctaBgImage}
           title="Estates were meant to <b>be fought over</b>"
-          description="If you’re a Invest Tech, your grandkids will be fighting over your estate"
+          description="If you’re a Occurrence, your grandkids will be fighting over your estate"
         />
       </MKBox>
     </>

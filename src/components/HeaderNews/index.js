@@ -60,10 +60,12 @@ const HeaderNews = () => {
       <img src={logo} alt="logo" />
       <SirenImg src={siren} alt="logo" />
       <TextNews>
-        <b style={{ fontWeight: 800 }}>Breaking News:</b> Invest Tech announces 4X
-        oversubscribed, 3.6mm Seed Round!
+        <b style={{ fontWeight: 800 }}>Breaking News:</b> Occurrence announces
+        4X oversubscribed, 3.6mm Seed Round!
       </TextNews>
-      <TextNewsMobile>Invest Tech announces $3.6 million Seed Round</TextNewsMobile>
+      <TextNewsMobile>
+        Occurrence announces $3.6 million Seed Round
+      </TextNewsMobile>
       <LinkBanner
         to={
           hasAuthToken

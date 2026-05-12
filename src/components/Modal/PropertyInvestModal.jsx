@@ -49,7 +49,7 @@ const PropertyInvestModal = ({
   const classes = styles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const [numberOfTokens, setNumberOfTokens] = useState(numberOfTokensDefault);
   const [tokensSold, setTokensSold] = useState(tokensSoldDefault);
   const {
@@ -58,7 +58,7 @@ const PropertyInvestModal = ({
     linkedBankAccounts,
   } = useSelector((state) => state.accounts);
   const { loader, isLoading: tokenFetchLoader } = useSelector(
-    (state) => state.marketplace
+    (state) => state.marketplace,
   );
   const { isLoading, userData } = useSelector((state) => state.auth);
   const { plaidState } = useSelector((state) => state.common);
@@ -66,7 +66,7 @@ const PropertyInvestModal = ({
   const tokensLeftForPurchase = Number(numberOfTokens) - Number(tokensSold);
   const [flow, setFlow] = useState(1);
   const [defaultChecked, setDefaultChecked] = useState(
-    linkedBankAccounts?.defaultMethod
+    linkedBankAccounts?.defaultMethod,
   );
   const [checked, setChecked] = useState(true);
   const [profilePending, setProfilePending] = useState(false);
@@ -86,10 +86,10 @@ const PropertyInvestModal = ({
   });
 
   const [stepDetail, setStepDetails] = useState({
-   totalSteps: [],
-   activeStep: 0,
-   showSteps: false
-  })
+    totalSteps: [],
+    activeStep: 0,
+    showSteps: false,
+  });
 
   // const { grey } = colors;
 
@@ -106,7 +106,7 @@ const PropertyInvestModal = ({
           data?.numberOfTokens && setNumberOfTokens(data?.numberOfTokens);
           data?.tokensSold && setTokensSold(data?.tokensSold);
         },
-      })
+      }),
     );
   }, []);
 
@@ -195,17 +195,20 @@ const PropertyInvestModal = ({
     // Check if payment method is a Stripe card
     // Stripe cards have: id (pm_xxx), card object, or type === 'card'
     // Plaid banks have: _id (MongoDB ObjectId)
-    const isStripeCard = defaultChecked?.card || defaultChecked?.type === 'card' || (defaultChecked?.id?.startsWith('pm_') && !defaultChecked?._id);
+    const isStripeCard =
+      defaultChecked?.card ||
+      defaultChecked?.type === "card" ||
+      (defaultChecked?.id?.startsWith("pm_") && !defaultChecked?._id);
 
-    console.log('=== investNow Debug ===');
-    console.log('defaultChecked:', defaultChecked);
-    console.log('isStripeCard:', isStripeCard);
+    console.log("=== investNow Debug ===");
+    console.log("defaultChecked:", defaultChecked);
+    console.log("isStripeCard:", isStripeCard);
 
     if (isStripeCard) {
       // Use Stripe payment intent for card payments
       const requestBody = {
         amount: parseFloat(breakupAmount?.totalFees),
-        paymentMethodType: 'card',
+        paymentMethodType: "card",
         paymentMethodId: defaultChecked?.id,
         propertyId: id,
         tokens: Number(noOfToken),
@@ -213,29 +216,35 @@ const PropertyInvestModal = ({
         saved: true,
       };
 
-      dispatch(commonSaga({
-        endPoint: '/payment/paymentIntent',
-        type: "post",
-        stateObj: "plaidState",
-        dataToPost: requestBody,
-        baseEP: "PAYMENT",
-        successHandler: () => {
-          toaster.success("Payment successful! Your shares have been added to your portfolio.");
-          handleClose();
-          dispatch(getWalletBalance());
-          setNoOfToken(0);
-          setTotalAmount(0);
-          setInvestStarted(false);
-          setBreakupAmount({
-            credits: 0, totalFees: 0, processingFees: 0,
-          });
-          navigate(routePaths.TRANSACTION_HISTORY_PATH);
-          setStepDetails((prevState) =>({...prevState,showSteps: false}));
-        },
-        errorHandler: () => {
-          setInvestStarted(false);
-        }
-      }));
+      dispatch(
+        commonSaga({
+          endPoint: "/payment/paymentIntent",
+          type: "post",
+          stateObj: "plaidState",
+          dataToPost: requestBody,
+          baseEP: "PAYMENT",
+          successHandler: () => {
+            toaster.success(
+              "Payment successful! Your shares have been added to your portfolio.",
+            );
+            handleClose();
+            dispatch(getWalletBalance());
+            setNoOfToken(0);
+            setTotalAmount(0);
+            setInvestStarted(false);
+            setBreakupAmount({
+              credits: 0,
+              totalFees: 0,
+              processingFees: 0,
+            });
+            navigate(routePaths.TRANSACTION_HISTORY_PATH);
+            setStepDetails((prevState) => ({ ...prevState, showSteps: false }));
+          },
+          errorHandler: () => {
+            setInvestStarted(false);
+          },
+        }),
+      );
     } else {
       // Use Plaid/Dwolla for bank transfers
       let res;
@@ -253,60 +262,74 @@ const PropertyInvestModal = ({
         credits: breakupAmount?.credits,
       };
 
-      dispatch(commonSaga({
-        endPoint: transferLink, type: "post", stateObj: "plaidState", dataToPost: requestBody, baseEP: "PAYMENT", successHandler: (data) => {
-          if(data.status)
-          {
-            toaster.info("Processing payment. Your shares in the property will be in your account when the payment is successfully completed (for banks, this is typically 3-5 business days).");
-            handleClose();
-            dispatch(getWalletBalance());
-            setNoOfToken(0);
-            setTotalAmount(0);
-            setInvestStarted(false);
-            setBreakupAmount({
-              credits: 0, totalFees: 0, processingFees: 0,
-            })
-            navigate(routePaths.TRANSACTION_HISTORY_PATH)
-          }
-          setStepDetails((prevState) =>({...prevState,showSteps: false}))
-        }}));
+      dispatch(
+        commonSaga({
+          endPoint: transferLink,
+          type: "post",
+          stateObj: "plaidState",
+          dataToPost: requestBody,
+          baseEP: "PAYMENT",
+          successHandler: (data) => {
+            if (data.status) {
+              toaster.info(
+                "Processing payment. Your shares in the property will be in your account when the payment is successfully completed (for banks, this is typically 3-5 business days).",
+              );
+              handleClose();
+              dispatch(getWalletBalance());
+              setNoOfToken(0);
+              setTotalAmount(0);
+              setInvestStarted(false);
+              setBreakupAmount({
+                credits: 0,
+                totalFees: 0,
+                processingFees: 0,
+              });
+              navigate(routePaths.TRANSACTION_HISTORY_PATH);
+            }
+            setStepDetails((prevState) => ({ ...prevState, showSteps: false }));
+          },
+        }),
+      );
     }
-  }
+  };
 
   const validateTokensBeforeInvest = () => {
-    console.log('=== validateTokensBeforeInvest called ===');
-    console.log('userData.kycStatus:', userData?.kycStatus);
-    console.log('noOfToken:', noOfToken);
-    console.log('defaultChecked:', defaultChecked);
-    
+    console.log("=== validateTokensBeforeInvest called ===");
+    console.log("userData.kycStatus:", userData?.kycStatus);
+    console.log("noOfToken:", noOfToken);
+    console.log("defaultChecked:", defaultChecked);
+
     if (userData?.kycStatus === "approved") {
       setProfilePending(false);
-      console.log('KYC approved, fetching property details...');
+      console.log("KYC approved, fetching property details...");
       dispatch(
         getPropertyDetailsSaga({
           tabSelected: "rationale",
           id,
           handleSuccess: (data) => {
-            console.log('Property details fetched:', data);
-            console.log('Available tokens:', Number(data?.numberOfTokens) - Number(data?.tokensSold));
+            console.log("Property details fetched:", data);
+            console.log(
+              "Available tokens:",
+              Number(data?.numberOfTokens) - Number(data?.tokensSold),
+            );
             if (
               Number(noOfToken) >
               Number(data?.numberOfTokens) - Number(data?.tokensSold)
             ) {
-              console.log('Not enough tokens available!');
+              console.log("Not enough tokens available!");
               setTokenError(true);
             } else {
-              console.log('Tokens available, calling investNow()...');
+              console.log("Tokens available, calling investNow()...");
               setTokenError(false);
               investNow();
             }
           },
-        })
+        }),
       );
     } else {
-      console.log('KYC not approved:', userData?.kycStatus);
+      console.log("KYC not approved:", userData?.kycStatus);
       toaster.info(
-        "ID verification still in process (will be completed in <1 minute)"
+        "ID verification still in process (will be completed in <1 minute)",
       );
       setProfilePending(true);
     }
@@ -364,27 +387,27 @@ const PropertyInvestModal = ({
   };
 
   const handleCheckout = (data) => {
-    console.log('=== handleCheckout called ===');
-    console.log('data received:', data);
-    
+    console.log("=== handleCheckout called ===");
+    console.log("data received:", data);
+
     // CRITICAL: Set the selected payment method!
     if (data) {
       setDefaultChecked(data);
-      console.log('defaultChecked SET to:', data);
+      console.log("defaultChecked SET to:", data);
     }
-    
+
     calculateBreakUpAmount(totalAmount, checked, data);
     setTokenError(false);
     setCheckout(true);
     setButtonText("Confirm Order");
   };
-  
+
   const handleSteps = (updatedState) => {
-   setStepDetails((prevState) =>( {
-    ...prevState,
-    ...updatedState
-   }))
-  }
+    setStepDetails((prevState) => ({
+      ...prevState,
+      ...updatedState,
+    }));
+  };
 
   return (
     <>
@@ -401,22 +424,24 @@ const PropertyInvestModal = ({
           left={30}
           className={classes.mkBox}
         >
-          { checkout && <Typography
-            variant="button"
-            className={classes.backButton2}
-            display="flex"
-            alignItems="center"
-            color="white"
-            onClick={() => {
-              setCheckout(false);
-              setButtonText("Proceed to Checkout")
-              dispatch(profileFetch());
-              !directCheckout && handleSubmit()
-            }}
-          >
-            <ArrowBackIosIcon />
-            Back
-          </Typography> }
+          {checkout && (
+            <Typography
+              variant="button"
+              className={classes.backButton2}
+              display="flex"
+              alignItems="center"
+              color="white"
+              onClick={() => {
+                setCheckout(false);
+                setButtonText("Proceed to Checkout");
+                dispatch(profileFetch());
+                !directCheckout && handleSubmit();
+              }}
+            >
+              <ArrowBackIosIcon />
+              Back
+            </Typography>
+          )}
           <CloseButton
             className={classes.closeIconRight}
             onClick={() => {
@@ -441,7 +466,10 @@ const PropertyInvestModal = ({
                   setProfilePending(false);
                   setInvestStarted(false);
                 }
-                setStepDetails((prevState) =>({...prevState,showSteps: false}))
+                setStepDetails((prevState) => ({
+                  ...prevState,
+                  showSteps: false,
+                }));
               }
               dispatch(profileFetch());
             }}
@@ -466,11 +494,15 @@ const PropertyInvestModal = ({
                 effect="blur"
               />
             </MKBox>
-            {stepDetail.showSteps &&
-            <MKBox className={classes.stepperBox} >
-                 <MKStepper steps={stepDetail?.totalSteps} activeStep={stepDetail?.activeStep} showlabel={false}/>
-             </MKBox>
-             }
+            {stepDetail.showSteps && (
+              <MKBox className={classes.stepperBox}>
+                <MKStepper
+                  steps={stepDetail?.totalSteps}
+                  activeStep={stepDetail?.activeStep}
+                  showlabel={false}
+                />
+              </MKBox>
+            )}
             <MKBox className={classes.investContent}>
               <MKBox className={classes.topSection}>
                 <MKTypography
@@ -566,9 +598,21 @@ const PropertyInvestModal = ({
                   <MKBox className={classes.tBoxContainer}>
                     {Number(numberOfTokens) - Number(tokensSold) - noOfToken >=
                       750 && (
-                      <MKBox sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                        <MKBox className={classes.specs1} sx={{ visibility: "hidden" }}>
-                          <MKTypography className={classes.tagsEle} component="span">
+                      <MKBox
+                        sx={{
+                          flex: 1,
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <MKBox
+                          className={classes.specs1}
+                          sx={{ visibility: "hidden" }}
+                        >
+                          <MKTypography
+                            className={classes.tagsEle}
+                            component="span"
+                          >
                             &nbsp;
                           </MKTypography>
                         </MKBox>
@@ -587,7 +631,13 @@ const PropertyInvestModal = ({
                     )}
                     {Number(numberOfTokens) - Number(tokensSold) - noOfToken >=
                       1500 && (
-                      <MKBox sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                      <MKBox
+                        sx={{
+                          flex: 1,
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
                         <MKBox className={classes.specs1}>
                           <MKTypography
                             className={classes.tagsEle}
@@ -615,9 +665,21 @@ const PropertyInvestModal = ({
                     )}
                     {Number(numberOfTokens) - Number(tokensSold) - noOfToken >=
                       3000 && (
-                      <MKBox sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                        <MKBox className={classes.specs1} sx={{ visibility: "hidden" }}>
-                          <MKTypography className={classes.tagsEle} component="span">
+                      <MKBox
+                        sx={{
+                          flex: 1,
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <MKBox
+                          className={classes.specs1}
+                          sx={{ visibility: "hidden" }}
+                        >
+                          <MKTypography
+                            className={classes.tagsEle}
+                            component="span"
+                          >
                             &nbsp;
                           </MKTypography>
                         </MKBox>
@@ -644,7 +706,7 @@ const PropertyInvestModal = ({
                     autoComplete="off"
                     onChange={(e) =>
                       updateTotalAmount(
-                        Number(e?.target?.value?.replaceAll(",", ""))
+                        Number(e?.target?.value?.replaceAll(",", "")),
                       )
                     }
                     inputProps={{ style: { textAlign: "right" } }}
@@ -682,7 +744,7 @@ const PropertyInvestModal = ({
                   >
                     <Grid item>
                       <MKTypography fontSize="12px" fontWeight="regular">
-                      Invest Tech Fees
+                        Occurrence Fees
                       </MKTypography>
                     </Grid>
                     <Grid item>
@@ -774,7 +836,7 @@ const PropertyInvestModal = ({
                             ? `${defaultChecked?.bankName} ************`
                             : defaultChecked?.card
                               ? `${defaultChecked?.card?.brand?.toUpperCase()} ****${defaultChecked?.card?.last4}`
-                              : `${defaultChecked?.name || 'Card'} ****${defaultChecked?.mask || defaultChecked?.last4 || ''}`}
+                              : `${defaultChecked?.name || "Card"} ****${defaultChecked?.mask || defaultChecked?.last4 || ""}`}
                         </MKTypography>
                       </Grid>
                     </Grid>
@@ -898,30 +960,36 @@ const PropertyInvestModal = ({
                   // color="primary"
                   size="medium"
                   onClick={() => {
-                    console.log('=== Button Clicked ===');
-                    console.log('checkout:', checkout);
-                    console.log('buttonText:', buttonText);
-                    console.log('noOfToken:', noOfToken);
-                    console.log('defaultChecked:', defaultChecked);
-                    console.log('minInvestment:', minInvestment);
-                    console.log('disabled conditions:', {
-                      'noOfToken <= 0': noOfToken <= 0,
-                      'loader.investProperty && investStarted': loader.investProperty && investStarted,
-                      'tokenError': tokenError,
-                      'isLoading?.profile': isLoading?.profile,
-                      'balanceLoader?.walletBalance': balanceLoader?.walletBalance,
-                      'tokenFetchLoader': tokenFetchLoader,
-                      'profilePending': profilePending,
-                      'plaidState?.isLoading && investStarted': plaidState?.isLoading && investStarted,
-                      'balanceLoader?.getBankAccountList': balanceLoader?.getBankAccountList,
-                      'checkout && _.isEmpty(defaultChecked)': checkout && _.isEmpty(defaultChecked),
-                      'Number(noOfToken) < Number(minInvestment)': Number(noOfToken) < Number(minInvestment),
+                    console.log("=== Button Clicked ===");
+                    console.log("checkout:", checkout);
+                    console.log("buttonText:", buttonText);
+                    console.log("noOfToken:", noOfToken);
+                    console.log("defaultChecked:", defaultChecked);
+                    console.log("minInvestment:", minInvestment);
+                    console.log("disabled conditions:", {
+                      "noOfToken <= 0": noOfToken <= 0,
+                      "loader.investProperty && investStarted":
+                        loader.investProperty && investStarted,
+                      tokenError: tokenError,
+                      "isLoading?.profile": isLoading?.profile,
+                      "balanceLoader?.walletBalance":
+                        balanceLoader?.walletBalance,
+                      tokenFetchLoader: tokenFetchLoader,
+                      profilePending: profilePending,
+                      "plaidState?.isLoading && investStarted":
+                        plaidState?.isLoading && investStarted,
+                      "balanceLoader?.getBankAccountList":
+                        balanceLoader?.getBankAccountList,
+                      "checkout && _.isEmpty(defaultChecked)":
+                        checkout && _.isEmpty(defaultChecked),
+                      "Number(noOfToken) < Number(minInvestment)":
+                        Number(noOfToken) < Number(minInvestment),
                     });
                     if (checkout) {
-                      console.log('Calling validateTokensBeforeInvest...');
+                      console.log("Calling validateTokensBeforeInvest...");
                       validateTokensBeforeInvest();
                     } else {
-                      console.log('Calling handleSubmit...');
+                      console.log("Calling handleSubmit...");
                       handleSubmit();
                     }
                   }}
@@ -972,8 +1040,20 @@ const PropertyInvestModal = ({
           </>
         </DialogContent>
       </Dialog>
-     {/* <DepositScreens amount={checked ? Math.ceil(Number(totalAmount) - (walletBalance?.availableBalance + walletBalance?.credits)) : Math.ceil(Number(totalAmount) - walletBalance?.availableBalance)} noAction handleAddFundsSuccess={handleAddFundsSuccess} open={openDeposit} setOpen={setOpenDeposit} /> */}
-     {openDeposit && <Checkout propertyId={id} open={openDeposit} defaultChecked={defaultChecked} setDefaultChecked={setDefaultChecked} setOpen={setOpenDeposit} currentFlow={flow} handleCheckout={handleCheckout} back handleSteps={handleSteps}/>}
+      {/* <DepositScreens amount={checked ? Math.ceil(Number(totalAmount) - (walletBalance?.availableBalance + walletBalance?.credits)) : Math.ceil(Number(totalAmount) - walletBalance?.availableBalance)} noAction handleAddFundsSuccess={handleAddFundsSuccess} open={openDeposit} setOpen={setOpenDeposit} /> */}
+      {openDeposit && (
+        <Checkout
+          propertyId={id}
+          open={openDeposit}
+          defaultChecked={defaultChecked}
+          setDefaultChecked={setDefaultChecked}
+          setOpen={setOpenDeposit}
+          currentFlow={flow}
+          handleCheckout={handleCheckout}
+          back
+          handleSteps={handleSteps}
+        />
+      )}
     </>
   );
 };

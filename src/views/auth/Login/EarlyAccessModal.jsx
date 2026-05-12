@@ -26,14 +26,16 @@ const EarlyAccessModal = ({ open, handleClose }) => {
   const dispatch = useDispatch();
 
   const handleSuccess = () => {
-    handleClose()
-  }
+    handleClose();
+  };
 
   const handleSubscribe = () => {
     const requestBody = {
       email: userEmail,
     };
-    dispatch(earlyAccessSubscribe({ requestBody, successHandler: handleSuccess }));
+    dispatch(
+      earlyAccessSubscribe({ requestBody, successHandler: handleSuccess }),
+    );
   };
 
   return (
@@ -51,7 +53,7 @@ const EarlyAccessModal = ({ open, handleClose }) => {
           align="center"
           className={classes.depositModalTitle}
         >
-          Welcome to Invest Tech
+          Welcome to Occurrence
         </MKTypography>
       </DialogTitle>
       <DialogContent
@@ -108,7 +110,9 @@ const EarlyAccessModal = ({ open, handleClose }) => {
                     className={classes.headerButton2}
                   >
                     {isLoading.earlyAccessSubscribe ? (
-                      <CircularProgress size={20} /*style={{ color: "black" }}*/ />
+                      <CircularProgress
+                        size={20} /*style={{ color: "black" }}*/
+                      />
                     ) : (
                       <img
                         src={ArrowRight}

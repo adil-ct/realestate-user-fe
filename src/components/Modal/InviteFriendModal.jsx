@@ -8,7 +8,7 @@ import MKBox from "components/custom/MKBox";
 import MKTypography from "components/custom/MKTypography";
 import MKButton from "components/custom/MKButton";
 import CloseButton from "components/CloseButton";
-import ShareIcon from '@mui/icons-material/Share';
+import ShareIcon from "@mui/icons-material/Share";
 import { Copy, WhatsApp, telegram, twitter, Fb } from "constants/assets";
 import useCopyToClipboard from "hooks/useCopyToClipboard";
 import styles from "./styles";
@@ -33,12 +33,11 @@ const InviteFriendModal = ({ open, handleClose, affiliateUser, shareLink }) => {
         toaster.error("Your browser doesn't support the Web Share API");
         return;
       }
-      await navigator.share(shareData)
-    }
-    catch (err) {
+      await navigator.share(shareData);
+    } catch (err) {
       // toaster.error(err?.message);
     }
-  }
+  };
 
   return (
     <Dialog
@@ -60,7 +59,7 @@ const InviteFriendModal = ({ open, handleClose, affiliateUser, shareLink }) => {
           align="center"
           className={classes.depositModalTitle}
         >
-          {affiliateUser ? "Invite invest tech" : "Invite Friends"}
+          {affiliateUser ? "Invite occurrence" : "Invite Friends"}
         </MKTypography>
       </DialogTitle>
       <DialogContent
@@ -72,14 +71,17 @@ const InviteFriendModal = ({ open, handleClose, affiliateUser, shareLink }) => {
         <MKBox className={classes.shareMainContainer}>
           <MKBox className={classes.shareCodeContainer}>
             <MKTypography className={classes.shareCodeText}>
-            {affiliateUser ? "Affiliate " : "Referral " } Code
+              {affiliateUser ? "Affiliate " : "Referral "} Code
             </MKTypography>
             <MKBox className={classes.copyCodeContainer}>
               <MKTypography className={classes.copyCodeText}>
                 {userData?.referralCode ?? "-"}
               </MKTypography>
               <MKBox className={classes.copyCodeIconsBox}>
-                <Tooltip enterTouchDelay={0} title={tooltipText === "Copy" ? "" : tooltipText}>
+                <Tooltip
+                  enterTouchDelay={0}
+                  title={tooltipText === "Copy" ? "" : tooltipText}
+                >
                   <img
                     src={Copy}
                     alt="copy"
@@ -91,14 +93,19 @@ const InviteFriendModal = ({ open, handleClose, affiliateUser, shareLink }) => {
           </MKBox>
           <MKBox className={classes.shareCodeContainer}>
             <MKTypography className={classes.shareCodeText}>
-            {affiliateUser ? "Affiliate " : "Referral " } Link
+              {affiliateUser ? "Affiliate " : "Referral "} Link
             </MKTypography>
             <MKBox className={classes.copyCodeContainer}>
               <MKTypography className={classes.copyCodeText}>
-                {shareLink?.length > 10 ? shareLink?.slice(0, 12) + "....." + shareLink?.slice(-3) : shareLink}
+                {shareLink?.length > 10
+                  ? shareLink?.slice(0, 12) + "....." + shareLink?.slice(-3)
+                  : shareLink}
               </MKTypography>
               <MKBox className={classes.copyCodeIconsBox}>
-                <Tooltip enterTouchDelay={0} title={newToolTipText === "Copy" ? "" : newToolTipText}>
+                <Tooltip
+                  enterTouchDelay={0}
+                  title={newToolTipText === "Copy" ? "" : newToolTipText}
+                >
                   <img
                     src={Copy}
                     alt="copy"
@@ -142,9 +149,9 @@ const InviteFriendModal = ({ open, handleClose, affiliateUser, shareLink }) => {
               target="_blank"
               rel="noreferrer"
             >
-            <MKBox className={classes.iconContainerIFM}>
-              <img src={Fb} />
-            </MKBox>
+              <MKBox className={classes.iconContainerIFM}>
+                <img src={Fb} />
+              </MKBox>
             </a>
             <a
               href={
@@ -174,16 +181,23 @@ const InviteFriendModal = ({ open, handleClose, affiliateUser, shareLink }) => {
             </a>
           </MKBox>
         </MKBox>
-        <MKBox display="flex" justifyContent="center" width="100%" alignItems="center" mt={2} className={classes.sectionDesktopSm1}>                
-            <MKButton
-              variant="gradient"
-              // color="primary"
-              className={classes.shareBtn}
-              onClick={() => shareToSocial(shareLink)}
-              >
-                <ShareIcon sx={{ mr: "10px"}}/>
-                Share Invitation
-            </MKButton>
+        <MKBox
+          display="flex"
+          justifyContent="center"
+          width="100%"
+          alignItems="center"
+          mt={2}
+          className={classes.sectionDesktopSm1}
+        >
+          <MKButton
+            variant="gradient"
+            // color="primary"
+            className={classes.shareBtn}
+            onClick={() => shareToSocial(shareLink)}
+          >
+            <ShareIcon sx={{ mr: "10px" }} />
+            Share Invitation
+          </MKButton>
         </MKBox>
       </DialogContent>
     </Dialog>

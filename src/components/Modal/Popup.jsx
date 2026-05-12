@@ -14,10 +14,9 @@ const Popup = ({ open, handleClose }) => {
       fontSize="18px"
       fontWeight="regular"
     >
-      Welcome to Invest Tech! <br />
+      Welcome to Occurrence! <br />
       Unfortunately, you did not sign up for early access through our waitlist.
-      If you think this is a mistake, please reach out to{" "}
-      {MOGUL_SUPPORT_EMAIL}
+      If you think this is a mistake, please reach out to {MOGUL_SUPPORT_EMAIL}
     </MKTypography>
   );
 

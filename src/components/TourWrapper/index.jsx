@@ -27,10 +27,10 @@ const TourWrapper = ({ children }) => {
       target: "body", // Portfolio
       content: (
         <div>
-          <h3 className={classes.tourContentBox}>Welcome to Invest Tech! 👋</h3>
+          <h3 className={classes.tourContentBox}>Welcome to Occurrence! 👋</h3>
           <p>
             Complete a quick walkthrough to familiarize yourself with the site,
-            so you can start investing like a Invest Tech.
+            so you can start investing like a Occurrence.
           </p>
         </div>
       ),
@@ -93,7 +93,7 @@ const TourWrapper = ({ children }) => {
         <p>
           Hover over the property with your mouse on laptop or tap on smart
           phone to expand the card. Click the invest button to continue your
-          journey to becoming a real estate Invest Tech.
+          journey to becoming a real estate Occurrence.
         </p>
       ),
       disableBeacon: false,
@@ -102,8 +102,9 @@ const TourWrapper = ({ children }) => {
       target: ".joyride-rational", // Property Description
       content: (
         <p>
-          With every property offered on Invest Tech vetted by industry professionals,
-          check out our Rationale section to see why this property made the cut.
+          With every property offered on Occurrence vetted by industry
+          professionals, check out our Rationale section to see why this
+          property made the cut.
         </p>
       ),
       disableBeacon: false,
@@ -173,8 +174,8 @@ const TourWrapper = ({ children }) => {
       content: (
         <p>
           When you reach the decision to invest, click on the Invest button, and
-          input your desired amount. Now, you’re investing like a Invest Tech! Once
-          the property closes, you will receive rental income distributed
+          input your desired amount. Now, you’re investing like a Occurrence!
+          Once the property closes, you will receive rental income distributed
           directly to your account, updates on value of your portfolio in real
           time, and tax statements directly in your user portal (much like
           Schwab, Fidelity or Robinhood!).
@@ -189,7 +190,7 @@ const TourWrapper = ({ children }) => {
           <h3 className={classes.tourContentBox}>Congratulations! 🎉</h3>
           <p>
             You are now ready to invest. Deposit funds and start investing like
-            a Invest Tech.
+            a Occurrence.
           </p>
         </div>
       ),

@@ -23,6 +23,7 @@ import { loginSaga, loginVerify, hideModal, sendOTP } from "store/actions";
 import ResendEmailModal from "./ResendEmailModal";
 import EarlyAccessModal from "./EarlyAccessModal";
 import { routePaths } from "routes/mainRoutes/routePaths";
+import Logo from "components/Logo";
 
 function Login() {
   const classes = loginStyle();
@@ -121,17 +122,8 @@ function Login() {
         p: { xs: "20px 16px", sm: "28px 32px" },
       }}>
         {/* Logo */}
-        <MKBox sx={{ display: "flex", alignItems: "center", gap: "8px", mb: "16px" }}>
-          <MKBox sx={{
-            width: 28, height: 28, borderRadius: "7px",
-            background: "linear-gradient(135deg,#1A2B4A,#2C4270)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "13px", fontWeight: 900, color: "#C9A84C",
-            fontFamily: '"PP Fragment-Serif",serif',
-          }}>O</MKBox>
-          <MKTypography sx={{ fontSize: "14px", fontWeight: 700, color: "#1A1A2E", fontFamily: '"PP Fragment-Serif",serif', letterSpacing: "-0.01em" }}>
-            Occurrence
-          </MKTypography>
+        <MKBox sx={{ display: "flex", justifyContent: "flex-start", mb: "16px" }}>
+          <Logo height={32} />
         </MKBox>
 
         {/* Heading */}

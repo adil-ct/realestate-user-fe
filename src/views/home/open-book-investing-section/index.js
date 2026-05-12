@@ -49,7 +49,7 @@ const OpenBookInvestingSection = () => {
             </div>
             <StepDescription>
               Institutional level diligence, mastery & transparency are the
-              Invest Tech foundation. We send our carefully crafted investment
+              Occurrence foundation. We send our carefully crafted investment
               criteria to our partners.
             </StepDescription>
           </Step>
@@ -61,8 +61,8 @@ const OpenBookInvestingSection = () => {
             </div>
             <StepDescription>
               Our investment banking backgrounds formed our relentless approach
-              to diligence. {"<1% "}of deals considered make it under the Invest Tech
-              name.
+              to diligence. {"<1% "}of deals considered make it under the
+              Occurrence name.
             </StepDescription>
           </Step>
           <Step>
@@ -76,7 +76,7 @@ const OpenBookInvestingSection = () => {
             </div>
             <StepDescription>
               Through our investment clubs, you invest and vote on key decisions
-              alongside other invest tech, your peers & friends.
+              alongside other occurrence, your peers & friends.
             </StepDescription>
           </Step>
           <Step>
@@ -99,8 +99,8 @@ const OpenBookInvestingSection = () => {
             </div>
             <StepDescription>
               As a diverse community of investors, leaders, creators, &
-              influencers, we celebrate both figuratively & literally with Invest Tech
-              club perks & experiences.
+              influencers, we celebrate both figuratively & literally with
+              Occurrence club perks & experiences.
             </StepDescription>
           </Step>
         </StepsWrapper>
@@ -127,8 +127,8 @@ const OpenBookInvestingSection = () => {
                 </div>
                 <StepDescription>
                   Institutional level diligence, mastery & transparency are the
-                  Invest Tech foundation. We send our carefully crafted investment
-                  criteria to our partners.
+                  Occurrence foundation. We send our carefully crafted
+                  investment criteria to our partners.
                 </StepDescription>
               </Step>
             </SwiperSlide>
@@ -140,9 +140,9 @@ const OpenBookInvestingSection = () => {
                   <StepTitle>Purchase Property</StepTitle>
                 </div>
                 <StepDescription>
-                  Our investment banking backgrounds formed our relentless approach
-                  to diligence. {"<1% "}of deals considered make it under the Invest Tech
-                  name.
+                  Our investment banking backgrounds formed our relentless
+                  approach to diligence. {"<1% "}of deals considered make it
+                  under the Occurrence name.
                 </StepDescription>
               </Step>
             </SwiperSlide>
@@ -154,8 +154,8 @@ const OpenBookInvestingSection = () => {
                   <StepTitle>Open the Club</StepTitle>
                 </div>
                 <StepDescription>
-                  Through our investment clubs, you invest and vote on key decisions
-                  alongside other invest tech, your peers & friends.
+                  Through our investment clubs, you invest and vote on key
+                  decisions alongside other occurrence, your peers & friends.
                 </StepDescription>
               </Step>
             </SwiperSlide>
@@ -167,9 +167,9 @@ const OpenBookInvestingSection = () => {
                   <StepTitle>Earn, Benefit, & Liquidate</StepTitle>
                 </div>
                 <StepDescription>
-                  Real time appreciation, monthly rental income, tax benefits. Sell
-                  after the typical 5-7 year hold, or on our Secondary market
-              (coming soon).
+                  Real time appreciation, monthly rental income, tax benefits.
+                  Sell after the typical 5-7 year hold, or on our Secondary
+                  market (coming soon).
                 </StepDescription>
               </Step>
             </SwiperSlide>
@@ -182,8 +182,8 @@ const OpenBookInvestingSection = () => {
                 </div>
                 <StepDescription>
                   As a diverse community of investors, leaders, creators, &
-                  influencers, we celebrate both figuratively & literally with Invest Tech
-                  club perks & experiences.
+                  influencers, we celebrate both figuratively & literally with
+                  Occurrence club perks & experiences.
                 </StepDescription>
               </Step>
             </SwiperSlide>

@@ -182,7 +182,8 @@ const InvestmentTab = ({
                   />
                   <span className={classes.labelBarLeft}>
                     {Math.floor(
-                      propertyObj?.investment?.loanValues?.loanToValuePercentage
+                      propertyObj?.investment?.loanValues
+                        ?.loanToValuePercentage,
                     )}
                     %
                   </span>
@@ -192,8 +193,8 @@ const InvestmentTab = ({
                       100 -
                         Number(
                           propertyObj?.investment?.loanValues
-                            ?.loanToValuePercentage
-                        )
+                            ?.loanToValuePercentage,
+                        ),
                     )}
                     %
                   </span>
@@ -376,7 +377,9 @@ const InvestmentTab = ({
                         <CurrencyFormat
                           zeroAllowed={false}
                           prefix={"$"}
-                          value={offerTableData?.purchasePrice - offerTableData?.debt}
+                          value={
+                            offerTableData?.purchasePrice - offerTableData?.debt
+                          }
                         />
                       </TableCell>
                     </TableRow>
@@ -395,7 +398,7 @@ const InvestmentTab = ({
                     </TableRow>
                     <TableRow>
                       <StyledTableCellHead>
-                        (+) Invest Tech Buyer Fee
+                        (+) Occurrence Buyer Fee
                       </StyledTableCellHead>
 
                       <StyledTableCell align="right">

@@ -84,7 +84,7 @@ function MogulClub() {
       icon: icon1,
       title: "Networking",
       Subtitle:
-        "Gain recognition and build your network as you invest alongside other invest tech.",
+        "Gain recognition and build your network as you invest alongside other occurrence.",
     },
     {
       icon: icon2,
@@ -99,7 +99,7 @@ function MogulClub() {
     {
       icon: icon4,
       title: "Exclusive Access",
-      Subtitle: "invest tech get exclusive early access to future products.",
+      Subtitle: "occurrence get exclusive early access to future products.",
     },
   ];
 
@@ -115,7 +115,7 @@ function MogulClub() {
       image: galery4,
       title: "Propose a Cohort",
       subtitle:
-        "Are you part of a profession or thought group that would be a fit for a Invest Tech cohort? Let us know!",
+        "Are you part of a profession or thought group that would be a fit for a Occurrence cohort? Let us know!",
     },
   ];
 
@@ -171,9 +171,9 @@ function MogulClub() {
             <br />
             <br />
             The interested, interesting, rising stars, renegades, the wild
-            cards. Invest Tech invites you to join a club that feels like a timeless
-            tradition, a place where everyone is welcome, yet the privilege of
-            belonging becomes the ultimate status symbol.
+            cards. Occurrence invites you to join a club that feels like a
+            timeless tradition, a place where everyone is welcome, yet the
+            privilege of belonging becomes the ultimate status symbol.
           </OriginStoryText>
           <OriginStoryImage src={mogulClubOrigin} />
         </OriginStoryContainer>
@@ -184,7 +184,7 @@ function MogulClub() {
             <p>
               Network, Education, <b>Experience</b>
             </p>
-            <p>Invest in real estate on Invest Tech, unlock membership.</p>
+            <p>Invest in real estate on Occurrence, unlock membership.</p>
             <CTAButton
               to={routePaths.LOGIN_REGISTER_PATH}
               style={{
@@ -224,15 +224,15 @@ function MogulClub() {
       <IntroducingSection>
         <IntroducingTextContainer>
           <p>Introducing</p>
-          <p>Invest Tech Cohorts</p>
+          <p>Occurrence Cohorts</p>
         </IntroducingTextContainer>
         <IntroducingDesc>
-          We built Invest Tech with ourselves, our earliest investors, and adopters in
-          mind. We realize these professions have unique requirements,
-          preferences, and inhibitors that make Invest Tech enticing. As an homage to
-          where we have been and where we are going, we have curated unique
-          cohorts of investors with tailored experiences, offerings, and
-          exclusive content.
+          We built Occurrence with ourselves, our earliest investors, and
+          adopters in mind. We realize these professions have unique
+          requirements, preferences, and inhibitors that make Occurrence
+          enticing. As an homage to where we have been and where we are going,
+          we have curated unique cohorts of investors with tailored experiences,
+          offerings, and exclusive content.
         </IntroducingDesc>
       </IntroducingSection>
       <GalerySection>

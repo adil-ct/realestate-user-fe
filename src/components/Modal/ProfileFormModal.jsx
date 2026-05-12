@@ -8,18 +8,17 @@ import MKTypography from "components/custom/MKTypography";
 import CloseButton from "components/CloseButton";
 import ProfileForm from "views/profile/profileForm";
 
-const ProfileFormModal = ({
-  open,
-  handleClose,
-  successHandler,
-}) => {
+const ProfileFormModal = ({ open, handleClose, successHandler }) => {
   const classes = styles();
 
   return (
     <>
       <Dialog open={open} className={classes.mainDialog4}>
         <MKBox display="flex" justifyContent="right" className={classes.mkBox}>
-          <CloseButton className={classes.closeIconRight} onClick={handleClose} />
+          <CloseButton
+            className={classes.closeIconRight}
+            onClick={handleClose}
+          />
         </MKBox>
         <DialogTitle
           display="flex"
@@ -39,7 +38,9 @@ const ProfileFormModal = ({
             align="center"
             className={classes.profileSubtitle}
           >
-            For your first investment on Invest Tech, we need to create your investor profile. Once completed, you can add your payment method and checkout
+            For your first investment on Occurrence, we need to create your
+            investor profile. Once completed, you can add your payment method
+            and checkout
           </MKTypography>
         </DialogTitle>
         <DialogContent
@@ -48,7 +49,7 @@ const ProfileFormModal = ({
           p={0}
           className={classes.dialogContent1}
         >
-            <ProfileForm modal handler={successHandler}/>
+          <ProfileForm modal handler={successHandler} />
         </DialogContent>
       </Dialog>
     </>

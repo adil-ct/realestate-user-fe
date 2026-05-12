@@ -20,10 +20,9 @@ import headerStyle, {
   ActionsButtonsContainer,
   HeaderContainer,
   LoginButton,
-  LogoBadge,
   LogoLink,
-  LogoText,
 } from "./styles";
+import Logo from "components/Logo";
 
 // Static imports
 import {
@@ -64,7 +63,7 @@ const pages = [
   //   link: routePaths.OUR_BLOGS_PATH,
   // },
   // {
-  //   name: "Invest Tech Club",
+  //   name: "Occurrence Club",
   //   link: routePaths.MOGUL_CLUB_PATH,
   // },
 ];
@@ -122,7 +121,7 @@ const Header = () => {
     //   },
     // },
     // {
-    //   name: "Invest Tech Club",
+    //   name: "Occurrence Club",
     //   route: routePaths.MOGUL_CLUB_PATH,
     //   clickHandler: () => {
     //     handleCloseUserMenu();
@@ -194,7 +193,7 @@ const Header = () => {
     //   },
     // },
     // {
-    //   name: "Invest Tech Club",
+    //   name: "Occurrence Club",
     //   route: routePaths.MOGUL_CLUB_PATH,
     //   clickHandler: () => {
     //     handleCloseUserMenu();
@@ -249,14 +248,17 @@ const Header = () => {
               },
             ]
           : []),
-        ...(userData?.affiliate ? [{
-            name: "Investor Relations",
-            icon: Referral,
-            clickHandler: () => {
-              navigate(routePaths.REWARDS_PATH);
-              handleCloseUserMenu();
-            },
-          }]
+        ...(userData?.affiliate
+          ? [
+              {
+                name: "Investor Relations",
+                icon: Referral,
+                clickHandler: () => {
+                  navigate(routePaths.REWARDS_PATH);
+                  handleCloseUserMenu();
+                },
+              },
+            ]
           : []),
         {
           name: "Profile",
@@ -278,7 +280,10 @@ const Header = () => {
           name: "Support",
           icon: Help,
           clickHandler: () => {
-            window.open(`mailto:${MOGUL_SUPPORT_EMAIL || 'support@occurence.com'}`, "_blank");
+            window.open(
+              `mailto:${MOGUL_SUPPORT_EMAIL || "support@occurence.com"}`,
+              "_blank",
+            );
             handleCloseUserMenu();
           },
         },
@@ -300,15 +305,18 @@ const Header = () => {
         },
       ]
     : [
-        ...(userData?.affiliate ? [{
-          name: "Investor Relations",
-          icon: Referral,
-          clickHandler: () => {
-            navigate(routePaths.REWARDS_PATH);
-            handleCloseUserMenu();
-          },
-        }]
-        : []),
+        ...(userData?.affiliate
+          ? [
+              {
+                name: "Investor Relations",
+                icon: Referral,
+                clickHandler: () => {
+                  navigate(routePaths.REWARDS_PATH);
+                  handleCloseUserMenu();
+                },
+              },
+            ]
+          : []),
         ...(userData?.kycStatus === "approved"
           ? [
               {
@@ -383,8 +391,7 @@ const Header = () => {
               target="_self"
               rel="noreferrer"
             >
-              <LogoBadge>O</LogoBadge>
-              <LogoText>Occurrence</LogoText>
+              <Logo tone="dark" height={40} />
             </LogoLink>
           </Box>
           <Box className={classes.flex1}>

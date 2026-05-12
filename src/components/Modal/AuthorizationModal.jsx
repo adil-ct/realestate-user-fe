@@ -55,10 +55,10 @@ const CustomConfirmationModal = ({
         className={classes.dialogContentConsent}
       >
         <MKTypography variant="body2" className={classes.subtitleConsent}>
-          I authorize Circle Internet Financial, on behalf of Invest Tech
-          Inc. to electronically debit my account (and, if necessary,
-          electronically credit my account) at the financial institution
-          selected by me in the previous step:
+          I authorize Circle Internet Financial, on behalf of Occurrence Inc. to
+          electronically debit my account (and, if necessary, electronically
+          credit my account) at the financial institution selected by me in the
+          previous step:
         </MKTypography>
         <MKBox mt={2}>
           {data.type === "Bank" && (

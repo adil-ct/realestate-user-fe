@@ -6,7 +6,7 @@ function Loader() {
   return (
     <MKBox style={{ paddingTop: "5vh" }}>
       <Grid container item justifyContent="center" mx="auto">
-        <CircularProgress />
+        <CircularProgress style={{ color: "#C9A84C" }} />
       </Grid>
     </MKBox>
   );

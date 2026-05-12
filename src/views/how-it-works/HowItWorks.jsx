@@ -69,7 +69,13 @@ function HowItWorks() {
               options={{
                 loop: true,
                 autoStart: true,
-                strings: ["Manjati", "Magnát", "Magnatas", "Mogol", "Invest Tech"],
+                strings: [
+                  "Manjati",
+                  "Magnát",
+                  "Magnatas",
+                  "Mogol",
+                  "Occurrence",
+                ],
               }}
             />
           </TypewriterWrapper>
@@ -79,8 +85,8 @@ function HowItWorks() {
             leverage, and price-to-rent dislocation.
           </HeroParagraph>
           <HeroExtra>
-            We don&#39;t just speak real estate, we speak Invest Tech, the long lost
-            dialect of legacy.
+            We don&#39;t just speak real estate, we speak Occurrence, the long
+            lost dialect of legacy.
           </HeroExtra>
         </HeroContainer>
       </HeroSection>
@@ -121,7 +127,7 @@ function HowItWorks() {
               <ProcessTitleRegular>
                 Deploy capital alongside
               </ProcessTitleRegular>{" "}
-              other invest tech.
+              other occurrence.
             </ProcessTitle>
           </ProcessStepWrapper>
           <img src={processTwo} alt="Process Two" />
@@ -138,7 +144,7 @@ function HowItWorks() {
             <ProcessNumber>3</ProcessNumber>
             <ProcessTitle>
               <ProcessTitleRegular>Keep score in your</ProcessTitleRegular>{" "}
-              Invest Tech portfolio.
+              Occurrence portfolio.
             </ProcessTitle>
           </ProcessStepWrapper>
           <ImageShadow src={processThree} alt="Process Three" />
@@ -158,7 +164,7 @@ function HowItWorks() {
               <ProcessDescription>
                 You&#39;re not just a spectator of your portfolio; you&#39;re an
                 active participant. You&#39;ll have the chance to vote on key
-                decisions alongside your fellow invest tech.
+                decisions alongside your fellow occurrence.
               </ProcessDescription>
             </div>
           </ProcessDescriptionWrapper>
@@ -286,12 +292,12 @@ function HowItWorks() {
                   (submit offer)
                 </StepTitle>
                 <StepDescription>
-                  At the Invest Tech investment committee, we only push properties
-                  through with a unanimous decision. During the committee, we go
-                  through all of the data previously researched around market,
-                  asset type, capital structure, underwriting, and more. Once a
-                  property has been thoroughly scrutinized and approved, we put
-                  an offer out.
+                  At the Occurrence investment committee, we only push
+                  properties through with a unanimous decision. During the
+                  committee, we go through all of the data previously researched
+                  around market, asset type, capital structure, underwriting,
+                  and more. Once a property has been thoroughly scrutinized and
+                  approved, we put an offer out.
                 </StepDescription>
               </StepWrapper>
               <StepWrapper>
@@ -315,15 +321,15 @@ function HowItWorks() {
                   as the buyer of the property and the investment club. We
                   capitalize the deal including our costs for maintenance
                   reserves, vacancy reserves, miscellaneous closing costs and
-                  Invest Tech&#39;s platform fee. We engage our setup and property
-                  management teams to get the property furnished and leased.
-                  Ultimately, we perform the final walk-through, and we close on
-                  the property.
+                  Occurrence&#39;s platform fee. We engage our setup and
+                  property management teams to get the property furnished and
+                  leased. Ultimately, we perform the final walk-through, and we
+                  close on the property.
                 </StepDescription>
               </StepWrapper>
               <StepWrapper>
                 <StepNumber>11</StepNumber>
-                <StepTitle>Offer Property on Invest Tech Platform</StepTitle>
+                <StepTitle>Offer Property on Occurrence Platform</StepTitle>
                 <StepDescription>
                   At this point, we meticulously package the diligence to date
                   from our deal memos into the “property cards” that are offered
@@ -359,7 +365,8 @@ function HowItWorks() {
                 <StepDescription>
                   After a typical 5-7 year hold period, our team will sell the
                   property at the market value with your input. Once sold,
-                  proceeds will be distributed pro rata to your Invest Tech dashboard.
+                  proceeds will be distributed pro rata to your Occurrence
+                  dashboard.
                 </StepDescription>
                 <StepDescription>
                   <StepDescriptionBold>Coming Soon:</StepDescriptionBold>

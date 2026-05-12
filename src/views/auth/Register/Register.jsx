@@ -3,6 +3,7 @@ import MKBox from "components/custom/MKBox";
 import MKTypography from "components/custom/MKTypography";
 import RegisterForm from "./RegisterForm";
 import InstantSign from "components/Modal/InstantSign";
+import Logo from "components/Logo";
 
 function Register() {
   const [showModal, setShowModal] = useState(false);
@@ -28,17 +29,8 @@ function Register() {
         p: { xs: "20px 16px", sm: "24px 32px" },
       }}>
         {/* Logo */}
-        <MKBox sx={{ display: "flex", alignItems: "center", gap: "8px", mb: "14px" }}>
-          <MKBox sx={{
-            width: 28, height: 28, borderRadius: "7px",
-            background: "linear-gradient(135deg,#1A2B4A,#2C4270)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "13px", fontWeight: 900, color: "#C9A84C",
-            fontFamily: '"PP Fragment-Serif",serif',
-          }}>O</MKBox>
-          <MKTypography sx={{ fontSize: "14px", fontWeight: 700, color: "#1A1A2E", fontFamily: '"PP Fragment-Serif",serif', letterSpacing: "-0.01em" }}>
-            Occurrence
-          </MKTypography>
+        <MKBox sx={{ display: "flex", justifyContent: "flex-start", mb: "14px" }}>
+          <Logo height={32} />
         </MKBox>
 
         {/* Heading */}

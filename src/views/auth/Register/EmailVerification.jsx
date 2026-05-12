@@ -8,7 +8,7 @@ import { Container, Grid } from "@mui/material";
 import MKBox from "components/custom/MKBox";
 import MKButton from "components/custom/MKButton";
 import MKTypography from "components/custom/MKTypography";
-// Logo removed for whitelabeling
+import Logo from "components/Logo";
 import HeadingLayout from "components/HeadingLayout/HeadingLayout";
 import { sendOTP, verifyOTPSaga, showModal } from "store/actions";
 import ButtonSpinner from "components/Loader/ButtonSpinner";
@@ -145,7 +145,9 @@ function EmailVerification() {
   return (
     <MKBox component="section" py={12} className={classes.paddingModal}>
       <Container>
-        <div style={{fontSize: '24px', fontWeight: 'bold', color: '#34c38f', textAlign: 'center', marginBottom: '20px'}}>Occurrence</div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+          <Logo height={44} />
+        </div>
         <Grid
           container
           item

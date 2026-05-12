@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 
 const ButtonSpinner = ({ isLoading, text, fontSize, id }) =>
   isLoading ? (
-    <CircularProgress size={20} /*style={{ color: "black" }}*/ />
+    <CircularProgress size={20} sx={{ color: "#FFFFFF" }} />
   ) : (
     <Typography
       id={id ? id : ""}

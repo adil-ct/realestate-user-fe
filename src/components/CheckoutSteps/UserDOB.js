@@ -26,7 +26,6 @@ const UserDOB = ({ handler = () => {}, alldDisabled = false }) => {
   const { userData } = useSelector((state) => state.auth);
   const { isLoading } = useSelector((state) => state.user);
 
-
   // Profile Update Success Handler
   const handleSuccess = () => {
     dispatch(profileFetch({ handleSuccess: handler }));
@@ -46,15 +45,19 @@ const UserDOB = ({ handler = () => {}, alldDisabled = false }) => {
   };
 
   const initialValues = {
-    firstName: userData?.firstName || '',
-    lastName: userData?.lastName || '',
+    firstName: userData?.firstName || "",
+    lastName: userData?.lastName || "",
     dob: formatDob(userData?.dob),
-    country: userData?.country ? { value: userData?.countryISO2, label: userData?.country } : '',
-    state: userData?.state ? { value: userData?.stateCode, label: userData?.state} : { value: "", label: ""},
-    city: userData?.city || '',
-    postalCode: userData?.zipCode || '',
-    countryCode: userData?.countryCode || '',
-    address1: userData?.address1 || '',
+    country: userData?.country
+      ? { value: userData?.countryISO2, label: userData?.country }
+      : "",
+    state: userData?.state
+      ? { value: userData?.stateCode, label: userData?.state }
+      : { value: "", label: "" },
+    city: userData?.city || "",
+    postalCode: userData?.zipCode || "",
+    countryCode: userData?.countryCode || "",
+    address1: userData?.address1 || "",
   };
 
   // Signup api handler
@@ -67,7 +70,7 @@ const UserDOB = ({ handler = () => {}, alldDisabled = false }) => {
       state: values.state?.label,
       city: values.city,
       zipCode: values.postalCode,
-      address1: values.address1,    
+      address1: values.address1,
       stateCode: values.state.value,
     };
     setIsStateUpdating(false);
@@ -76,8 +79,8 @@ const UserDOB = ({ handler = () => {}, alldDisabled = false }) => {
         requestBody,
         handleSuccess,
         handleFail: handleProfileFetchSuccess,
-        showToast: false
-      })
+        showToast: false,
+      }),
     );
   };
 
@@ -89,7 +92,7 @@ const UserDOB = ({ handler = () => {}, alldDisabled = false }) => {
       submitBtnhandler(values);
     },
   });
- 
+
   return (
     <MKBox
       width="100%"
@@ -133,7 +136,7 @@ const UserDOB = ({ handler = () => {}, alldDisabled = false }) => {
               gutterBottom
               sx={{ textAlign: "left", marginBottom: "10px" }}
             >
-              You must be 18 years old to open a invest tech account
+              You must be 18 years old to open a occurrence account
             </Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateField
@@ -173,7 +176,12 @@ const UserDOB = ({ handler = () => {}, alldDisabled = false }) => {
               variant="gradient"
               //  color="primary"
               className={classes.nextBtn}
-              disabled={isStateUpdating || alldDisabled || !formik.isValid || isLoading?.setPersonalDetails}
+              disabled={
+                isStateUpdating ||
+                alldDisabled ||
+                !formik.isValid ||
+                isLoading?.setPersonalDetails
+              }
             >
               <ButtonSpinner
                 text={"Next"}

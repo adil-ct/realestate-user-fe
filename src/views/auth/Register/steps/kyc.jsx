@@ -20,21 +20,21 @@ const KYC = ({ setActiveStep }) => {
   const [client, setClient] = useState();
   const { _id } = userData;
   const [isPersonalLoaded, setPersonaLoaded] = useState(false);
-  const language = "en-US"; // hard code for now 
+  const language = "en-US"; // hard code for now
 
   const loadScripts = (url) => {
-    let script = document.createElement('script');
+    let script = document.createElement("script");
     script.src = url;
-    document.getElementsByTagName('head')[0].appendChild(script);
+    document.getElementsByTagName("head")[0].appendChild(script);
     setPersonaLoaded(true);
-  }
+  };
 
   useEffect(() => {
-      loadScripts("https://cdn.withpersona.com/dist/persona-v4.2.0.js");
-  }, [])
+    loadScripts("https://cdn.withpersona.com/dist/persona-v4.2.0.js");
+  }, []);
 
   useEffect(() => {
-    if(isPersonalLoaded) {
+    if (isPersonalLoaded) {
       const personaClient = new Persona.Client({
         templateId: PERSONA_TEMPLATE_ID,
         environment: PERSONA_ENV,
@@ -51,9 +51,7 @@ const KYC = ({ setActiveStep }) => {
 
   const successHandler = () => {
     // move to 2FA step
-    toaster.success(
-      "ID verification completed! Confirm order to invest."
-    );
+    toaster.success("ID verification completed! Confirm order to invest.");
     setActiveStep(2);
     window.scrollTo(0, 0);
   };
@@ -70,11 +68,8 @@ const KYC = ({ setActiveStep }) => {
         className={classes.borderDesktop}
         sx={{ mx: "auto" }}
       >
-        <MKTypography
-          variant="description"
-          className={classes.kycdescription1}
-        >
-          Complete ID verification in just 2 minutes to access Invest Tech.
+        <MKTypography variant="description" className={classes.kycdescription1}>
+          Complete ID verification in just 2 minutes to access Occurrence.
         </MKTypography>
         <MKTypography variant="description" className={classes.kycdescription}>
           Given we are a US-based entity dealing with money, we are required to
@@ -83,9 +78,9 @@ const KYC = ({ setActiveStep }) => {
           process, one of the largest service providers in the compliance space
           and trusted by institutions such as Square, Brex, Toast, and more.
           These verification measures are required for all platforms dealing
-          with money such as Robinhood, Fidelity, and more. The
-          verification has nothing to do with credit, and this verification will
-          not impact your credit.
+          with money such as Robinhood, Fidelity, and more. The verification has
+          nothing to do with credit, and this verification will not impact your
+          credit.
         </MKTypography>
         <Grid container alignItems="center" justifyContent="center">
           <Grid

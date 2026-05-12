@@ -7,9 +7,9 @@ const QRCodeModal = ({
   secretCode,
   setOpen,
   handleNext,
-  type="",
-  backBtn=false,
-  code="",
+  type = "",
+  backBtn = false,
+  code = "",
 }) => {
   const handleClose = () => {
     setOpen(false);
@@ -18,12 +18,12 @@ const QRCodeModal = ({
   const data = {
     title: "Scan QR Code",
     subtitle: () => {},
-    tagline: !type ? 
-      "Scan the QR code or copy the wallet address to transfer USDC (Polygon) to your Invest Tech wallet" :
-      `Scan the QR code to share the ${type} link or copy the ${type} code`,
+    tagline: !type
+      ? "Scan the QR code or copy the wallet address to transfer USDC (Polygon) to your Occurrence wallet"
+      : `Scan the QR code to share the ${type} link or copy the ${type} code`,
     link: "Resend Email",
     qrImage,
-    secretCode: type ?  code : secretCode,
+    secretCode: type ? code : secretCode,
   };
   return (
     <div>
@@ -31,7 +31,7 @@ const QRCodeModal = ({
         open={open}
         handleClose={handleClose}
         data={data}
-        secretCode={type ?  code : secretCode}
+        secretCode={type ? code : secretCode}
         handleNext={handleNext}
         noButton={true}
         backBtn={type ? false : true}

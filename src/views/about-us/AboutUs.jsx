@@ -1,5 +1,5 @@
 import CTASection from "../../components/cta/CTASection";
-// Logo removed for whitelabeling
+import Logo from "components/Logo";
 import scratched from "../../assets/icons/scratched.svg";
 import img1 from "../../assets/images/about-us/img1.png";
 import img2 from "../../assets/images/about-us/img2.png";
@@ -39,7 +39,9 @@ const AboutUs = () => {
         <ImageAbsolute top="80px" right="0px" src={img3} alt="image 3" />
         <ImageAbsolute top="560px" right="0px" src={img4} alt="image 4" />
         <div>
-          <div style={{fontSize: '32px', fontWeight: 'bold', color: '#34c38f', marginBottom: '20px'}}>Occurrence</div>
+          <div style={{ marginBottom: "20px" }}>
+            <Logo height={68} />
+          </div>
           <Title1>Legacy matters</Title1>
           <WrapTitleGray>
             <Title2>We&#39;re all </Title2>
@@ -48,13 +50,13 @@ const AboutUs = () => {
               <img src={scratched} alt="Scratched image" width="100%" />
             </Scratched>
           </WrapTitleGray>
-          <Title2>invest tech</Title2>
+          <Title2>occurrence</Title2>
         </div>
         <ParagraphAbout marginTop="80px">
           Our team once catered exclusively to the wealthiest echelon of
-          society— investing billions for the top .00001%. At Occurrence our mission,
-          our personal calling, has morphed to a profound duty. A duty to
-          present unparalleled opportunities to you. We&#39;re not only
+          society— investing billions for the top .00001%. At Occurrence our
+          mission, our personal calling, has morphed to a profound duty. A duty
+          to present unparalleled opportunities to you. We&#39;re not only
           allocating capital and facilitating transactions; we&#39;re reshaping
           paradigms, unveiling possibilities, and enabling agency. We&#39;re
           making Occurrence and we take it personally.
@@ -62,9 +64,9 @@ const AboutUs = () => {
         <ParagraphAbout marginTop="60px">
           We bridge the old and new. Where effortless wealth stems from asset
           ownership, and the hunger and boldness of newer generations define our
-          vision. With Invest Tech, we aim to make real estate not just an investment
-          but an aspiration once again, and in doing so, we invite you to be
-          part of a movement that reshapes the world.
+          vision. With Occurrence, we aim to make real estate not just an
+          investment but an aspiration once again, and in doing so, we invite
+          you to be part of a movement that reshapes the world.
         </ParagraphAbout>
       </FirstSection>
       <ContainerGreen>

@@ -194,7 +194,7 @@ function WhyRealEstate() {
       <SectionReturn>
         <ContainerReturn>
           <TitleReturn>
-            <TitleReturn1>Invest Tech:</TitleReturn1>
+            <TitleReturn1>Occurrence:</TitleReturn1>
             <TitleReturn2>The Return(s) of Real Estate</TitleReturn2>
           </TitleReturn>
           <CardsRow>
@@ -280,8 +280,8 @@ function WhyRealEstate() {
             <ContainerTextReturn>
               <TitleCardReturn>Leverage</TitleCardReturn>
               <TextCardReturn>
-                People take out debt, invest tech take out leverage. Borrowing funds
-                to purchase an investment property means less of your own
+                People take out debt, occurrence take out leverage. Borrowing
+                funds to purchase an investment property means less of your own
                 capital down. With rental income paying borrowing costs and
                 property&#39;s appreciating on the whole value, leverage
                 amplifies returns.
