@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
  *
  * Source aspect ratio: 400 x 140.
  */
-const SOURCE_WIDTH = 400;
+const SOURCE_WIDTH = 480;
 const SOURCE_HEIGHT = 140;
 const PUBLIC = process.env.PUBLIC_URL || "";
 

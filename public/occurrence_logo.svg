@@ -1,4 +1,4 @@
-<svg width="400" height="140" viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+<svg width="480" height="140" viewBox="0 0 480 140" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&amp;display=swap');
@@ -27,5 +27,7 @@
     font-weight="600"
     fill="#0B1F4E"
     letter-spacing="2"
+    textLength="350"
+    lengthAdjust="spacingAndGlyphs"
   >OCCURRENCE</text>
 </svg>
