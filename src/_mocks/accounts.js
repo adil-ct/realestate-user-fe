@@ -5,18 +5,9 @@ import Balance from "components/TableSubComponents/balance";
 import Progress from "components/TableSubComponents/progress";
 
 const balances = () => {
-  const { pfListData, pfOverviewData } = useSelector((state) => state.accounts);
+  const { pfListData } = useSelector((state) => state.accounts);
 
   const rows = pfListData?.value || [];
-
-  // Fallback: if the overview endpoint hasn't returned a portfolioValue yet,
-  // derive total holdings from the list itself so allocation bars still render.
-  const derivedPortfolioValue = rows.reduce(
-    (sum, item) => sum + (Number(item?.tokens) || 0) * (Number(item?.currentPrice) || 0),
-    0
-  );
-  const portfolioValue =
-    Number(pfOverviewData?.portfolioValue) || derivedPortfolioValue || 0;
 
   return {
     column: ["Asset", "Allocation", "Balance", "Action"],
@@ -25,8 +16,7 @@ const balances = () => {
       const price = Number(item?.currentPrice) || 0;
       const boughtAt = Number(item?.boughtAtPrice) || 0;
       const dollarValue = tokenCount * price;
-      const allocationPct =
-        portfolioValue > 0 ? (dollarValue / portfolioValue) * 100 : 0;
+      const allocationPct = Number(item?.tokensSoldPercentage) || 0;
 
       return {
         Asset: (
