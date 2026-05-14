@@ -350,7 +350,7 @@ const CheckoutModal = ({
                                                     setDefaultChecked={setDefaultChecked}
                                                 />
                                             } else if (!addMethod) {
-                                                return <SelectPayment key={index} loading={plaidState?.isLoading || isLoading?.getBankAccountList} disabledState={isLoading?.plaidLinkToken} paymentMethods={paymentMethods} setPaymentMethods={setPaymentMethods} paymentMethod={paymentMethod} setPaymentmethod={setPaymentMethod} handelMainDepositModalContinue={handelMainDepositModalContinue} addMethod={getPlaidTokenHandler}/>
+                                                return <SelectPayment key={index} loading={plaidState?.isLoading || isLoading?.getBankAccountList} disabledState={isLoading?.plaidLinkToken} paymentMethods={paymentMethods} setPaymentMethods={setPaymentMethods} paymentMethod={paymentMethod} setPaymentmethod={setPaymentMethod} handelMainDepositModalContinue={handelMainDepositModalContinue} addMethod={getPlaidTokenHandler} onSelectSavedCard={(card) => { setDefaultChecked(card); getNextStep(card); }}/>
                                             } else {
                                                 return <SetDefault isLoading={plaidState?.isLoading} handleClose={() => {
                                                     getNextStep();
