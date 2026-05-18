@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, IconButton } from "@mui/material";
+import { Grid, Box, IconButton, Skeleton } from "@mui/material";
 import {
   Player,
   ControlBar,
@@ -33,13 +33,35 @@ const Rationale = ({
 
   const images = propertyObj?.rationale?.images || [];
   const total = images.length;
+  const [carouselLoaded, setCarouselLoaded] = useState(false);
+  const [videoImageLoaded, setVideoImageLoaded] = useState(false);
 
   useEffect(() => {
     setActiveIndex(0);
+    setCarouselLoaded(false);
   }, [propertyObj?.rationale?._id]);
 
-  const goPrev = () => setActiveIndex((i) => (i <= 0 ? total - 1 : i - 1));
-  const goNext = () => setActiveIndex((i) => (i >= total - 1 ? 0 : i + 1));
+  const goPrev = () => {
+    setCarouselLoaded(false);
+    setActiveIndex((i) => (i <= 0 ? total - 1 : i - 1));
+  };
+  const goNext = () => {
+    setCarouselLoaded(false);
+    setActiveIndex((i) => (i >= total - 1 ? 0 : i + 1));
+  };
+
+  // Preload adjacent images so they are cached before the user navigates to them
+  useEffect(() => {
+    if (total < 2) return;
+    const prevIdx = activeIndex <= 0 ? total - 1 : activeIndex - 1;
+    const nextIdx = activeIndex >= total - 1 ? 0 : activeIndex + 1;
+    [prevIdx, nextIdx].forEach((idx) => {
+      if (images[idx]?.url) {
+        const img = new Image();
+        img.src = images[idx].url;
+      }
+    });
+  }, [activeIndex, images, total]);
 
   return (
     <Grid container spacing={5}>
@@ -75,9 +97,27 @@ const Rationale = ({
               position: "relative",
             }}
           >
+            {!carouselLoaded && (
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  zIndex: 2,
+                  borderRadius: "16px",
+                  bgcolor: "grey.200",
+                }}
+              />
+            )}
             <img
+              key={activeIndex}
               src={images[activeIndex]?.url}
               alt={`slide-${activeIndex}`}
+              onLoad={() => setCarouselLoaded(true)}
               style={{
                 position: "absolute",
                 top: 0,
@@ -87,6 +127,8 @@ const Rationale = ({
                 objectFit: "cover",
                 display: "block",
                 zIndex: 1,
+                opacity: carouselLoaded ? 1 : 0,
+                transition: "opacity 300ms ease",
               }}
             />
 
@@ -187,9 +229,26 @@ const Rationale = ({
               position: "relative",
             }}
           >
+            {!videoImageLoaded && (
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  zIndex: 2,
+                  borderRadius: "16px",
+                  bgcolor: "grey.200",
+                }}
+              />
+            )}
             <img
               src={propertyObj?.rationale?.video?.url}
               alt="img"
+              onLoad={() => setVideoImageLoaded(true)}
               style={{
                 position: "absolute",
                 top: 0,
@@ -198,6 +257,8 @@ const Rationale = ({
                 height: "100%",
                 objectFit: "cover",
                 display: "block",
+                opacity: videoImageLoaded ? 1 : 0,
+                transition: "opacity 300ms ease",
               }}
             />
           </Box>

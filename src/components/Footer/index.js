@@ -22,6 +22,8 @@ import {
 import Logo from "components/Logo";
 
 const Footer = () => {
+  const isAuthenticated = !!localStorage.getItem("authToken");
+
   const productLinks = [
     { name: "Marketplace", link: routePaths.INVESTOR_PATH, external: false },
     { name: "Portfolio", link: routePaths.PORTFOLIO_PATH, external: false },
@@ -82,11 +84,18 @@ const Footer = () => {
             <GridItem>
               <GridItemTitle>Account</GridItemTitle>
               <GridLinksContainer>
-                <GridLink to={routePaths.LOGIN_PATH}>Login</GridLink>
-                <GridLink to={routePaths.LOGIN_REGISTER_PATH}>
-                  Register
-                </GridLink>
-                <GridLink to={routePaths.PROFILE_PATH}>Profile</GridLink>
+                {isAuthenticated ? (
+                  <>
+                    <GridLink to={routePaths.PROFILE_PATH}>Profile</GridLink>
+                    <GridLink to={routePaths.PERSONAL_DETAILS_PATH}>Personal Info</GridLink>
+                    <GridLink to={routePaths.ACCOUNT_SETTINGS_PATH}>Settings</GridLink>
+                  </>
+                ) : (
+                  <>
+                    <GridLink to={routePaths.LOGIN_PATH}>Login</GridLink>
+                    <GridLink to={routePaths.LOGIN_REGISTER_PATH}>Register</GridLink>
+                  </>
+                )}
               </GridLinksContainer>
             </GridItem>
 

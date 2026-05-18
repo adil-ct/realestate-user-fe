@@ -69,10 +69,12 @@ const Notifications = () => {
               <MKBox className={classes.notificationLabel}>Notifications</MKBox>
             </Grid>
             <Grid item xs={12} sm={4} className={classes.filterBox}>
-              <MKBox className={classes.markedRead} onClick={handleAllRead}>
-                <img src={DoubleTick} alt="Marked Read" />
-                Mark as all read
-              </MKBox>
+              {!!notificationsList.notifications?.length && (
+                <MKBox className={classes.markedRead} onClick={handleAllRead}>
+                  <img src={DoubleTick} alt="Marked Read" />
+                  Mark as all read
+                </MKBox>
+              )}
               {/* Hide filter */}
               <MKBox>
                 <Dropdown

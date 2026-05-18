@@ -30,7 +30,7 @@ function Register() {
       }}>
         {/* Logo */}
         <MKBox sx={{ display: "flex", justifyContent: "flex-start", mb: "14px" }}>
-          <Logo height={32} />
+          <Logo height={40} />
         </MKBox>
 
         {/* Heading */}

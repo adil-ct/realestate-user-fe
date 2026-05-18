@@ -49,6 +49,7 @@ function Login() {
 
   useEffect(() => {
     if (modalName === "LOGIN_SECURITY_VERIFICATION") setShowOTPModal(true);
+    else                                             setShowOTPModal(false);
     if (modalName === "LOGIN_POPUP")                 setShowPopup(true);
     if (modalName === "RESEND_EMAIL")                setShowResendOTPModal(true);
   }, [modalName]);
@@ -123,7 +124,7 @@ function Login() {
       }}>
         {/* Logo */}
         <MKBox sx={{ display: "flex", justifyContent: "flex-start", mb: "16px" }}>
-          <Logo height={32} />
+          <Logo height={40} />
         </MKBox>
 
         {/* Heading */}

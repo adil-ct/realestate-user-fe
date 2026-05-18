@@ -226,7 +226,15 @@ const History = () => {
             {!isLoading.getTransactionsList && !historyData?.row?.length ? (
               <MKBox className={classes.noContentBox}>
                 <img src={noTransactions} alt="No Transactions" />
-                <span className={classes.noContentText}>No Data Available</span>
+                <span className={classes.noContentText}>
+                  You have no transactions yet.{" "}
+                  <span
+                    onClick={() => navigate(routePaths.INVESTOR_PATH)}
+                    style={{ color: "#C9A84C", fontWeight: 600, cursor: "pointer", textDecoration: "underline" }}
+                  >
+                    Browse properties to invest.
+                  </span>
+                </span>
               </MKBox>
             ) : (
               <>
@@ -269,7 +277,9 @@ const History = () => {
             {!userLoader.rewardTransactions && !rewardTransData?.row?.length ? (
               <MKBox className={classes.noContentBox}>
                 <img src={noTransactions} alt="No Transactions" />
-                <span className={classes.noContentText}>No Data Available</span>
+                <span className={classes.noContentText}>
+                  You have no reward transactions yet. Refer friends to start earning rewards.
+                </span>
               </MKBox>
             ) : (
               <>

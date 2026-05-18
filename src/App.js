@@ -41,6 +41,36 @@ const App = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location?.pathname]);
+
+  useEffect(() => {
+    const pageTitles = {
+      "/":                        "Login - Occurrence",
+      "/login":                   "Login - Occurrence",
+      "/register":                "Register - Occurrence",
+      "/forgot-password":         "Forgot Password - Occurrence",
+      "/marketplace":             "Marketplace - Occurrence",
+      "/portfolio":               "Portfolio - Occurrence",
+      "/profile":                 "Profile - Occurrence",
+      "/account-settings":        "Account Settings - Occurrence",
+      "/register/personal-information": "Personal Information - Occurrence",
+      "/accounts":                "Accounts - Occurrence",
+      "/wallet":                  "Wallet - Occurrence",
+      "/notifications":           "Notifications - Occurrence",
+      "/transaction-history":     "Transaction History - Occurrence",
+      "/property-profile":        "Property - Occurrence",
+      "/page-not-found":          "Page Not Found - Occurrence",
+    };
+    const path = location.pathname;
+    const exact = pageTitles[path];
+    if (exact) {
+      document.title = exact;
+    } else {
+      const prefix = Object.keys(pageTitles).find(
+        (key) => key !== "/" && path.startsWith(key)
+      );
+      document.title = prefix ? pageTitles[prefix] : "Occurrence";
+    }
+  }, [location?.pathname]);
   
   const MogulSpinner = () => <div className="loader_content"><OvalSpinner isLoading={true} /></div>;
 

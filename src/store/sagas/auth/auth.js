@@ -264,9 +264,9 @@ export function* loginVerifySaga(action) {
       yield call([localStorage, "setItem"], "authToken", response.data.token);
       yield call([localStorage, "setItem"], "userId", response.data._id);
       yield call([localStorage, "setItem"], "toaster-type", "success");
-      !id ? navigate(routePaths.INVESTOR_PATH) : navigate(`${routePaths.PROPERTY_PROFILE_PATH}/?id=${id}&invest=open`)
-      yield put(profileFetch());
       yield put(hideModal());
+      yield put(profileFetch());
+      !id ? navigate(routePaths.INVESTOR_PATH) : navigate(`${routePaths.PROPERTY_PROFILE_PATH}/?id=${id}&invest=open`)
     },
     failHandler: yield function* onLoginVerifyFail(response) {
       yield put(loginVerifyFail(response));
@@ -474,38 +474,30 @@ export function* resendEmailVerificationSaga(action) {
 
 // Signup saga
 export function* signupSaga(action) {
-  const { requestBody, navigate, sso } = action.payload || "";
+  const { requestBody, navigate, sso, handleSignupSuccess } = action.payload || "";
   yield put(signupStart());
   yield errorHandler({
     endpoint: `/user/signup`,
     baseURL: USER_BASE_URL,
     successHandler: yield function* onSignupSuccess(response) {
       const { data, msg } = response;
-      // const { personalDetailsCheck, kycStatus, securityCheck } = data;
       yield put(signupSuccess(data));
       yield put(profileFetch());
 
       yield call([localStorage, "setItem"], "authToken", response.data.token);
       yield call([localStorage, "setItem"], "userId", response.data._id);
-      // yield put(showModal({ modalName: "EMAIL_CONFIRMATION" }));
-      // redirectToPersonalDetail(
-      //   personalDetailsCheck,
-      //   kycStatus,
-      //   securityCheck,
-      //   navigate,
-      //   true
-      // );
-      toaster.success(msg)
-      navigate(routePaths.INVESTOR_PATH, {
-        state: {
-          showModal: sso ? false : true
-        }
-      });
+
+      toaster.success(msg);
+      if (sso || !handleSignupSuccess) {
+        navigate(routePaths.INVESTOR_PATH);
+      } else {
+        handleSignupSuccess(data.email || requestBody.email);
+      }
     },
     failHandler: yield function* onSignupFail(response) {
       yield put(signupFail(response));
       toaster.error(response);
-      sso && navigate(routePaths.LOGIN_PATH)
+      sso && navigate(routePaths.LOGIN_PATH);
     },
     failHandlerType: "CUSTOM",
     payload: requestBody,

@@ -262,6 +262,7 @@ const styles = makeStyles((theme) =>
       },
       propertyTitle: {
         fontSize: "1.25rem",
+        textShadow: "0 1px 4px rgba(0,0,0,0.5)",
         [theme.breakpoints.up("lg")]: {
           fontSize: "1.35rem",
         }
@@ -589,6 +590,7 @@ const styles = makeStyles((theme) =>
         color: "#fff",
         lineHeight: 1,
         flexShrink: 0,
+        textShadow: "0 1px 3px rgba(0,0,0,0.5)",
       },
       locationEleCard: {
         fontSize: "14px",
@@ -675,14 +677,20 @@ const styles = makeStyles((theme) =>
       },
       propertyNameContainer: {
         position: "absolute",
-        bottom: "24px",
-        left: "24px",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        padding: "48px 16px 16px",
+        background: "linear-gradient(to top, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.28) 60%, transparent 100%)",
+        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 0,
       },
       propertyLocationContainer: {
         display: "flex",
         alignItems: "center",
         gap: "8px",
         color: "#fff",
+        marginTop: "2px",
       },
       investmentsContainer: {
         width: "100%",

@@ -6,7 +6,6 @@ import { Box } from "@mui/material";
 import CottageIcon from "@mui/icons-material/Cottage";
 
 // Static imports
-import PhoneNumberVerificationModal from "components/Modal/PhoneNumberVerificationModal";
 import PropertyInvestModal from "components/Modal/PropertyInvestModal";
 import PropertyCard from "components/Cards/Investor/PropertyCard";
 import { noInvestment } from "constants/assets";
@@ -15,8 +14,6 @@ import MKBox from "components/custom/MKBox";
 import {
   getPropertyListSaga,
   profileFetch,
-  resendOtpSaga,
-  emailVerificationSaga,
   getWalletBalance,
 } from "store/actions";
 import { NoProperty } from "constants/assets";
@@ -31,12 +28,10 @@ const Investor = () => {
   const classes = styles();
   const isLogedin = localStorage.getItem("authToken");
   const { propertyList, isLoading } = useSelector((state) => state.marketplace);
-  const { isLoading: authLoader } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [skeltonLoader, setSkeltonLoader] = useState(true);
   const { userData, isLogin } = useSelector((state) => state.auth);
   const { state } = useLocation();
-  const [emailVerify, setEmailVerify] = useState(false);
   const [upcomingProperties, setUpcomingProperties] = useState([]);
   const [trendingProperties, setTrendingProperties] = useState([]);
   const [selectedProperty, setSelectedProperty] = useState({});
@@ -65,46 +60,14 @@ const Investor = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    const { access, showModal } = state || "";
+    const { access } = state || "";
     if (access) {
       handelInvestModal();
     }
-    if (showModal && !emailVerify && !userData?.emailVerified)
-      setEmailVerify(true);
   }, [state]);
 
-  const otpData = {
-    email: userData?.email,
-  };
-
-  const handleEmailVerificationSuccess = () => {
-    setEmailVerify(false);
-    dispatch(profileFetch());
-  };
-
-  const handlePhoneVerificationNext = (requestBody) => {
-    dispatch(
-      emailVerificationSaga({
-        requestBody,
-        handleSuccess: handleEmailVerificationSuccess,
-        handleFail: () => {},
-      })
-    );
-  };
-
-  const handleResend = () => {
-    const requestBody = {
-      channel: "Email",
-      email: userData?.email,
-    };
-    dispatch(resendOtpSaga({ requestBody }));
-  };
-
   const handelInvestModal = () => {
-    if (!userData?.emailVerified) {
-      setEmailVerify(true);
-      return null;
-    } else if (!userData?.address1 && !userData?.dob) {
+    if (!userData?.address1 && !userData?.dob) {
       return false;
     } else {
       return true;
@@ -313,19 +276,6 @@ const Investor = () => {
               handleClose={() => setOpenRegsiter(false)}
             />
           )}
-          <PhoneNumberVerificationModal
-            title="Verify Email Address"
-            description={`Enter code sent to ${
-              userData?.email ? userData?.email : "xxxxxxxx"
-            }`}
-            show={emailVerify}
-            setShow={setEmailVerify}
-            otpData={otpData}
-            onSubmit={handlePhoneVerificationNext}
-            handleResend={handleResend}
-            isLoading={authLoader?.emailVerification}
-            email={userData?.email}
-          />
         </Box>
       </Box>
     </>

@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { useFormik } from "formik";
 
-import EmailVerificationSentModal from "components/Modal/EmailVerificationSentModal";
+import EmailOTPModal from "components/Modal/EmailOTPModal";
 import { NODE_ENV, PRIVACY_LINK, TERMS_AND_CONDITION } from "constants/env";
 import { PASSWORD_VALIDATION } from "constants/errorConstants";
 import registerValidation from "validation/registerValidation";
@@ -24,8 +24,9 @@ import loginStyle from "../Login/styles/loginStyle";
 import MKButton from "components/custom/MKButton";
 import MKInput from "components/custom/MKInput";
 import MKBox from "components/custom/MKBox";
-import { signupSaga } from "store/actions";
+import { signupSaga, resendOtpSaga } from "store/actions";
 import { publicRoutes } from "routes";
+import { routePaths } from "routes/mainRoutes/routePaths";
 
 const singupObj = {
   firstName: "",
@@ -43,7 +44,6 @@ function RegisterForm({ showModal, sso, noIdCheck, pid="" }) {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { modalName } = useSelector((state) => state.modal);
   const { isLoading } = useSelector((state) => state.auth);
   const { email } = useSelector((state) => state.user);
 
@@ -51,6 +51,7 @@ function RegisterForm({ showModal, sso, noIdCheck, pid="" }) {
   const [verified, setVerified] = useState(false);
   const [refCode, setRefCode] = useState(false);
   const [open, setOpen] = useState(false);
+  const [otpEmail, setOtpEmail] = useState("");
 
   const initialValues = NODE_ENV === "development" ? singupObj : { ...singupObj, tc: false };
   const passedReferralCode = id?.toUpperCase();
@@ -63,9 +64,6 @@ function RegisterForm({ showModal, sso, noIdCheck, pid="" }) {
     }
   }, [email]);
 
-  useEffect(() => {
-    if (modalName === "EMAIL_CONFIRMATION") setOpen(true);
-  }, [modalName]);
 
   useEffect(() => {
     if (queryParamsStr) {
@@ -78,6 +76,15 @@ function RegisterForm({ showModal, sso, noIdCheck, pid="" }) {
     dispatch(signupSaga({ requestBody: { sharedCredentialsUuid, oneclick: true }, navigate, sso }));
   };
 
+  const handleSignupSuccess = (email) => {
+    setOtpEmail(email);
+    setOpen(true);
+  };
+
+  const handleResend = () => {
+    dispatch(resendOtpSaga({ requestBody: { channel: "Email", email: otpEmail } }));
+  };
+
   const submitBtnhandler = (values) => {
     const { email, password, firstName, referral, lastName } = values;
     const requestBody = {
@@ -86,7 +93,7 @@ function RegisterForm({ showModal, sso, noIdCheck, pid="" }) {
         referralCode: (passedReferralCode && !noIdCheck) ? passedReferralCode : formik.values.referral,
       }),
     };
-    dispatch(signupSaga({ requestBody, navigate }));
+    dispatch(signupSaga({ requestBody, navigate, handleSignupSuccess }));
   };
 
   const formik = useFormik({
@@ -340,7 +347,13 @@ function RegisterForm({ showModal, sso, noIdCheck, pid="" }) {
         </Box>
       </MKBox>
 
-      <EmailVerificationSentModal open={open} setOpen={setOpen} email={formik.values.email} />
+      <EmailOTPModal
+        open={open}
+        onClose={() => setOpen(false)}
+        email={otpEmail}
+        onResend={handleResend}
+        onVerified={() => navigate(routePaths.INVESTOR_PATH)}
+      />
     </>
   );
 }
