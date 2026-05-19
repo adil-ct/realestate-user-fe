@@ -105,7 +105,7 @@ export default function* errorHandler({
         typeof response.data.msg === "string"
       ) {
         if (failHandlerType === "CUSTOM") {
-          yield failHandler(response.data.msg, response.data);
+          yield failHandler(response.data.msg, response.data, response.status);
         } else {
           yield put(failHandler(response.data.msg));
         }
@@ -147,13 +147,13 @@ export default function* errorHandler({
         typeof error.response.data.msg === "string"
       ) {
         if (failHandlerType === "CUSTOM") {
-          yield failHandler(error.response.data.msg);
+          yield failHandler(error.response.data.msg, error.response.data, error.response.status);
         } else {
           yield put(failHandler(error.response.data.msg));
         }
       } else {
         if (failHandlerType === "CUSTOM") {
-          yield failHandler("Server error! Please try again.");
+          yield failHandler("Server error! Please try again.", error.response.data, error.response.status);
         } else {
           yield put(failHandler("Server error! Please try again."));
         }

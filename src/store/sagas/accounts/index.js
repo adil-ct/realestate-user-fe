@@ -197,9 +197,12 @@ export function* getListOfCardsSaga(action) {
       const { data } = response;
       yield put(getListOfCardsSuccess(data));
     },
-    failHandler: yield function* onGetListOfCardsFail(response) {
+    failHandler: yield function* onGetListOfCardsFail(response, data, status) {
       yield put(getListOfCardsFail(response));
-      toaster.error(response);
+      // Suppress toaster for 500 errors on the card list endpoint
+      if (status !== 500) {
+        toaster.error(response);
+      }
     },
     failHandlerType: "CUSTOM",
     apiType: "get",
