@@ -25,11 +25,11 @@ const Choose2FAModal = ({
       name: "Authenticator App",
       status: false,
     },
-    {
-      id: 2,
-      name: "Phone Number Verification",
-      status: false,
-    },
+    // {
+    //   id: 2,
+    //   name: "Phone Number Verification",
+    //   status: false,
+    // },
     {
       id: 3,
       name: "None",
@@ -80,7 +80,7 @@ const Choose2FAModal = ({
       </MKBox>
       <DialogTitle
         display="flex"
-        justify="center"
+        justifyContent="center"
         className={classes.dialogTitle2}
         component="div"
       >
@@ -89,11 +89,12 @@ const Choose2FAModal = ({
           align="center"
           className={classes.depositModalTitle}
         >
-          Choose 2FA
+          Set 2FA
         </MKTypography>
       </DialogTitle>
       <DialogContent
         display="flex"
+        flexDirection="column"
         justify="center"
         p={2}
         className={classes.dialogContent}
@@ -124,7 +125,7 @@ const Choose2FAModal = ({
             ))}
           </MKBox>
         </MKBox>
-        <MKBox display="flex" justifyContent="center">
+        <MKBox display="flex" justifyContent="center" width="100%">
           <MKButton
             variant="gradient"
             // color="primary"

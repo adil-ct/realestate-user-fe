@@ -12,17 +12,22 @@ const balances = () => {
   return {
     column: ["Asset", "Allocation", "Balance", "Action"],
     row: rows.map((item, index) => {
-      const tokenCount = Number(item?.tokens) || 0;
+      const tokenCount = Number(item?.balanceTokens ?? item?.tokens) || 0;
       const price = Number(item?.currentPrice) || 0;
       const boughtAt = Number(item?.boughtAtPrice) || 0;
-      const dollarValue = tokenCount * price;
-      const allocationPct = Number(item?.tokensSoldPercentage) || 0;
+      const dollarValue =
+        Number(item?.balanceValue) || tokenCount * price;
+      const allocationPct = Number(item?.allocationPercentage) || 0;
+      const mainImage =
+        typeof item?.mainImage === "string"
+          ? item?.mainImage
+          : item?.mainImage?.url;
 
       return {
         Asset: (
           <Asset
             title={item?.title}
-            icon={item?.mainImage?.url}
+            icon={mainImage}
             index={index}
             to={`/property-details-card/${item?._property}`}
           />
@@ -45,7 +50,7 @@ const balances = () => {
         tokensSold: item.tokensSold,
         numberOfTokens: item.numberOfTokens,
         tokensSoldPercentage: item.tokensSoldPercentage,
-        mainImage: item.mainImage,
+        mainImage,
         minInvestment: item?.minInvestment,
         title: item?.title,
         city: item?.city || "",
