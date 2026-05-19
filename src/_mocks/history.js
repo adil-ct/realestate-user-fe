@@ -9,12 +9,40 @@ import toaster from "utils/toaster";
 const history = () => {
   const { transactions } = useSelector((state) => state.accounts);
 
-  const copyToCLipBoard = (value) => {
+  // Fallback for non-secure contexts (plain HTTP) where
+  // navigator.clipboard is unavailable.
+  const legacyCopy = (value) => {
     try {
-      navigator.clipboard.writeText(value);
-      toaster.success("Copied to clipboard!");
+      const textArea = document.createElement("textarea");
+      textArea.value = value;
+      textArea.style.position = "fixed";
+      textArea.style.top = "-9999px";
+      textArea.style.left = "-9999px";
+      textArea.setAttribute("readonly", "");
+      document.body.appendChild(textArea);
+      textArea.select();
+      textArea.setSelectionRange(0, value.length);
+      const successful = document.execCommand("copy");
+      document.body.removeChild(textArea);
+      return successful;
     } catch (err) {
-      // console.log(err);
+      return false;
+    }
+  };
+
+  const copyToCLipBoard = async (value) => {
+    if (navigator?.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(value);
+        toaster.success("Copied to clipboard!");
+        return;
+      } catch (err) {
+        // Fall through to legacy path below.
+      }
+    }
+
+    if (legacyCopy(value)) {
+      toaster.success("Copied to clipboard!");
     }
   };
 
