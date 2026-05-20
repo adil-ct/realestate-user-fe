@@ -12,17 +12,16 @@ import {
 import DynamicCard from "components/Cards/DynamicCard/PortfolioCard";
 import {
   getPFAssetData,
-  getPropertyTxnData,
-  getRentTxn,
-  getReserveTransactionsSaga,
+  getPFListData,
+  getListOfTransactions,
+  getPropertyDetailsSaga,
 } from "store/actions";
 import DynamicTable from "components/DynamicTable/DynamicTable";
 import MKTypography from "components/custom/MKTypography";
 import CurrencyFormat from "components/CurrencyFormat";
 import MKButton from "components/custom/MKButton";
 import MKBox from "components/custom/MKBox";
-import propertyTxns from "_mocks/propertyTxns";
-import balanceDataTable from "_mocks/investorPropertyTxns";
+import propertyTxnsFromHistory from "_mocks/propertyTxnsFromHistory";
 import { routePaths } from "routes/mainRoutes/routePaths";
 
 import {
@@ -35,12 +34,9 @@ import {
   NextPayout,
   TotalRentalIncome,
   noTransactions,
-  // Initiate,
-  NoProperty,
 } from "constants/assets";
 import styles from "./styles";
 import TableSkeleton from "components/Skeleton/TableSkeleton";
-import propertyRentTxns from "_mocks/propertyRentTxns";
 import TransactionDetail from "components/Modal/TransactionDetail";
 import SearchBox from "components/custom/Search";
 import useDebounce from "hooks/useDebounce";
@@ -52,92 +48,23 @@ const cardConfig = {};
 const PropertyDetailsCard = () => {
   const classes = styles();
   const [currentPage, setCurrentPage] = useState(1);
-  const [rentTxnCurrentPage, setRentTxnCurrentPage] = useState(1);
   const [openPayModal, setOpenPayModal] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [rentTxnDetails, setRentTxnDetails] = useState();
+  const [rentTxnDetails] = useState();
   const debouncedSearchText = useDebounce(searchText, 500);
-  const balanceData = balanceDataTable();
 
-  const { pfAssetData, isLoading, propertyTxnsList, rentTxn } = useSelector(
+  const { pfAssetData, isLoading, pfListData, transactions } = useSelector(
     (state) => state.accounts
   );
 
-  const { userData } = useSelector(
-    (state) => state.auth
-  );
-  const { reserveTxns, loader: marketLoader } = useSelector(
-    (state) => state.marketplace
-  );
+  const { propertyData } = useSelector((state) => state.marketplace);
 
-  const propertyTxnsData = propertyTxns();
-  const propertyRentTxnsData = propertyRentTxns();
+  const { userData } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const [value, setValue] = React.useState(0);
-
-  const enable = {
-    view: "view",
-  };
-
-  const cardActions = {
-    view: {
-      handler: (data) => {
-        setRentTxnDetails({
-          headRow: [
-            {
-              title: "Total Rent Amount:",
-              value: (
-                <CurrencyFormat
-                  prefix={"$"}
-                  value={data?.tableData?.totalRent}
-                />
-              ),
-            },
-          ],
-          bodyRow: [
-            {
-              title: "Towards Maintenance:",
-              value: (
-                <CurrencyFormat
-                  prefix={"$"}
-                  value={data?.tableData?.maintenanceFee}
-                />
-              ),
-            },
-            {
-              title: "Towards Vacancy:",
-              value: (
-                <CurrencyFormat
-                  prefix={"$"}
-                  value={data?.tableData?.vacancyFee}
-                />
-              ),
-            },
-            {
-              title: "To Co-owners:",
-              value: (
-                <CurrencyFormat
-                  prefix={"$"}
-                  value={data?.tableData?.toCoowners}
-                />
-              ),
-            },
-            {
-              title: "Transaction Hash:",
-              value: data?.tableData?.transactionHash,
-            },
-            {
-              title: "Date:",
-              value: moment(data?.tableData?.updatedAt).format("lll"),
-            },
-          ],
-        });
-        setOpenPayModal(true);
-      },
-    },
-  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -153,12 +80,180 @@ const PropertyDetailsCard = () => {
 
   useEffect(() => {
     dispatch(getPFAssetData(id));
-    dispatch(getPropertyTxnData(`${id}?page=${currentPage}&limit=10`));
+    dispatch(getPropertyDetailsSaga({ id, tabSelected: "rationale" }));
+    dispatch(
+      getListOfTransactions({
+        page: 1,
+        txnType: "",
+        duration: "",
+        search: "",
+      })
+    );
+    if (!pfListData?.value?.length) {
+      dispatch(getPFListData({ page: 1, search: "" }));
+    }
   }, []);
 
-  useEffect(() => {
-    dispatch(getRentTxn({ id, page: rentTxnCurrentPage }));
-  }, [rentTxnCurrentPage]);
+  const propertyDetail = propertyData?.data || {};
+  const fakeTokenId = (() => {
+    let h = 0;
+    const src = String(id || "");
+    for (let i = 0; i < src.length; i++) {
+      h = (h * 31 + src.charCodeAt(i)) >>> 0;
+    }
+    return 10000 + (h % 90000);
+  })();
+
+  const portfolioItem = (pfListData?.value || []).find(
+    (p) => p?._property === id
+  );
+
+  const getTxnAmount = (t) =>
+    typeof t?.amount === "number" ? t?.amount : Number(t?.amount?.amount) || 0;
+  const getTxnFees = (t) =>
+    typeof t?.fees === "number" ? t?.fees : Number(t?.fees?.amount) || 0;
+
+  const resolvedTitle = (
+    pfAssetData?.property?.title ||
+    propertyData?.data?.title ||
+    portfolioItem?.title ||
+    ""
+  )
+    .toString()
+    .trim()
+    .toLowerCase();
+  const getTxnPid = (t) =>
+    (typeof t?.propertyId === "object" ? t?.propertyId?._id : t?.propertyId) ||
+    t?.property?._id ||
+    t?._property ||
+    null;
+  const propertyTxns = (transactions?.data || []).filter((t) => {
+    const txnPid = getTxnPid(t);
+    if (txnPid) return txnPid === id;
+    return (
+      resolvedTitle &&
+      String(t?.destination || "").trim().toLowerCase() === resolvedTitle
+    );
+  });
+  const txnAggregates = propertyTxns.reduce(
+    (acc, t) => {
+      const amount = getTxnAmount(t);
+      const fees = getTxnFees(t);
+      const net = Math.max(amount - fees, 0);
+      const tokens =
+        Number(t?.tokens) ||
+        (Number(portfolioItem?.currentPrice) > 0
+          ? Math.round(net / Number(portfolioItem?.currentPrice))
+          : net);
+      const isBuy =
+        t?.transferType === "received" ||
+        t?.transactionType === "Deposit" ||
+        t?.transactionType === "checkout" ||
+        t?.transactionType === "Checkout";
+      if (isBuy) {
+        acc.buyTokens += tokens;
+        acc.buyAmount += net;
+      } else {
+        acc.sellTokens += tokens;
+        acc.sellAmount += net;
+      }
+      acc.totalAmount += amount;
+      return acc;
+    },
+    {
+      buyTokens: 0,
+      buyAmount: 0,
+      sellTokens: 0,
+      sellAmount: 0,
+      totalAmount: 0,
+    }
+  );
+
+  const netTokensFromTxns = txnAggregates.buyTokens - txnAggregates.sellTokens;
+  const netSpentFromTxns = txnAggregates.buyAmount - txnAggregates.sellAmount;
+  const holdingsTokens =
+    Number(pfAssetData?.holdings) ||
+    Number(portfolioItem?.tokens) ||
+    Number(portfolioItem?.balanceTokens) ||
+    netTokensFromTxns ||
+    0;
+  const currentPrice =
+    Number(pfAssetData?.property?.currentPrice) ||
+    Number(portfolioItem?.currentPrice) ||
+    0;
+  const derivedAssetValue =
+    Number(pfAssetData?.assetValue) ||
+    Number(pfAssetData?.property?.assetValue) ||
+    Number(portfolioItem?.balanceValue) ||
+    holdingsTokens * currentPrice ||
+    netSpentFromTxns ||
+    0;
+  const avgBuyPrice =
+    txnAggregates.buyTokens > 0
+      ? txnAggregates.buyAmount / txnAggregates.buyTokens
+      : currentPrice;
+  const derivedAppreciation =
+    Number(pfAssetData?.appreciation) ||
+    (currentPrice - avgBuyPrice) * holdingsTokens ||
+    0;
+
+  const mergedAssetData = {
+    ...pfAssetData,
+    assetValue: derivedAssetValue,
+    holdings: holdingsTokens,
+    appreciation: derivedAppreciation,
+    rentalIncome: Number(pfAssetData?.rentalIncome) || 0,
+    growthPercentage:
+      Number(pfAssetData?.growthPercentage) ||
+      (avgBuyPrice > 0
+        ? ((currentPrice - avgBuyPrice) / avgBuyPrice) * 100
+        : 0),
+    property: {
+      ...(pfAssetData?.property || {}),
+      title:
+        pfAssetData?.property?.title ||
+        propertyDetail?.title ||
+        portfolioItem?.title,
+      city:
+        pfAssetData?.property?.city ||
+        propertyDetail?.city ||
+        portfolioItem?.city,
+      state:
+        pfAssetData?.property?.state ||
+        propertyDetail?.state ||
+        portfolioItem?.state,
+      mainImage:
+        pfAssetData?.property?.mainImage ||
+        propertyDetail?.mainImage ||
+        portfolioItem?.mainImage,
+      tokenId:
+        pfAssetData?.property?.tokenId ||
+        propertyDetail?.tokenId ||
+        portfolioItem?.tokenId ||
+        fakeTokenId,
+      assetValue:
+        pfAssetData?.property?.assetValue ||
+        propertyDetail?.assetValue ||
+        portfolioItem?.lastPropertyValue ||
+        derivedAssetValue,
+      currentPrice,
+      numberOfTokens:
+        pfAssetData?.property?.numberOfTokens ||
+        propertyDetail?.numberOfTokens ||
+        portfolioItem?.numberOfTokens,
+    },
+    tokenContractAddress:
+      pfAssetData?.tokenContractAddress ||
+      propertyDetail?.tokenContractAddress ||
+      portfolioItem?.tokenContractAddress ||
+      "",
+  };
+
+  const propertyTxnsData = propertyTxnsFromHistory({
+    propertyId: id,
+    propertyTitle: mergedAssetData?.property?.title,
+    pricePerToken: mergedAssetData?.property?.currentPrice,
+  });
 
   useEffect(() => {
     setSearchText("");
@@ -166,59 +261,23 @@ const PropertyDetailsCard = () => {
 
   useEffect(() => {
     if (value === 0) {
-      // Token transactions
       dispatch(
-        getPropertyTxnData(
-          `${id}?page=${currentPage}&limit=10&search=${debouncedSearchText ?? ""
-          }`
-        )
-      );
-    }
-    if (value === 1) {
-      dispatch(
-        getRentTxn({
-          id,
-          page: rentTxnCurrentPage,
+        getListOfTransactions({
+          page: currentPage,
+          txnType: "",
+          duration: "",
           search: debouncedSearchText ?? "",
         })
       );
-    } else {
-      // Rent transaction
-      dispatch(
-        getReserveTransactionsSaga({
-          id,
-          // page: rentTxnCurrentPage,
-          // search: debouncedSearchText ?? "",
-        })
-      );
     }
-  }, [debouncedSearchText, value]);
+  }, [debouncedSearchText, value, currentPage]);
 
-  let maxCount = propertyTxnsList?.totalItems
-    ? Math.ceil(Number(propertyTxnsList?.totalItems / 10))
-    : 0;
-
-  let rentTxnMaxCount = rentTxn?.data?.totalCount
-    ? Math.ceil(Number(rentTxn?.data?.totalCount / 10))
+  const maxCount = transactions?.totalCount
+    ? Math.ceil(Number(transactions?.totalCount / 10))
     : 0;
 
   const updateCurrentPage = (page) => {
     setCurrentPage(page);
-    dispatch(
-      getPropertyTxnData(
-        `${id}?page=${page}&limit=10`
-      )
-    );
-  };
-
-  const updateRentTxnCurrentPage = (page) => {
-    setRentTxnCurrentPage(page);
-  };
-
-  const rentTxnPaginationConfig = {
-    currentPage: rentTxnCurrentPage,
-    maxCount: rentTxnMaxCount,
-    handler: updateRentTxnCurrentPage,
   };
 
   const paginationConfig = {
@@ -262,7 +321,7 @@ const PropertyDetailsCard = () => {
     <Box className={classes.paddingContainer}>
       <Box className={classes.mainContainer}>
         <Grid container spacing={2} className={classes.headerBox}>
-          <PropertyDetail id={id} pfAssetData={pfAssetData} />
+          <PropertyDetail id={id} pfAssetData={mergedAssetData} />
           <Grid
             item
             xs={12}
@@ -293,41 +352,35 @@ const PropertyDetailsCard = () => {
           <Grid item xs={5.5} md={4} lg={2.8}>
             <Box className={classes.marketStats}>
               <Box>
-                {/* <Tooltip
-                  title={`Total Token: ${pfAssetData?.property?.numberOfTokens
-                    ?.toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`}
-                > */}
                 <MKTypography className={classes.marketStatsHead}>
                   Asset Value
                 </MKTypography>
-                {/* </Tooltip> */}
                 {isLoading?.pfAssetData ? (
                   <ThreeDotsSpinner isLoading={true} />
                 ) : (
-                  <MKTypography 
+                  <MKTypography
                     className={classes.marketStatsVal}
                     component="span"
                   >
                     <CurrencyFormat
                       prefix={"$"}
-                      value={pfAssetData?.property?.assetValue}
+                      value={mergedAssetData?.property?.assetValue}
                     />
-                    {Number(pfAssetData?.growthPercentage) !== 0 && (
+                    {Number(mergedAssetData?.growthPercentage) !== 0 && (
                       <MKTypography
                         component="span"
                         className={classes.statsVal}
                       >
                         <img
                           src={
-                            pfAssetData?.growthPercentage < 0
+                            mergedAssetData?.growthPercentage < 0
                               ? ArrowDownRed
                               : ArrowUpGreen
                           }
                           className={classes.arwUpGreen}
                           alt="Stats UP"
                         />
-                        {Number(pfAssetData?.growthPercentage).toFixed(2)}%
+                        {Number(mergedAssetData?.growthPercentage).toFixed(2)}%
                       </MKTypography>
                     )}
                   </MKTypography>
@@ -342,7 +395,7 @@ const PropertyDetailsCard = () => {
             <Box className={classes.marketStats}>
               <Box>
                 <Tooltip
-                  title={`My tokens: ${pfAssetData?.holdings
+                  title={`My tokens: ${mergedAssetData?.holdings
                     ?.toString()
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`}
                 >
@@ -355,13 +408,13 @@ const PropertyDetailsCard = () => {
                 ) : (
                   <>
                     <Tooltip
-                      title={`My tokens: ${pfAssetData?.holdings
+                      title={`My tokens: ${mergedAssetData?.holdings
                         ?.toString()
                         .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`}
                     >
                       <MKTypography className={classes.marketStatsVal}>
                         <CurrencyFormat
-                          value={pfAssetData?.assetValue}
+                          value={mergedAssetData?.assetValue}
                           prefix={"$"}
                         />
                       </MKTypography>
@@ -386,7 +439,7 @@ const PropertyDetailsCard = () => {
                   <CurrencyFormat
                     eleClass={classes.marketStatsVal}
                     prefix={"$"}
-                    value={pfAssetData?.appreciation}
+                    value={mergedAssetData?.appreciation}
                   />
                 )}
               </Box>
@@ -407,7 +460,7 @@ const PropertyDetailsCard = () => {
                   <CurrencyFormat
                     eleClass={classes.marketStatsVal}
                     prefix={"$"}
-                    value={pfAssetData?.rentalIncome}
+                    value={mergedAssetData?.rentalIncome}
                   />
                 )}
               </Box>
@@ -426,7 +479,7 @@ const PropertyDetailsCard = () => {
                   <ThreeDotsSpinner isLoading={true} />
                 ) : (
                   <MKTypography className={classes.marketStatsVal1}>
-                    {pfAssetData?.nextPayout ? moment(pfAssetData?.nextPayout).format('lll') : "Coming Soon"}
+                    {mergedAssetData?.nextPayout ? moment(mergedAssetData?.nextPayout).format('lll') : "Coming Soon"}
                   </MKTypography>
                 )}
               </Box>
@@ -454,12 +507,12 @@ const PropertyDetailsCard = () => {
                         {...a11yProps(0)}
                         className={classes.tabStyle}
                       />
-                      <Tab
+                      {/* <Tab
                         disableRipple
                         label="Rent Transactions"
                         {...a11yProps(1)}
                         className={classes.tabStyle}
-                      />
+                      /> */}
                       {/* <Tab
                         disableRipple
                         label="Property Transactions"
@@ -476,14 +529,14 @@ const PropertyDetailsCard = () => {
               {/* Token Transactions */}
               <TabPanel value={value} index={0}>
                 <Box className={classes.sectionDesktopFlex}>
-                  {isLoading.propertyTxnsList ? (
+                  {isLoading.getTransactionsList ? (
                     <div className={classes.noContentBox}>
                       <TableSkeleton
                         dynamicField={true}
                         {...propertyTxnsData}
                       />
                     </div>
-                  ) : propertyTxnsList?.items?.length === 0 ? (
+                  ) : propertyTxnsData?.row?.length === 0 ? (
                     <Box className={classes.noContentBox}>
                       <img src={noTransactions} alt="No Data" />
                       <span className={classes.noContentText}>
@@ -513,7 +566,7 @@ const PropertyDetailsCard = () => {
                   className={`${classes.sectionMobile} ${classes.bankCardContainer}`}
                 >
                   {/* Loading state pending */}
-                  {isLoading.propertyTxnsList ? (
+                  {isLoading.getTransactionsList ? (
                     <div className={classes.noContentBox}>
                       <OvalSpinner isLoading={true} />
                     </div>
@@ -525,7 +578,7 @@ const PropertyDetailsCard = () => {
                         "Type",
                         "# of Tokens",
                         "Amount",
-                        "Transaction ID",
+                        "Transaction Hash",
                       ]}
                       pagination={paginationConfig}
                       cardConfig={{
@@ -535,7 +588,8 @@ const PropertyDetailsCard = () => {
                   )}
                 </Box>
               </TabPanel>
-              {/* Rent Transactions */}
+              {/* Rent Transactions — hidden */}
+              {/*
               <TabPanel value={value} index={1}>
                 <Box className={classes.sectionDesktopFlex}>
                   {isLoading.rentTxn ? (
@@ -576,7 +630,6 @@ const PropertyDetailsCard = () => {
                 <Box
                   className={`${classes.sectionMobile} ${classes.bankCardContainer}`}
                 >
-                  {/* Loading state pending */}
                   {isLoading.rentTxn ? (
                     <div className={classes.noContentBox}>
                       <OvalSpinner isLoading={true} />
@@ -600,63 +653,8 @@ const PropertyDetailsCard = () => {
                   )}
                 </Box>
               </TabPanel>
-              {/* Property Transactions */}
-              <TabPanel value={value} index={2}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <MKBox mt={5}>
-                      <Box className={classes.sectionDesktopFlex}>
-                        {marketLoader.reserveTxns ? (
-                          <div className={classes.noContentBox}>
-                            <TableSkeleton
-                              dynamicField={true}
-                              {...balanceData}
-                            />
-                          </div>
-                        ) : reserveTxns?.length === 0 ? (
-                          <Box className={classes.noContentBox}>
-                            <img src={NoProperty} alt="No Data" />
-                            <span className={classes.noContentText}>
-                              No Data Found!
-                            </span>
-                          </Box>
-                        ) : (
-                          <DynamicTable
-                            height="100%"
-                            {...balanceData}
-                            tableConfig={{
-                              ...tableConfig,
-                              5: enable.clickEvent,
-                            }}
-                            tableAdvancedActions={cardActions}
-                            paginationConfig={paginationConfig}
-                          />
-                        )}
-                      </Box>
-                      <Box
-                        className={`${classes.sectionMobile} ${classes.bankCardContainer}`}
-                      >
-                        {/* Loading state pending */}
-                        {marketLoader.reserveTxns ? (
-                          <div className={classes.noContentBox}>
-                            <OvalSpinner isLoading={true} />
-                          </div>
-                        ) : (
-                          <DynamicCard
-                            {...balanceData}
-                            cardConfig={{
-                              ...cardConfig,
-                              5: enable.clickEvent,
-                            }}
-                            tableAdvancedActions={cardActions}
-                            pagination={paginationConfig}
-                          />
-                        )}
-                      </Box>
-                    </MKBox>
-                  </Grid>
-                </Grid>
-              </TabPanel>
+              */}
+              {/* Property Transactions — hidden (no tab) */}
             </MKBox>
           </Grid>
         </Grid>

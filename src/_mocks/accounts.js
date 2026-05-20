@@ -10,13 +10,10 @@ const balances = () => {
   const rows = pfListData?.value || [];
 
   return {
-    column: ["Asset", "Allocation", "Balance", "Action"],
+    column: ["Asset", "Allocation", "Tokens", "Action"],
     row: rows.map((item, index) => {
-      const tokenCount = Number(item?.balanceTokens ?? item?.tokens) || 0;
-      const price = Number(item?.currentPrice) || 0;
-      const boughtAt = Number(item?.boughtAtPrice) || 0;
-      const dollarValue =
-        Number(item?.balanceValue) || tokenCount * price;
+      const tokenCount = Number(item?.tokens ?? item?.balanceTokens) || 0;
+      const totalTokens = Number(item?.numberOfTokens) || 0;
       const allocationPct = Number(item?.allocationPercentage) || 0;
       const mainImage =
         typeof item?.mainImage === "string"
@@ -35,12 +32,11 @@ const balances = () => {
         Allocation: (
           <Progress decimalAllowed={true} value={allocationPct} />
         ),
-        Balance: (
+        Tokens: (
           <Balance
             ele={{
-              diff: dollarValue,
-              stats: price - boughtAt >= 0 ? "up" : "down",
               balance: tokenCount,
+              totalTokens,
             }}
           />
         ),

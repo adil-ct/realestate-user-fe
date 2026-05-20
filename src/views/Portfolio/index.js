@@ -686,7 +686,7 @@ const Portfolio = () => {
                   ) : (
                     <DynamicCard
                       {...balanceData}
-                      column={["Asset", "Balance", "Allocation", "Action"]}
+                      column={["Asset", "Tokens", "Allocation", "Action"]}
                       cardConfig={{
                         ...cardConfig,
                         2: enable.blueLinkBalance,

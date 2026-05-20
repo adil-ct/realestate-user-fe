@@ -9,6 +9,8 @@ import CurrencyFormat from "components/CurrencyFormat";
 const amountData = (props) => {
   const classes = historyMock();
   const { ele } = props;
+  const hasTotalTokens =
+    ele?.totalTokens !== undefined && ele?.totalTokens !== null;
   return (
     <MKBox className={classes.alignCenter}>
       <MKTypography className={classes.mainBal} component="span" fontWeight="bold">
@@ -18,16 +20,29 @@ const amountData = (props) => {
           onlyComma
           noSpan={true}
         />
+        {hasTotalTokens && (
+          <>
+            {" / "}
+            <CurrencyFormat
+              value={ele?.totalTokens}
+              zeroAllowed
+              onlyComma
+              noSpan={true}
+            />
+          </>
+        )}
       </MKTypography>
-      <MKTypography className={classes.diffVal} component="span">
-        <CurrencyFormat
+      {!hasTotalTokens && (
+        <MKTypography className={classes.diffVal} component="span">
+          <CurrencyFormat
             prefix={"$"}
             value={ele?.diff}
             zeroAllowed
             onlyComma
             noSpan={true}
           />
-      </MKTypography>
+        </MKTypography>
+      )}
     </MKBox>
   );
 };
