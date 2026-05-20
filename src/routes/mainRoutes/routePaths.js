@@ -29,6 +29,7 @@ export const routePaths = {
   PROFILE_PATH: "/profile",
   ACCOUNTS_PATH: "/accounts",
   ACCOUNT_SETTINGS_PATH: "/account-settings",
+  HOME_PATH: "/home",
   PORTFOLIO_PATH: "/portfolio",
   WALLET_PATH: "/wallet",
   NOTIFICATIONS_PATH: "/notifications",

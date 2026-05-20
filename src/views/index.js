@@ -1,4 +1,5 @@
 import React from "react";
+import Home from "./home-logged-in";
 
 const PropertyManagerDetails = React.lazy(() =>
   import("./property-manager/components/property-details")
@@ -96,6 +97,7 @@ export {
   HowItWorks,
   WhyRealEstate,
   MogulClub,
+  Home,
 };
 
 // This Folder will contain all the pages which will be served for every individual routes

@@ -65,15 +65,19 @@ const styles = makeStyles((theme) =>
       },
       line1: {
         fontWeight: 300,
+        color: "#FFFFFF",
       },
       line2: {
         paddingBottom: "1%",
+        color: "#FFFFFF",
       },
       line3: {
-        opacity: 0.7,
+        opacity: 0.85,
+        color: "#CBD5E1",
       },
       line4: {
         fontWeight: 800,
+        color: "#FFFFFF",
       },
     },
     { name: "home-page-banned-section-view" }

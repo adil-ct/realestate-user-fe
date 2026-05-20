@@ -96,7 +96,7 @@ const EmailVerificationSuccess = () => {
     }
     else{
       userData?.userType
-      ? navigate(routePaths.INVESTOR_PATH)
+      ? navigate(routePaths.HOME_PATH)
       : navigate(routePaths.LANDING_PAGE_PATH);
     }
   };

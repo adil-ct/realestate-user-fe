@@ -143,10 +143,10 @@ export const redirectToPersonalDetail = (
     allowPendingKYC
   );
   if (stepNumber === -1) {
-    navigate(routePaths.PORTFOLIO_PATH);
+    navigate(routePaths.HOME_PATH);
     return;
   } else if (stepNumber === -2) {
-    navigate(routePaths.INVESTOR_PATH);
+    navigate(routePaths.HOME_PATH);
     return;
   }
 
@@ -204,7 +204,7 @@ export function* loginSaga({ payload }) {
           yield put(profileFetch());
           yield call([localStorage, "setItem"], "toaster-type", "success");
           yield call([localStorage, "setItem"], "userId", response.data._id);
-          !id ? navigate(routePaths.INVESTOR_PATH) : navigate(`${routePaths.PROPERTY_PROFILE_PATH}/?id=${id}&invest=open`)
+          !id ? navigate(routePaths.HOME_PATH) : navigate(`${routePaths.PROPERTY_PROFILE_PATH}/?id=${id}&invest=open`)
         }
 
         if (twoFA.authenticator) {
@@ -266,7 +266,7 @@ export function* loginVerifySaga(action) {
       yield call([localStorage, "setItem"], "toaster-type", "success");
       yield put(hideModal());
       yield put(profileFetch());
-      !id ? navigate(routePaths.INVESTOR_PATH) : navigate(`${routePaths.PROPERTY_PROFILE_PATH}/?id=${id}&invest=open`)
+      !id ? navigate(routePaths.HOME_PATH) : navigate(`${routePaths.PROPERTY_PROFILE_PATH}/?id=${id}&invest=open`)
     },
     failHandler: yield function* onLoginVerifyFail(response) {
       yield put(loginVerifyFail(response));
@@ -388,7 +388,7 @@ export function* loginAuthenticationSaga({ payload }) {
       // Storing data in local storage
       yield call([localStorage, "setItem"], "authToken", response.data.token);
       yield call([localStorage, "setItem"], "toaster-type", "success");
-      navigate(routePaths.INVESTOR_PATH);
+      navigate(routePaths.HOME_PATH);
     },
     failHandler: yield function* onSendOTPFail(response) {
       yield put(loginAuthenticationFail(response));
@@ -489,7 +489,7 @@ export function* signupSaga(action) {
 
       toaster.success(msg);
       if (sso || !handleSignupSuccess) {
-        navigate(routePaths.INVESTOR_PATH);
+        navigate(routePaths.HOME_PATH);
       } else {
         handleSignupSuccess(data.email || requestBody.email);
       }

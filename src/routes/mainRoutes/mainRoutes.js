@@ -30,9 +30,10 @@ import {
   // ReferralTransactions,
   ForceUpdatePassword,
   // AboutUs,
-  // HowItWorks,
-  // WhyRealEstate,
+  HowItWorks,
+  WhyRealEstate,
   // MogulClub,
+  Home,
 } from "views";
 
 // import Home from "views/home";
@@ -58,8 +59,13 @@ export const publicRoutes = [
     path: routePaths.HOW_IT_WORKS_PATH,
     exact: true,
     name: "HowItWorks",
-    //component: React.lazy(() => import('../../views/how-it-works')),
-    component: <Login />,
+    component: <HowItWorks />,
+  },
+  {
+    path: routePaths.WHY_REAL_ESTATE_PATH,
+    exact: true,
+    name: "WhyRealEstate",
+    component: <WhyRealEstate />,
   },
   // {
   //   path: routePaths.MOGUL_CLUB_PATH,
@@ -69,13 +75,6 @@ export const publicRoutes = [
   //   // component: <MogulClub />,
   //   // component: <Login />,
 
-  // },
-  // {
-  //   path: routePaths.WHY_REAL_ESTATE_PATH,
-  //   exact: true,
-  //   name: "WhyRealEstate",
-  //   //component: React.lazy(() => import('../../views/how-it-works')),
-  //   component: <WhyRealEstate />,
   // },
   // {
   //   path: routePaths.OUR_BLOGS_PATH,
@@ -193,6 +192,11 @@ export const guestRoutes = [
 ].concat(publicRoutes);
 
 export const kycVerifiedUserRoutes = [
+  {
+    path: routePaths.HOME_PATH,
+    name: "Home",
+    component: <Home />,
+  },
   // {
   //   path: routePaths.REWARDS_PATH,
   //   exact: true,
@@ -279,6 +283,11 @@ export const kycVerifiedUserRoutes = [
 ].concat(publicRoutes);
 
 export const kycPendingUserRoutes = [
+  {
+    path: routePaths.HOME_PATH,
+    name: "Home",
+    component: <Home />,
+  },
   // {
   //   path: routePaths.REWARDS_PATH,
   //   exact: true,

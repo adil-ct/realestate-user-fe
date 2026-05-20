@@ -47,6 +47,10 @@ import { routePaths } from "routes/mainRoutes/routePaths";
 
 const pages = [
   {
+    name: "Home",
+    link: routePaths.HOME_PATH,
+  },
+  {
     name: "Properties",
     link: routePaths.INVESTOR_PATH,
   },
@@ -387,7 +391,11 @@ const Header = () => {
         >
           <Box className={classes.flexCenter}>
             <LogoLink
-              to={routePaths.LANDING_PAGE_PATH}
+              to={
+                isLogin || hasAuthToken
+                  ? routePaths.HOME_PATH
+                  : routePaths.LANDING_PAGE_PATH
+              }
               target="_self"
               rel="noreferrer"
             >

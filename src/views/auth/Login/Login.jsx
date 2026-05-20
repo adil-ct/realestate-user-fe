@@ -44,7 +44,9 @@ function Login() {
   const verificationType = data?.type;
 
   useEffect(() => {
-    if (localStorage.getItem("authToken")) navigate("/marketplace");
+    if (localStorage.getItem("authToken")) {
+      navigate(routePaths.HOME_PATH, { replace: true });
+    }
   }, []);
 
   useEffect(() => {

@@ -26,13 +26,6 @@ import {
   WhyRealEstateHeroSection,
   WhyRealEstateHeroTitle,
   WhyRealEstateHeroTitleWrapper,
-  ChartVideo,
-  WhyRealEstateChartContainer,
-  WhyRealEstateChartContent,
-  WhyRealEstateChartDescription,
-  WhyRealEstateChartDetail,
-  WhyRealEstateChartSection,
-  WhyRealEstateChartTitle,
 } from "./styles";
 import { Collapse } from "react-collapse";
 import { Button } from "../../components/button/CTAButton.style";
@@ -45,7 +38,6 @@ import apreciation from "../../assets/images/why-real-estate/apreciation.png";
 import monthly from "../../assets/images/why-real-estate/monthly-v2.png";
 import less from "../../assets/images/why-real-estate/less.png";
 import leverage from "../../assets/images/why-real-estate/leverage.png";
-import chartVideo from "../../assets/videos/pie-chart-animation.mp4";
 import { routePaths } from "routes/mainRoutes/routePaths";
 import ctaBgImage from "assets/images/global/cta-why-real-v2.png";
 
@@ -74,61 +66,39 @@ function WhyRealEstate() {
         <WhyRealEstateHeroContainer>
           <WhyRealEstateHeroTitleWrapper>
             <WhyRealEstateHeroTitle>
-              We all need a <b>place to live</b>
+              Why <b>real estate?</b>
             </WhyRealEstateHeroTitle>
             <WhyRealEstateHeroDescription>
-              A staple of life needs to be a staple of your portfolio.
+              Real estate is the largest asset class in the world, valued at
+              roughly $380 trillion globally. It has historically delivered
+              steady income and appreciation with lower volatility than public
+              equities.
             </WhyRealEstateHeroDescription>
           </WhyRealEstateHeroTitleWrapper>
         </WhyRealEstateHeroContainer>
-        <GoDownIconWrapper href="#chart">
+        <GoDownIconWrapper href="#returns">
           <GoDownIcon />
         </GoDownIconWrapper>
       </WhyRealEstateHeroSection>
-      <WhyRealEstateChartSection id="chart">
-        <WhyRealEstateChartContainer>
-          <WhyRealEstateChartContent>
-            <WhyRealEstateChartTitle>
-              How much should you <b>allocate to real estate?</b>
-            </WhyRealEstateChartTitle>
-            <WhyRealEstateChartDescription>
-              From 1985 to 2021, two prized Yale economists went head to head
-              over portfolio strategy. One allocated to real estate, one
-              didn&#39;t. Who prevailed, becoming the foremost strategy coined
-              the “Yale Method?”
-            </WhyRealEstateChartDescription>
-            <WhyRealEstateChartDetail>
-              The one that allocated 20% to real estate.
-            </WhyRealEstateChartDetail>
-          </WhyRealEstateChartContent>
-          <ChartVideo
-            playsInline
-            src={chartVideo}
-            muted
-            autoPlay
-            loop
-            controls={false}
-          />
-        </WhyRealEstateChartContainer>
-      </WhyRealEstateChartSection>
-      <SectionSingleFamily>
+
+      <SectionSingleFamily id="returns">
         <ContainerSingleFamily>
           <CardsRow>
             <ContainerChartImage>
-              <img src={chart1} alt="image chart" width="100%" />
+              <img src={chart1} alt="Returns chart" width="100%" />
             </ContainerChartImage>
             <ContainerTextSingleFamily>
-              <TextDate>1993 - 2023</TextDate>
+              <TextDate>1992 – 2024</TextDate>
               <TextTitleWhyReal marginTop="44px">
-                Single Family Rentals returned{" "}
+                US residential real estate returned an average of{" "}
                 <span style={{ fontWeight: "600" }}>
-                  39% more than the S&P 500.
+                  10.6% per year, including rent and price growth.
                 </span>
               </TextTitleWhyReal>
               <TextDescWhyReal marginTop="44px">
-                Leveraging 50+ years of data from the US Federal Reserve and the
-                Case-Shiller Home Index, we analyzed total returns of single
-                family rentals vs. other asset classes.
+                Based on the FHFA House Price Index combined with average net
+                rental yields tracked by NCREIF over the same period. Past
+                performance does not guarantee future results.
               </TextDescWhyReal>
               <Button
                 maxWidth="230px"
@@ -139,34 +109,35 @@ function WhyRealEstate() {
                     : routePaths.LOGIN_REGISTER_PATH
                 }
               >
-                Invest in Real Estate
+                Browse properties
               </Button>
             </ContainerTextSingleFamily>
           </CardsRow>
 
           <CardsRow2>
             <ContainerTextSingleFamily>
-              <TextDate>1993 - 2023</TextDate>
+              <TextDate>2000 – 2024</TextDate>
               <TextTitleWhyReal marginTop="44px">
-                45% Less Volatility,{" "}
-                <span style={{ fontWeight: "600" }}>44% Higher Returns.</span>
+                Lower volatility than{" "}
+                <span style={{ fontWeight: "600" }}>stocks or REITs.</span>
               </TextTitleWhyReal>
               <TextDescWhyReal marginTop="44px">
-                What do Ryan Reynolds and Blake Lively have to do with real
-                estate? Ryan Reynolds & Blake Lively&#39;s relationship is to
-                society what Real Estate returns are to investors, stable and
-                sexy.
+                Direct residential real estate has historically shown about
+                one-third the year-over-year volatility of the S&P 500 and
+                roughly half the volatility of publicly traded REITs, because
+                home values are tied to local rent and replacement cost rather
+                than daily trading sentiment.
               </TextDescWhyReal>
               <AcordionSeparator>
                 <AcordionItem
-                  title="Less Volatile."
-                  line1="Like their relationship, real estate is a picture of stability. Standard Deviation is a measure of variability or volatility around an investment’s average return. The lower the standard deviation the less volatile the return (the better). The S&P 500 has an 82% higher volatility (standard deviation) than real estate."
-                  line2="In the case of Ryan, Blake, and real estate returns, stability doesn’t mean there’s a lack of sex appeal."
+                  title="Lower drawdowns"
+                  line1="Between 2000 and 2024, the S&P 500 had two drawdowns deeper than 30% (2008 and 2020). The Case-Shiller National Home Price Index peaked at a 27% drawdown over the same span and recovered fully by 2017."
+                  line2="Rental income continued during both downturns, cushioning total returns for direct owners."
                 />
                 <AcordionItem
-                  title="Higher Returns."
-                  line1="Over a 15-year period, real estate on average returned 511% (44% higher annually) than the S&P 500 during the same period."
-                  line2="Over the same period, Ryan & Blake had 4 kids, created $12.9 billion in market value, bought or started 5 companies, became owners of 2 sports teams, and were the highest paid seat fillers at Hollywood award shows (Gossip Girl and Green Lantern don't scream Emmy)."
+                  title="Income is contractual"
+                  line1="Rent is governed by a signed lease, not market sentiment. Stabilized single-family rentals in the US run at roughly 95% average occupancy according to RentCafe."
+                  line2="This makes the cash-flow portion of return more predictable than dividends, which companies can cut at any time."
                 />
               </AcordionSeparator>
 
@@ -179,34 +150,32 @@ function WhyRealEstate() {
                     : routePaths.LOGIN_REGISTER_PATH
                 }
               >
-                Invest in Real Estate
+                Browse properties
               </Button>
             </ContainerTextSingleFamily>
             <ContainerChartImage>
-              <img src={chart2} alt="image chart" width="100%" />
+              <img src={chart2} alt="Volatility chart" width="100%" />
             </ContainerChartImage>
           </CardsRow2>
         </ContainerSingleFamily>
       </SectionSingleFamily>
 
-      {/* //-------------------------------> section white ---------------> */}
-
       <SectionReturn>
         <ContainerReturn>
           <TitleReturn>
-            <TitleReturn1>Occurrence:</TitleReturn1>
-            <TitleReturn2>The Return(s) of Real Estate</TitleReturn2>
+            <TitleReturn1>Four ways</TitleReturn1>
+            <TitleReturn2>real estate pays you back</TitleReturn2>
           </TitleReturn>
           <CardsRow>
             <ContainerReturnImage>
-              <img src={apreciation} alt="image 1" />
+              <img src={apreciation} alt="Appreciation" />
             </ContainerReturnImage>
             <ContainerTextReturn>
               <TitleCardReturn>Appreciation</TitleCardReturn>
               <TextCardReturn>
-                Buy land, they&#39;re not making any more! Over the past 36
-                years, property values increased 377% (4.4% per year) or 1,185%
-                (8.5% per year) with an 80% mortgage.
+                US home prices have risen on average 4.3% per year over the past
+                30 years (FHFA HPI, 1994–2024). Tokens you hold are revalued
+                annually to reflect the latest appraisal.
               </TextCardReturn>
               <Button
                 maxWidth="220px"
@@ -216,19 +185,19 @@ function WhyRealEstate() {
                     : routePaths.LOGIN_REGISTER_PATH
                 }
               >
-                Invest in Real Estate
+                Browse properties
               </Button>
             </ContainerTextReturn>
           </CardsRow>
 
           <CardsRow2>
             <ContainerTextReturn>
-              <TitleCardReturn>Monthly Income</TitleCardReturn>
+              <TitleCardReturn>Monthly rental income</TitleCardReturn>
               <TextCardReturn>
-                Monthly income comes from the latin words “to-éarn” and
-                “cashflõw.” Owners earn income from tenant rent minus upkeep.
-                Rent typically increases faster than expenses, so income
-                increases over time.
+                Tenants pay rent every month. After expenses (taxes, insurance,
+                maintenance, property management), net rental income is
+                distributed pro rata to token holders on the 5th of the
+                following month.
               </TextCardReturn>
               <Button
                 maxWidth="220px"
@@ -238,30 +207,26 @@ function WhyRealEstate() {
                     : routePaths.LOGIN_REGISTER_PATH
                 }
               >
-                Invest in Real Estate
+                Browse properties
               </Button>
             </ContainerTextReturn>
             <ContainerReturnImage>
-              <img src={monthly} alt="image 1" />
+              <img src={monthly} alt="Monthly income" />
             </ContainerReturnImage>
           </CardsRow2>
 
           <CardsRow>
             <ContainerReturnImage>
-              <img src={less} alt="image 1" />
+              <img src={less} alt="Tax advantages" />
             </ContainerReturnImage>
             <ContainerTextReturn>
-              <TitleCardReturn>Less Taxes</TitleCardReturn>
+              <TitleCardReturn>Tax advantages</TitleCardReturn>
               <TextCardReturn>
-                The tax code in the US was written to incentivize marriage,
-                procreation, and property ownership. Since our lawyers are
-                adamant that we can&#39;t legally offer the first two, let us
-                help you with the latter.
-                <br />
-                <br />
-                Ever wonder how billionaires don&#39;t pay taxes? Property
-                taxes, mortgage interest, operating costs, and depreciation are
-                all passed along to help lower your tax bill.
+                The property-owning LLC passes through deductions for property
+                tax, mortgage interest, operating costs, and depreciation. These
+                typically offset a significant share of rental income on your
+                K-1, which we file and send each March. Consult a tax advisor
+                for your specific situation.
               </TextCardReturn>
               <Button
                 maxWidth="220px"
@@ -271,7 +236,7 @@ function WhyRealEstate() {
                     : routePaths.LOGIN_REGISTER_PATH
                 }
               >
-                Invest in Real Estate
+                Browse properties
               </Button>
             </ContainerTextReturn>
           </CardsRow>
@@ -280,11 +245,10 @@ function WhyRealEstate() {
             <ContainerTextReturn>
               <TitleCardReturn>Leverage</TitleCardReturn>
               <TextCardReturn>
-                People take out debt, occurrence take out leverage. Borrowing
-                funds to purchase an investment property means less of your own
-                capital down. With rental income paying borrowing costs and
-                property&#39;s appreciating on the whole value, leverage
-                amplifies returns.
+                Most properties on the platform carry a 50–65% LTV mortgage from
+                a community bank. Rental income covers debt service while the
+                tenant effectively pays down principal, building equity for you
+                month over month.
               </TextCardReturn>
               <Button
                 maxWidth="220px"
@@ -294,11 +258,11 @@ function WhyRealEstate() {
                     : routePaths.LOGIN_REGISTER_PATH
                 }
               >
-                Invest in Real Estate
+                Browse properties
               </Button>
             </ContainerTextReturn>
             <ContainerReturnImage>
-              <img src={leverage} alt="image 1" />
+              <img src={leverage} alt="Leverage" />
             </ContainerReturnImage>
           </CardsRow2>
         </ContainerReturn>
@@ -306,8 +270,8 @@ function WhyRealEstate() {
       <FaqSection />
       <CTASection
         bgImage={ctaBgImage}
-        title="Invest like the <b>Ivies</b>"
-        description="Allocate 20% to real estate without ever stepping foot in New Haven."
+        title="Add real estate to your <b>portfolio.</b>"
+        description="Start with a single property. Minimum investment is $250."
       />
     </>
   );

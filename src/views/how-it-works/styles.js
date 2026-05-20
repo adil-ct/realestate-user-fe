@@ -186,9 +186,28 @@ export const ProcessTitleDescription = styled.b`
 
 export const ImageShadow = styled.img`
   border-radius: 24px;
+  max-width: 360px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  align-self: center;
   margin-bottom: -100px;
+
   @media (max-width: 768px) {
+    max-width: 280px;
     margin-bottom: -90px;
+  }
+`;
+
+export const ProcessImage = styled.img`
+  max-width: 360px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  align-self: center;
+
+  @media (max-width: 768px) {
+    max-width: 280px;
   }
 `;
 

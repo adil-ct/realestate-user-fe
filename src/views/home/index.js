@@ -9,7 +9,7 @@ const OpenBookInvestingSection = React.lazy(
   () => import("./open-book-investing-section"),
 );
 const AdsBannedSection = React.lazy(() => import("./banned-section"));
-const InvestorsSection = React.lazy(() => import("./investorsSection"));
+// const InvestorsSection = React.lazy(() => import("./investorsSection"));
 import CTASection from "components/cta/CTASection";
 import FaqSection from "components/faq/FaqSection";
 
@@ -34,7 +34,6 @@ const HomePage = () => {
         <InvitationSection />
         <OpenBookInvestingSection />
         <AdsBannedSection />
-        <InvestorsSection />
         <FaqSection />
         <CTASection
           bgImage={ctaBgImage}

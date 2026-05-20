@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
@@ -23,20 +23,26 @@ import "./styles/index.css";
 import Layout from 'layouts/mainLayout'
 
 const App = () => {
-  const [tokenPresent, setTokenPresent] = useState(
-    !!localStorage.getItem("authToken")
-  );
   const location = useLocation();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
   const isLogin  = useSelector((state) => state.auth.isLogin);
+  const profileLoading = useSelector((state) => state.auth.isLoading?.profile);
+
+  // Derive on every render — flips synchronously with isLogin or page reload.
+  const tokenPresent =
+    isLogin || !!localStorage.getItem("authToken");
 
   useEffect(() => {
-    setTokenPresent(!!localStorage.getItem("authToken"));
-    if (tokenPresent && !userData?.kycStatus && isLogin) {
+    if (
+      tokenPresent &&
+      !userData?.kycStatus &&
+      !userData?._id &&
+      !profileLoading
+    ) {
       dispatch(profileFetch());
     }
-  }, [userData, tokenPresent]);
+  }, [tokenPresent]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

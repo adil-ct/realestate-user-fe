@@ -87,7 +87,6 @@ const Footer = () => {
                 {isAuthenticated ? (
                   <>
                     <GridLink to={routePaths.PROFILE_PATH}>Profile</GridLink>
-                    <GridLink to={routePaths.PERSONAL_DETAILS_PATH}>Personal Info</GridLink>
                     <GridLink to={routePaths.ACCOUNT_SETTINGS_PATH}>Settings</GridLink>
                   </>
                 ) : (

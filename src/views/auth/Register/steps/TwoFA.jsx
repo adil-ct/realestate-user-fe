@@ -60,9 +60,7 @@ const TwoFA = () => {
         toaster.success("2FA is setup successfully.");
         userData?.kycStatus === "approved" &&
           localStorage.setItem("tour_started", true);
-        userData?.kycStatus === "whitelisting"
-          ? navigate(routePaths.INVESTOR_PATH)
-          : navigate(routePaths.PORTFOLIO_PATH);
+        navigate(routePaths.HOME_PATH);
         setTimeout(() => {
           dispatch(profileFetch());
         }, [1000]);
@@ -70,9 +68,7 @@ const TwoFA = () => {
       case securityRequestType.NONE:
         userData?.kycStatus === "approved" &&
           localStorage.setItem("tour_started", true);
-        userData?.kycStatus === "whitelisting"
-          ? navigate(routePaths.INVESTOR_PATH)
-          : navigate(routePaths.PORTFOLIO_PATH);
+        navigate(routePaths.HOME_PATH);
         setTimeout(() => {
           dispatch(profileFetch());
         }, [1000]);
@@ -94,9 +90,7 @@ const TwoFA = () => {
     );
     userData?.kycStatus === "approved" &&
       localStorage.setItem("tour_started", true);
-    userData?.kycStatus === "whitelisting"
-      ? navigate(routePaths.INVESTOR_PATH)
-      : navigate(routePaths.PORTFOLIO_PATH);
+    navigate(routePaths.HOME_PATH);
   };
 
   const handleSubmit = () => {
@@ -154,9 +148,7 @@ const TwoFA = () => {
     toaster.success("2FA is setup successfully.");
     userData?.kycStatus === "approved" &&
       localStorage.setItem("tour_started", true);
-    userData?.kycStatus === "whitelisting"
-      ? navigate(routePaths.INVESTOR_PATH)
-      : navigate(routePaths.PORTFOLIO_PATH);
+    navigate(routePaths.HOME_PATH);
     setTimeout(() => {
       dispatch(profileFetch());
     }, [1000]);

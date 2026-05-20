@@ -352,7 +352,7 @@ function RegisterForm({ showModal, sso, noIdCheck, pid="" }) {
         onClose={() => setOpen(false)}
         email={otpEmail}
         onResend={handleResend}
-        onVerified={() => navigate(routePaths.INVESTOR_PATH)}
+        onVerified={() => navigate(routePaths.HOME_PATH)}
       />
     </>
   );
