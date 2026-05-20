@@ -14,17 +14,12 @@ import {
 } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 import { getPropertyListSaga } from "store/actions";
 import { routePaths } from "routes/mainRoutes/routePaths";
 import house1 from "assets/images/house1.png";
 import house2 from "assets/images/house2.png";
 import house3 from "assets/images/house3.png";
-import hiw1 from "assets/images/hiw1.png";
-import hiw2 from "assets/images/hiw2.png";
-import hiw3 from "assets/images/hiw3.png";
-import hiw4 from "assets/images/hiw4.png";
 
 const NAVY = "#1A2B4A";
 const NAVY_DARK = "#0F1C32";
@@ -92,10 +87,18 @@ const ChainBadge = ({ label, color }) => (
   </Box>
 );
 
-const PropertyMiniCard = ({ tag, image, title, total, investors, sold, percent }) => {
+const PropertyMiniCard = ({ id, tag, image, title, total, investors, sold, percent }) => {
   const navigate = useNavigate();
+  const goToDetails = () => {
+    if (id) {
+      navigate(`${routePaths.PROPERTY_PROFILE_PATH}/?id=${id}`);
+    } else {
+      navigate(routePaths.INVESTOR_PATH);
+    }
+  };
   return (
     <Box
+      onClick={goToDetails}
       sx={{
         borderRadius: 3,
         overflow: "hidden",
@@ -103,6 +106,9 @@ const PropertyMiniCard = ({ tag, image, title, total, investors, sold, percent }
         border: `1px solid ${BORDER}`,
         display: "flex",
         flexDirection: "column",
+        cursor: "pointer",
+        transition: "transform 0.2s ease, box-shadow 0.2s ease",
+        "&:hover": { transform: "translateY(-3px)", boxShadow: "0 8px 20px rgba(0,0,0,0.08)" },
       }}
     >
       <Box sx={{ position: "relative", height: 160 }}>
@@ -195,22 +201,10 @@ const PropertyMiniCard = ({ tag, image, title, total, investors, sold, percent }
         </Box>
         <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
           <Button
-            sx={{
-              flex: 1,
-              border: `1px solid ${NAVY}`,
-              color: NAVY,
-              textTransform: "none",
-              fontSize: 12,
-              fontWeight: 600,
-              borderRadius: 1.5,
-              py: 0.75,
-              "&:hover": { backgroundColor: "rgba(26,43,74,0.05)" },
+            onClick={(e) => {
+              e.stopPropagation();
+              goToDetails();
             }}
-          >
-            View Contract ↗
-          </Button>
-          <Button
-            onClick={() => navigate(routePaths.INVESTOR_PATH)}
             sx={{
               flex: 1,
               backgroundColor: NAVY,
@@ -231,48 +225,9 @@ const PropertyMiniCard = ({ tag, image, title, total, investors, sold, percent }
   );
 };
 
-const HowItWorksCard = ({ image, bgColor, title, desc }) => (
+const BigPropertyCard = ({ image, title, location, height = 240, tag, onClick }) => (
   <Box
-    sx={{
-      borderRadius: 3,
-      overflow: "hidden",
-      backgroundColor: bgColor,
-      p: 3,
-      display: "flex",
-      flexDirection: "column",
-      gap: 2,
-      height: "100%",
-    }}
-  >
-    <Typography sx={{ fontSize: 16, fontWeight: 700, color: NAVY, lineHeight: 1.3 }}>
-      {title}
-    </Typography>
-    <Typography sx={{ fontSize: 13, color: "#4B5563", lineHeight: 1.5 }}>
-      {desc}
-    </Typography>
-    <Box
-      sx={{
-        mt: "auto",
-        borderRadius: 2,
-        overflow: "hidden",
-        height: 90,
-        backgroundColor: "rgba(255,255,255,0.5)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <img
-        src={image}
-        alt={title}
-        style={{ maxHeight: "100%", maxWidth: "100%", objectFit: "contain" }}
-      />
-    </Box>
-  </Box>
-);
-
-const BigPropertyCard = ({ image, title, location, pricePerToken, height = 240, tag }) => (
-  <Box
+    onClick={onClick}
     sx={{
       position: "relative",
       borderRadius: 3,
@@ -306,24 +261,9 @@ const BigPropertyCard = ({ image, title, location, pricePerToken, height = 240, 
     )}
     <Box sx={{ position: "absolute", bottom: 14, left: 14, right: 14, color: "#fff" }}>
       <Typography sx={{ fontSize: 17, fontWeight: 700 }}>{title}</Typography>
-      <Typography sx={{ fontSize: 12, opacity: 0.85, mb: 1 }}>
+      <Typography sx={{ fontSize: 12, opacity: 0.85 }}>
         📍 {location}
       </Typography>
-      <Box
-        sx={{
-          display: "inline-flex",
-          alignItems: "center",
-          px: 1.5,
-          py: 0.5,
-          borderRadius: 1,
-          backgroundColor: "rgba(255,255,255,0.18)",
-          backdropFilter: "blur(8px)",
-          fontSize: 12,
-          fontWeight: 600,
-        }}
-      >
-        ${pricePerToken}/Token
-      </Box>
     </Box>
   </Box>
 );
@@ -419,6 +359,7 @@ const Home = () => {
         const numTokens = Number(p?.numberOfTokens) || 1;
         const percent = Math.min(100, Math.round((sold / numTokens) * 100));
         return {
+          id: p?._id,
           tag: idx === 0 ? "Featured" : idx === 1 ? "Hot" : null,
           image: p?.mainImage?.url || [house1, house2, house3][idx % 3],
           title: p?.title || `Property ${idx + 1}`,
@@ -458,11 +399,10 @@ const Home = () => {
       ];
 
   const browseProperties = (propertyList || []).slice(0, 4).map((p, idx) => ({
+    id: p?._id,
     image: p?.mainImage?.url || [house1, house2, house3, house1][idx % 3],
     title: p?.title || ["Maple Grove Residence", "Cedar Park Estates", "Riverside Loft", "Hilltop Manor"][idx],
     location: [p?.city, p?.state].filter(Boolean).join(", ") || "United States",
-    pricePerToken: Number(p?.currentPrice) || 100,
-    tag: idx === 1 ? "View Smart Contract" : null,
   }));
 
   while (browseProperties.length < 4) {
@@ -471,10 +411,16 @@ const Home = () => {
       image: [house1, house2, house3, house1][idx % 3],
       title: ["Maple Grove Residence", "Cedar Park Estates", "Riverside Loft", "Hilltop Manor"][idx],
       location: ["Austin, TX", "Denver, CO", "Tampa, FL", "Charlotte, NC"][idx],
-      pricePerToken: 100,
-      tag: idx === 1 ? "View Smart Contract" : null,
     });
   }
+
+  const goToProperty = (id) => {
+    if (id) {
+      navigate(`${routePaths.PROPERTY_PROFILE_PATH}/?id=${id}`);
+    } else {
+      navigate(routePaths.INVESTOR_PATH);
+    }
+  };
 
   return (
     <Box sx={{ backgroundColor: OFF_WHITE }}>
@@ -699,104 +645,6 @@ const Home = () => {
         </Grid>
       </Container>
 
-      {/* HOW IT WORKS */}
-      <Container maxWidth="lg" sx={{ pb: { xs: 5, md: 7 } }}>
-        <Box sx={{ textAlign: "center", mb: 4 }}>
-          <SectionHeading>How it works</SectionHeading>
-        </Box>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <HowItWorksCard
-              image={hiw1}
-              bgColor="#FBF6E6"
-              title="Choose a property"
-              desc="Browse our hand-picked portfolio of vetted high-quality, investment-ready properties."
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <HowItWorksCard
-              image={hiw2}
-              bgColor="#FFF2E1"
-              title="Invest fractionally using crypto or fiat"
-              desc="Start with a small amount using cryptocurrency or traditional currency — no full property purchase required."
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <HowItWorksCard
-              image={hiw3}
-              bgColor="#EFE3FA"
-              title="Receive digital tokens representing ownership"
-              desc="Get blockchain-based tokens that represent your share in the property."
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <HowItWorksCard
-              image={hiw4}
-              bgColor="#D9F6F2"
-              title="Blockchain-verified asset record"
-              desc="Enjoy secure, transparent ownership backed by blockchain technology — no middleman involved."
-            />
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* WHY TOKENIZE */}
-      <Box sx={{ backgroundColor: "#fff", py: { xs: 5, md: 7 } }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={5} alignItems="center">
-            <Grid item xs={12} md={5}>
-              <Box
-                sx={{
-                  borderRadius: 3,
-                  overflow: "hidden",
-                  height: { xs: 280, md: 420 },
-                  backgroundImage: `url(${house2})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={7}>
-              <SectionHeading sx={{ mb: 3 }}>
-                Why tokenize real estate?
-              </SectionHeading>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                {[
-                  {
-                    title: "Fractional Ownership",
-                    desc: "Invest in a portion of a property without needing to buy the whole asset — making real estate accessible to more investors.",
-                  },
-                  {
-                    title: "Global access to premium properties",
-                    desc: "Gain exposure to high-value real estate across the world, without geographical limitations or complex legal processes.",
-                  },
-                  {
-                    title: "Automated income distribution",
-                    desc: "Earn rental income and dividends automatically through smart contracts — no manual tracking or delays.",
-                  },
-                  {
-                    title: "24/7 liquidity",
-                    desc: "Trade or sell your real estate tokens anytime, just like stocks or crypto, without waiting for traditional sale cycles.",
-                  },
-                ].map((f) => (
-                  <Box key={f.title} sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
-                    <FiberManualRecordIcon sx={{ fontSize: 14, color: GOLD, mt: "5px" }} />
-                    <Box>
-                      <Typography sx={{ fontSize: 16, fontWeight: 700, color: NAVY, mb: 0.5 }}>
-                        {f.title}
-                      </Typography>
-                      <Typography sx={{ fontSize: 13.5, color: "#475569", lineHeight: 1.6 }}>
-                        {f.desc}
-                      </Typography>
-                    </Box>
-                  </Box>
-                ))}
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
       {/* BROWSE TOKENIZED PROPERTIES */}
       <Container maxWidth="lg" sx={{ py: { xs: 5, md: 7 } }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3, flexWrap: "wrap", gap: 2 }}>
@@ -823,19 +671,39 @@ const Home = () => {
         </Box>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
-            <BigPropertyCard {...browseProperties[0]} height={340} />
+            <BigPropertyCard
+              {...browseProperties[0]}
+              height={340}
+              onClick={() => goToProperty(browseProperties[0]?.id)}
+            />
           </Grid>
           <Grid item xs={12} md={4}>
-            <BigPropertyCard {...browseProperties[1]} height={340} tag="View Smart Contract" />
+            <BigPropertyCard
+              {...browseProperties[1]}
+              height={340}
+              onClick={() => goToProperty(browseProperties[1]?.id)}
+            />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <BigPropertyCard {...browseProperties[2]} height={220} />
+            <BigPropertyCard
+              {...browseProperties[2]}
+              height={220}
+              onClick={() => goToProperty(browseProperties[2]?.id)}
+            />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <BigPropertyCard {...browseProperties[3]} height={220} />
+            <BigPropertyCard
+              {...browseProperties[3]}
+              height={220}
+              onClick={() => goToProperty(browseProperties[3]?.id)}
+            />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <BigPropertyCard {...browseProperties[0]} height={220} />
+            <BigPropertyCard
+              {...browseProperties[0]}
+              height={220}
+              onClick={() => goToProperty(browseProperties[0]?.id)}
+            />
           </Grid>
         </Grid>
       </Container>

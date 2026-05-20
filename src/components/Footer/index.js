@@ -29,18 +29,6 @@ const Footer = () => {
     { name: "Portfolio", link: routePaths.PORTFOLIO_PATH, external: false },
   ];
 
-  const companyLinks = [
-    {
-      name: "How it Works",
-      link: routePaths.HOW_IT_WORKS_PATH,
-      external: false,
-    },
-    {
-      name: "Why Real Estate",
-      link: routePaths.WHY_REAL_ESTATE_PATH,
-      external: false,
-    },
-  ];
 
   return (
     <FooterSection>
@@ -63,17 +51,6 @@ const Footer = () => {
               <GridItemTitle>Product</GridItemTitle>
               <GridLinksContainer>
                 {productLinks.map((l) => (
-                  <GridLink key={l.name} to={l.link}>
-                    {l.name}
-                  </GridLink>
-                ))}
-              </GridLinksContainer>
-            </GridItem>
-
-            <GridItem>
-              <GridItemTitle>Company</GridItemTitle>
-              <GridLinksContainer>
-                {companyLinks.map((l) => (
                   <GridLink key={l.name} to={l.link}>
                     {l.name}
                   </GridLink>
